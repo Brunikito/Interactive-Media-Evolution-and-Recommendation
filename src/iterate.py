@@ -4,7 +4,7 @@ import datetime
 
 import recommendate
 import table_operations
-import os
+import initialize
 
 # load the tables
 channels = pd.read_csv('data/channels.csv')
