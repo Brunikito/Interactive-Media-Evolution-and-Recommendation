@@ -1,0 +1,62 @@
+ISO3,ISO-Numeric,Country,Population,Continent,Languages
+ARE,784,United Arab Emirates,9630959,AS,"ar,fa,en,hi,ur"
+ARG,32,Argentina,44494502,SA,"es,en,it,de,fr,gn"
+AUT,40,Austria,8847037,EU,"de,hr,hu,sl"
+AUS,36,Australia,24992369,OC,en
+BEL,56,Belgium,11422068,EU,"nl,fr,de"
+BGR,100,Bulgaria,7000039,EU,"bg,tr,rom"
+BRA,76,Brazil,209469333,SA,"pt,es,en,fr"
+CAN,124,Canada,37058856,NA,"en,fr,iu"
+CHE,756,Switzerland,8516543,EU,"de,fr,it,rm"
+CHL,152,Chile,18729160,SA,es
+CHN,156,China,1411778724,AS,"zh,yue,wuu,dta,ug,za"
+COL,170,Colombia,49648685,SA,es
+CRI,188,Costa Rica,4999441,NA,"es,en"
+CYP,196,Cyprus,1189265,EU,"el,tr,en"
+CZE,203,Czechia,10625695,EU,"cs,sk"
+DEU,276,Germany,82927922,EU,de
+DNK,208,Denmark,5797446,EU,"da,en,fo,de"
+ECU,218,Ecuador,17084357,SA,es
+EST,233,Estonia,1320884,EU,"et,ru"
+EGY,818,Egypt,98423595,AF,"ar,en,fr"
+ESP,724,Spain,46723749,EU,"es,ca,gl,eu,oc"
+FIN,246,Finland,5518050,EU,"fi,sv,smn"
+FRA,250,France,66987244,EU,"fr,frp,br,co,ca,eu,oc"
+GBR,826,United Kingdom,66488991,EU,"en,cy,gd"
+GRC,300,Greece,10727668,EU,"el,en,fr"
+HKG,344,Hong Kong,7491609,AS,"zh,yue,zh,en"
+HRV,191,Croatia,3871833,EU,"hr,sr"
+HUN,348,Hungary,9768785,EU,hu
+IDN,360,Indonesia,267663435,AS,"id,en,nl,jv"
+IRL,372,Ireland,4853506,EU,"en,ga"
+ISR,376,Israel,8883800,AS,"he,ar,en,"
+IND,356,India,1352617328,AS,"en,hi,bn,te,mr,ta,ur,gu,kn,ml,or,pa,as,bh,sat,ks,ne,sd,kok,doi,mni,sit,sa,fr,lus,inc"
+ITA,380,Italy,60431283,EU,"it,de,fr,sc,ca,co,sl"
+JPN,392,Japan,126529100,AS,ja
+KOR,410,South Korea,51635256,AS,"ko,en"
+LTU,440,Lithuania,2789533,EU,"lt,ru,pl"
+LUX,442,Luxembourg,607728,EU,"lb,de,fr"
+LVA,428,Latvia,1926542,EU,"lv,ru,lt"
+MAR,504,Morocco,36029138,AF,"ar,ber,fr"
+MEX,484,Mexico,126190788,NA,es
+MYS,458,Malaysia,31528585,AS,"ms,en,zh,ta,te,ml,pa,th"
+NLD,528,The Netherlands,17231017,EU,"nl,fy"
+NOR,578,Norway,5314336,EU,"no,nb,nn,se,fi"
+NZL,554,New Zealand,4885500,OC,"en,mi"
+PER,604,Peru,31989256,SA,"es,qu,ay"
+PHL,608,Philippines,106651922,AS,"tl,en,fil,ceb,ilo,hil,war,pam,bik,bcl,pag,mrw,tsg,mdh,cbk,krj,sgd,msb,akl,ibg,yka,mta,abx"
+POL,616,Poland,37978548,EU,pl
+PRT,620,Portugal,10281762,EU,"pt,mwl"
+ROU,642,Romania,19473936,EU,"ro,hu,rom"
+RUS,643,Russia,144478050,EU,"ru,tt,xal,cau,ady,kv,ce,tyv,cv,udm,tut,mns,bua,myv,mdf,chm,ba,inh,kbd,krc,av,sah,nog"
+SAU,682,Saudi Arabia,33699947,AS,ar
+SWE,752,Sweden,10183175,EU,"sv,se,sma,fi"
+SGP,702,Singapore,5638676,AS,"cmn,en,ms,ta,zh"
+SVK,703,Slovakia,5447011,EU,"sk,hu"
+THA,764,Thailand,69428524,AS,"th,en"
+TUR,792,Turkey,82319724,AS,"tr,ku,diq,az,av"
+TWN,158,Taiwan,23451837,AS,"zh,zh,nan,hak"
+UKR,804,Ukraine,44622516,EU,"uk,ru,rom,pl,hu"
+USA,840,United States,327167434,NA,"en,es,haw,fr"
+VNM,704,Vietnam,95540395,AS,"vi,en,fr,zh,km"
+ZAF,710,South Africa,57779622,AF,"zu,xh,af,nso,en,tn,st,ts,ss,ve,nr"

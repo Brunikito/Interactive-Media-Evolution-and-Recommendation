@@ -1,0 +1,52 @@
+[
+    {
+      "age_span": "0-10",
+      "avg_duration": "7.616666666666666",
+      "users_in_group": "6312"
+    },
+    {
+      "age_span": "10-20",
+      "avg_duration": "7.466666666666667",
+      "users_in_group": "41934"
+    },
+    {
+      "age_span": "20-30",
+      "avg_duration": "7.55",
+      "users_in_group": "214165"
+    },
+    {
+      "age_span": "30-40",
+      "avg_duration": "7.483333333333333",
+      "users_in_group": "221778"
+    },
+    {
+      "age_span": "40-50",
+      "avg_duration": "7.4",
+      "users_in_group": "173777"
+    },
+    {
+      "age_span": "50-60",
+      "avg_duration": "7.383333333333334",
+      "users_in_group": "157760"
+    },
+    {
+      "age_span": "60-70",
+      "avg_duration": "7.583333333333333",
+      "users_in_group": "75379"
+    },
+    {
+      "age_span": "70-80",
+      "avg_duration": "7.866666666666666",
+      "users_in_group": "23157"
+    },
+    {
+      "age_span": "80-90",
+      "avg_duration": "8.116666666666667",
+      "users_in_group": "3622"
+    },
+    {
+      "age_span": "90-100",
+      "avg_duration": "8.366666666666667",
+      "users_in_group": "235"
+    }
+  ]
