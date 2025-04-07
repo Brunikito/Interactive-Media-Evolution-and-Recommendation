@@ -1,146 +1,145 @@
-ocupation,category,work_time,free_from_work_time
-Desenvolvedor de software,Tecnologia,09:00:00,17:00:00
-Engenheiro de dados,Tecnologia,09:00:00,17:00:00
-Arquiteto de TI,Tecnologia,09:00:00,17:00:00
-Administrador de redes,Tecnologia,09:00:00,17:00:00
-Analista de segurança,Tecnologia,09:00:00,17:00:00
-Médico,Saúde,07:00:00,17:00:00
-Enfermeiro,Saúde,07:00:00,19:00:00
-Psicólogo,Saúde,09:00:00,17:00:00
-Dentista,Saúde,08:00:00,16:00:00
-Fisioterapeuta,Saúde,08:00:00,16:00:00
-Designer de moda,Moda,09:00:00,17:00:00
-Estilista,Moda,09:00:00,17:00:00
-Modelista,Moda,09:00:00,17:00:00
-Consultor de estilo,Moda,09:00:00,17:00:00
-Fotógrafo de moda,Moda,09:00:00,17:00:00
-Oficial,Militar,05:00:00,17:00:00
-Praça,Militar,05:00:00,17:00:00
-Policial oficial,Militar,05:00:00,17:00:00
-Policial praça,Militar,05:00:00,17:00:00
-Bombeiro,Militar,05:00:00,17:00:00
-Chef de cozinha,Gastronomia,10:00:00,20:00:00
-Garçom,Gastronomia,10:00:00,18:00:00
-Cozinheiro,Gastronomia,10:00:00,18:00:00
-Barman,Gastronomia,10:00:00,18:00:00
-Padeiro,Gastronomia,04:00:00,12:00:00
-Ator,Entretenimento,09:00:00,15:00:00
-Cineasta,Entretenimento,09:00:00,17:00:00
-Produtor de cinema,Entretenimento,09:00:00,17:00:00
-DJ,Entretenimento,21:00:00,03:00:00
-Apresentador,Entretenimento,09:00:00,15:00:00
-Jogador de futebol,Esportes,10:00:00,18:00:00
-Atleta olímpico,Esportes,09:00:00,15:00:00
-Treinador de futebol,Esportes,09:00:00,17:00:00
-Árbitro de futebol,Esportes,16:00:00,22:00:00
-Atleta de basquete,Esportes,10:00:00,18:00:00
-Estudante pré-escola,Educação,07:00:00,11:00:00
-Estudante ensino fundamental I,Educação,07:00:00,11:00:00
-Estudante ensino fundamental II,Educação,07:00:00,11:00:00
-Estudante ensino médio,Educação,07:00:00,13:00:00
-Estudante universitário,Educação,07:00:00,13:00:00
-Professor pré-escola,Educação,07:00:00,11:00:00
-Professor ensino fundamental I,Educação,07:00:00,11:00:00
-Professor ensino fundamental II,Educação,07:00:00,11:00:00
-Professor ensino médio,Educação,07:00:00,15:00:00
-Professor universitário,Educação,07:00:00,13:00:00
-Biólogo,Ciências,09:00:00,17:00:00
-Físico,Ciências,09:00:00,17:00:00
-Químico,Ciências,09:00:00,17:00:00
-Astrônomo,Ciências,09:00:00,17:00:00
-Geólogo,Ciências,09:00:00,17:00:00
-Músico,Música,09:00:00,15:00:00
-Compositor,Música,09:00:00,15:00:00
-Maestro,Música,09:00:00,15:00:00
-Cantor,Música,19:00:00,01:00:00
-Pianista,Música,09:00:00,15:00:00
-Artista plástico,Arte,09:00:00,15:00:00
-Pintor,Arte,09:00:00,15:00:00
-Escultor,Arte,09:00:00,15:00:00
-Fotógrafo,Arte,09:00:00,17:00:00
-Ilustrador,Arte,09:00:00,17:00:00
-Contador,Finanças,09:00:00,17:00:00
-Analista financeiro,Finanças,09:00:00,17:00:00
-Consultor financeiro,Finanças,09:00:00,17:00:00
-Auditor,Finanças,09:00:00,17:00:00
-Economista,Finanças,07:00:00,15:00:00
-Engenheiro civil,Engenharia,07:00:00,15:00:00
-Engenheiro elétrico,Engenharia,08:00:00,16:00:00
-Engenheiro mecânico,Engenharia,08:00:00,16:00:00
-Engenheiro de produção,Engenharia,08:00:00,16:00:00
-Engenheiro ambiental,Engenharia,08:00:00,16:00:00
-Presidente,Política,09:00:00,19:00:00
-Senador,Política,09:00:00,17:00:00
-Deputado,Política,09:00:00,17:00:00
-Governador,Política,09:00:00,19:00:00
-Vereador,Política,09:00:00,17:00:00
-Advogado,Direito,09:00:00,17:00:00
-Juiz,Direito,09:00:00,17:00:00
-Promotor de justiça,Direito,07:00:00,15:00:00
-Defensor público,Direito,07:00:00,15:00:00
-Desembargador,Direito,07:00:00,15:00:00
-Barbeiro,Prestação de Serviços,07:00:00,15:00:00
-Lixeiro,Prestação de Serviços,06:00:00,14:00:00
-Garçom,Prestação de Serviços,10:00:00,18:00:00
-Recepcionista,Prestação de Serviços,09:00:00,17:00:00
-Motorista de táxi,Prestação de Serviços,08:00:00,16:00:00
-Jornalista,Comunicação,09:00:00,17:00:00
-Redator,Comunicação,09:00:00,17:00:00
-Locutor,Comunicação,09:00:00,17:00:00
-Roteirista,Comunicação,09:00:00,17:00:00
-Publicitário,Comunicação,09:00:00,17:00:00
-Agrônomo,Agronegócio,08:00:00,16:00:00
-Zootecnista,Agronegócio,08:00:00,16:00:00
-Veterinário,Agronegócio,08:00:00,16:00:00
-Engenheiro agrônomo,Agronegócio,08:00:00,16:00:00
-Pecuarista,Agronegócio,08:00:00,16:00:00
-Guia turístico,Turismo,09:00:00,17:00:00
-Agente de viagens,Turismo,09:00:00,17:00:00
-Recepcionista de hotel,Turismo,09:00:00,17:00:00
-Gerente de hotel,Turismo,09:00:00,17:00:00
-Consultor de turismo,Turismo,09:00:00,17:00:00
-Pedreiro,Construção Civil,07:00:00,15:00:00
-Carpinteiro,Construção Civil,07:00:00,15:00:00
-Engenheiro civil,Construção Civil,07:00:00,15:00:00
-Mestre de obras,Construção Civil,07:00:00,15:00:00
-Ajudante de pedreiro,Construção Civil,07:00:00,15:00:00
-Programador de software,Programação,09:00:00,17:00:00
-Desenvolvedor front-end,Programação,09:00:00,17:00:00
-Desenvolvedor back-end,Programação,09:00:00,17:00:00
-Analista de sistemas,Programação,09:00:00,17:00:00
-Engenheiro de software,Programação,09:00:00,17:00:00
-Designer de jogos,Jogos,09:00:00,17:00:00
-Programador de jogos,Jogos,09:00:00,17:00:00
-Tester de jogos,Jogos,09:00:00,17:00:00
-Desenvolvedor de jogos,Jogos,09:00:00,17:00:00
-Produtor de jogos,Jogos,09:00:00,17:00:00
-Designer gráfico,Design,09:00:00,17:00:00
-Designer de interiores,Design,09:00:00,17:00:00
-Designer de produto,Design,09:00:00,17:00:00
-Designer de moda,Design,09:00:00,17:00:00
-Ilustrador,Design,09:00:00,17:00:00
-Gerente de vendas,Gestão,09:00:00,17:00:00
-Gestor de recursos humanos,Gestão,07:00:00,15:00:00
-Diretor executivo,Gestão,07:00:00,15:00:00
-Consultor de gestão,Gestão,07:00:00,15:00:00
-Coordenador de projetos,Gestão,07:00:00,15:00:00
-Segurança privada,Segurança,18:00:00,02:00:00
-Policial militar,Segurança,06:00:00,18:00:00
-Agente de segurança,Segurança,06:00:00,18:00:00
-Vigilante,Segurança,18:00:00,06:00:00
-Perito criminal,Segurança,09:00:00,17:00:00
-Administrador de sistemas,Tecnologia da Informação,09:00:00,17:00:00
-Analista de redes,Tecnologia da Informação,09:00:00,17:00:00
-Desenvolvedor de TI,Tecnologia da Informação,09:00:00,17:00:00
-Suporte técnico,Tecnologia da Informação,09:00:00,17:00:00
-Engenheiro de software,Tecnologia da Informação,09:00:00,17:00:00
-Logístico,Logística,08:00:00,16:00:00
-Gerente de logística,Logística,09:00:00,17:00:00
-Coordenador de logística,Logística,09:00:00,17:00:00
-Motorista de transporte,Logística,08:00:00,16:00:00
-Supervisor de estoque,Logística,08:00:00,16:00:00
-Vendedor,Vendas,09:00:00,17:00:00
-Representante comercial,Vendas,09:00:00,17:00:00
-Gerente de vendas,Vendas,09:00:00,17:00:00
-Supervisor de vendas,Vendas,09:00:00,17:00:00
-Consultor de vendas,Vendas,09:00:00,17:00:00
+ocupation,category,work_time,free_from_work_time,days_work
+Desenvolvedor de software,Tecnologia,09:00:00,17:00:00,5
+Engenheiro de dados,Tecnologia,09:00:00,17:00:00,5
+Arquiteto de TI,Tecnologia,09:00:00,17:00:00,5
+Administrador de redes,Tecnologia,09:00:00,17:00:00,5
+Analista de segurança,Tecnologia,09:00:00,17:00:00,5
+Médico,Saúde,07:00:00,17:00:00,6
+Enfermeiro,Saúde,07:00:00,19:00:00,6
+Psicólogo,Saúde,09:00:00,17:00:00,5
+Dentista,Saúde,08:00:00,16:00:00,5
+Fisioterapeuta,Saúde,08:00:00,16:00:00,5
+Designer de moda,Moda,09:00:00,17:00:00,5
+Estilista,Moda,09:00:00,17:00:00,5
+Modelista,Moda,09:00:00,17:00:00,5
+Consultor de estilo,Moda,09:00:00,17:00:00,5
+Fotógrafo de moda,Moda,09:00:00,17:00:00,5
+Oficial,Militar,05:00:00,17:00:00,6
+Praça,Militar,05:00:00,17:00:00,6
+Policial oficial,Militar,05:00:00,17:00:00,6
+Policial praça,Militar,05:00:00,17:00:00,6
+Bombeiro,Militar,05:00:00,17:00:00,6
+Chef de cozinha,Gastronomia,10:00:00,20:00:00,6
+Garçom,Gastronomia,10:00:00,18:00:00,6
+Cozinheiro,Gastronomia,10:00:00,18:00:00,6
+Barman,Gastronomia,10:00:00,18:00:00,6
+Padeiro,Gastronomia,04:00:00,12:00:00,6
+Ator,Entretenimento,09:00:00,15:00:00,5
+Cineasta,Entretenimento,09:00:00,17:00:00,5
+Produtor de cinema,Entretenimento,09:00:00,17:00:00,5
+Apresentador,Entretenimento,09:00:00,15:00:00,5
+Jogador de futebol,Esportes,10:00:00,18:00:00,6
+Atleta olímpico,Esportes,09:00:00,15:00:00,5
+Treinador de futebol,Esportes,09:00:00,17:00:00,5
+Árbitro de futebol,Esportes,10:00:00,16:00:00,5
+Atleta de basquete,Esportes,10:00:00,18:00:00,6
+Estudante pré-escola,Educação,07:00:00,11:00:00,5
+Estudante ensino fundamental I,Educação,07:00:00,11:00:00,5
+Estudante ensino fundamental II,Educação,07:00:00,11:00:00,5
+Estudante ensino médio,Educação,07:00:00,13:00:00,5
+Estudante universitário,Educação,07:00:00,13:00:00,5
+Professor pré-escola,Educação,07:00:00,11:00:00,5
+Professor ensino fundamental I,Educação,07:00:00,11:00:00,5
+Professor ensino fundamental II,Educação,07:00:00,11:00:00,5
+Professor ensino médio,Educação,07:00:00,15:00:00,5
+Professor universitário,Educação,07:00:00,13:00:00,5
+Biólogo,Ciências,09:00:00,17:00:00,5
+Físico,Ciências,09:00:00,17:00:00,5
+Químico,Ciências,09:00:00,17:00:00,5
+Astrônomo,Ciências,09:00:00,17:00:00,5
+Geólogo,Ciências,09:00:00,17:00:00,5
+Músico,Música,09:00:00,15:00:00,5
+Compositor,Música,09:00:00,15:00:00,5
+Maestro,Música,09:00:00,15:00:00,5
+Cantor,Música,19:00:00,01:00:00,6
+Pianista,Música,09:00:00,15:00:00,5
+Artista plástico,Arte,09:00:00,15:00:00,5
+Pintor,Arte,09:00:00,15:00:00,5
+Escultor,Arte,09:00:00,15:00:00,5
+Fotógrafo,Arte,09:00:00,17:00:00,5
+Ilustrador,Arte,09:00:00,17:00:00,5
+Contador,Finanças,09:00:00,17:00:00,5
+Analista financeiro,Finanças,09:00:00,17:00:00,5
+Consultor financeiro,Finanças,09:00:00,17:00:00,5
+Auditor,Finanças,09:00:00,17:00:00,5
+Economista,Finanças,07:00:00,15:00:00,5
+Engenheiro civil,Engenharia,07:00:00,15:00:00,5
+Engenheiro elétrico,Engenharia,08:00:00,16:00:00,5
+Engenheiro mecânico,Engenharia,08:00:00,16:00:00,5
+Engenheiro de produção,Engenharia,08:00:00,16:00:00,5
+Engenheiro ambiental,Engenharia,08:00:00,16:00:00,5
+Presidente,Política,09:00:00,19:00:00,5
+Senador,Política,09:00:00,17:00:00,5
+Deputado,Política,09:00:00,17:00:00,5
+Governador,Política,09:00:00,19:00:00,5
+Vereador,Política,09:00:00,17:00:00,5
+Advogado,Direito,09:00:00,17:00:00,5
+Juiz,Direito,09:00:00,17:00:00,5
+Promotor de justiça,Direito,07:00:00,15:00:00,5
+Defensor público,Direito,07:00:00,15:00:00,5
+Desembargador,Direito,07:00:00,15:00:00,5
+Barbeiro,Prestação de Serviços,07:00:00,15:00:00,5
+Lixeiro,Prestação de Serviços,06:00:00,14:00:00,6
+Garçom,Prestação de Serviços,10:00:00,18:00:00,6
+Recepcionista,Prestação de Serviços,09:00:00,17:00:00,5
+Motorista de táxi,Prestação de Serviços,08:00:00,16:00:00,5
+Jornalista,Comunicação,09:00:00,17:00:00,5
+Redator,Comunicação,09:00:00,17:00:00,5
+Locutor,Comunicação,09:00:00,17:00:00,5
+Roteirista,Comunicação,09:00:00,17:00:00,5
+Publicitário,Comunicação,09:00:00,17:00:00,5
+Agrônomo,Agronegócio,08:00:00,16:00:00,5
+Zootecnista,Agronegócio,08:00:00,16:00:00,5
+Veterinário,Agronegócio,08:00:00,16:00:00,5
+Engenheiro agrônomo,Agronegócio,08:00:00,16:00:00,5
+Pecuarista,Agronegócio,08:00:00,16:00:00,5
+Guia turístico,Turismo,09:00:00,17:00:00,5
+Agente de viagens,Turismo,09:00:00,17:00:00,5
+Recepcionista de hotel,Turismo,09:00:00,17:00:00,5
+Gerente de hotel,Turismo,09:00:00,17:00:00,5
+Consultor de turismo,Turismo,09:00:00,17:00:00,5
+Pedreiro,Construção Civil,07:00:00,15:00:00,5
+Carpinteiro,Construção Civil,07:00:00,15:00:00,5
+Engenheiro civil,Construção Civil,07:00:00,15:00:00,5
+Mestre de obras,Construção Civil,07:00:00,15:00:00,5
+Ajudante de pedreiro,Construção Civil,07:00:00,15:00:00,5
+Programador de software,Programação,09:00:00,17:00:00,5
+Desenvolvedor front-end,Programação,09:00:00,17:00:00,5
+Desenvolvedor back-end,Programação,09:00:00,17:00:00,5
+Analista de sistemas,Programação,09:00:00,17:00:00,5
+Engenheiro de software,Programação,09:00:00,17:00:00,5
+Designer de jogos,Jogos,09:00:00,17:00:00,5
+Programador de jogos,Jogos,09:00:00,17:00:00,5
+Tester de jogos,Jogos,09:00:00,17:00:00,5
+Desenvolvedor de jogos,Jogos,09:00:00,17:00:00,5
+Produtor de jogos,Jogos,09:00:00,17:00:00,5
+Designer gráfico,Design,09:00:00,17:00:00,5
+Designer de interiores,Design,09:00:00,17:00:00,5
+Designer de produto,Design,09:00:00,17:00:00,5
+Designer de moda,Design,09:00:00,17:00:00,5
+Ilustrador,Design,09:00:00,17:00:00,5
+Gerente de vendas,Gestão,09:00:00,17:00:00,5
+Gestor de recursos humanos,Gestão,07:00:00,15:00:00,5
+Diretor executivo,Gestão,07:00:00,15:00:00,5
+Consultor de gestão,Gestão,07:00:00,15:00:00,5
+Coordenador de projetos,Gestão,07:00:00,15:00:00,5
+Segurança privada,Segurança,18:00:00,02:00:00,5
+Policial militar,Segurança,06:00:00,18:00:00,6
+Agente de segurança,Segurança,06:00:00,18:00:00,6
+Vigilante,Segurança,18:00:00,06:00:00,6
+Perito criminal,Segurança,09:00:00,17:00:00,5
+Administrador de sistemas,Tecnologia da Informação,09:00:00,17:00:00,5
+Analista de redes,Tecnologia da Informação,09:00:00,17:00:00,5
+Desenvolvedor de TI,Tecnologia da Informação,09:00:00,17:00:00,5
+Suporte técnico,Tecnologia da Informação,09:00:00,17:00:00,5
+Engenheiro de software,Tecnologia da Informação,09:00:00,17:00:00,5
+Logístico,Logística,08:00:00,16:00:00,5
+Gerente de logística,Logística,09:00:00,17:00:00,5
+Coordenador de logística,Logística,09:00:00,17:00:00,5
+Motorista de transporte,Logística,08:00:00,16:00:00,5
+Supervisor de estoque,Logística,08:00:00,16:00:00,5
+Vendedor,Vendas,09:00:00,17:00:00,5
+Representante comercial,Vendas,09:00:00,17:00:00,5
+Gerente de vendas,Vendas,09:00:00,17:00:00,5
+Supervisor de vendas,Vendas,09:00:00,17:00:00,5
+Consultor de vendas,Vendas,09:00:00,17:00:00,5

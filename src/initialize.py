@@ -12,7 +12,6 @@ def initialize_tables():
         'user_wake_time',
         'user_lunch_time',
         'user_dinner_time',
-        'user_exercise_time',
         'user_work_time',
         'user_free_from_work_time',
         'user_work_days',
@@ -24,6 +23,8 @@ def initialize_tables():
         'user_education',
         'user_video_watching_time',
         'user_video_retention_time',
+        'user_channel_id',
+        'user_admin_channel_id',
     ])
     users.to_csv('data/users.csv', index=False)
 
