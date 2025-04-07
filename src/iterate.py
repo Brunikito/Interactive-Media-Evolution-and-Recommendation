@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-from numba import njit
 import os
 from random_username.generate import generate_username
 from multiprocessing import Pool
