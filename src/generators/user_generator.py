@@ -3,18 +3,25 @@ import numpy as np
 import os
 from random_username.generate import generate_username
 from multiprocessing import Pool
+from src.generators.cython.cy_user_generator import (
+    get_sleep_time_vectorized, get_wake_up_time_vectorized, init_data
+)
 
 # Get current directory (adjust if needed)
-actual_dir = os.path.dirname(os.path.abspath(__file__))
+actual_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+
+# Load data files
+init_data()
 
 # Load CSV data
-channels = pd.read_csv(os.path.join(actual_dir, '../data/channels.csv'))
-comments = pd.read_csv(os.path.join(actual_dir, '../data/comments.csv'))
-content = pd.read_csv(os.path.join(actual_dir, '../data/content.csv'))
-users = pd.read_csv(os.path.join(actual_dir, '../data/users.csv'))
-country_data = pd.read_csv(os.path.join(actual_dir, '../data/behavior_generated/country_data_cleaned.csv'))
-sleep_data = pd.read_csv(os.path.join(actual_dir, '../data/behavior_generated/sleep_hours_by_age_country.csv'))
-work_data = pd.read_csv(os.path.join(actual_dir, '../data/behavior_generated/work_behavior.csv'))
+channels = pd.read_csv(os.path.join(actual_dir, 'data/channels.csv'))
+comments = pd.read_csv(os.path.join(actual_dir, 'data/comments.csv'))
+content = pd.read_csv(os.path.join(actual_dir, 'data/content.csv'))
+users = pd.read_csv(os.path.join(actual_dir, 'data/users.csv'))
+country_data = pd.read_csv(os.path.join(actual_dir, 'data/behavior_generated/country_data_cleaned.csv'))
+sleep_data = pd.read_csv(os.path.join(actual_dir, 'data/behavior_generated/sleep_hours_by_age_country.csv'))
+work_data = pd.read_csv(os.path.join(actual_dir, 'data/behavior_generated/work_behavior.csv'))
 
 # Pre-calculate population fractions for sampling
 total_population = country_data['Population'].sum()
@@ -28,47 +35,6 @@ work_data_jobs = work_data[~work_data['ocupation'].isin([
     'Estudante universitário'
 ])]
 
-##############################################################################
-# 1. Vectorized Beta distribution functions for time generation
-##############################################################################
-
-# Build a dictionary for faster lookup of sleep hours by (country, age_span)
-sleep_lookup = {
-    (row['country'], row['age_span']): row['sleep_hours']
-    for _, row in sleep_data.iterrows()
-}
-
-def get_sleep_time_vectorized(user_countries, user_ages, minimum=4, maximum=9, alpha=6, rng=None):
-    if rng is None:
-        rng = np.random.default_rng()
-    age_span = ((user_ages + 9) // 10) * 10
-    sleep_means = np.array([
-        sleep_lookup.get((country, span), 7)  # fallback: 7 hours
-        for country, span in zip(user_countries, age_span)
-    ])
-    normalized_mean = (sleep_means - minimum) / (maximum - minimum)
-    beta_param = alpha * (1 - normalized_mean) / normalized_mean
-    beta_values = rng.beta(alpha, beta_param)
-    return minimum + (maximum - minimum) * beta_values
-
-def get_wake_up_time_vectorized(user_work_time, minimum_dif=2, maximum_dif=0.5, mean_dif=1, alpha=6, rng=None):
-    if rng is None:
-        rng = np.random.default_rng()
-    minimum = user_work_time - minimum_dif
-    maximum = user_work_time - maximum_dif
-    mean = user_work_time - mean_dif
-    normalized_mean = (mean - minimum) / (maximum - minimum)
-    beta_param = alpha * (1 - normalized_mean) / normalized_mean
-    beta_values = rng.beta(alpha, beta_param)
-    return minimum + (maximum - minimum) * beta_values
-
-def generate_eat_time_vectorized(mean, minimum, maximum, alpha=2, rng=None):
-    if rng is None:
-        rng = np.random.default_rng()
-    normalized_mean = (mean - minimum) / (maximum - minimum)
-    beta_param = alpha * (1 - normalized_mean) / normalized_mean
-    beta_values = rng.beta(alpha, beta_param)
-    return minimum + (maximum - minimum) * beta_values
 
 ##############################################################################
 # 2. Build dictionaries for occupation mappings and language lookups
@@ -91,6 +57,14 @@ iso3_to_languages = {
 
 # Timezone dictionary
 iso3_to_timezone = dict(zip(country_data['ISO3'], country_data['Timezone']))
+
+def generate_eat_time_vectorized(mean, minimum, maximum, alpha=2, rng=None):
+    if rng is None:
+        rng = np.random.default_rng()
+    normalized_mean = (mean - minimum) / (maximum - minimum)
+    beta_param = alpha * (1 - normalized_mean) / normalized_mean
+    beta_values = rng.beta(alpha, beta_param)
+    return minimum + (maximum - minimum) * beta_values
 
 ##############################################################################
 # 3. Optimize DataFrame memory usage
@@ -133,7 +107,7 @@ def create_random_user(number_of_users, start_id):
     
     user_id = np.arange(start_id, start_id + number_of_users)
     user_name = generate_username(number_of_users)
-    user_age = np.clip(rng.negative_binomial(5, 0.15, number_of_users), 4, 100)
+    user_age = np.clip(rng.negative_binomial(5, 0.15, number_of_users), 4, 100).astype(np.int32)
     user_gender = rng.choice(['M', 'F'], size=number_of_users)
     user_location = rng.choice(country_data['ISO3'].unique(), size=number_of_users, p=probabilities_country)
 
@@ -158,7 +132,7 @@ def create_random_user(number_of_users, start_id):
     user_bed_time = user_work_time - user_sleep_duration
 
     # Lunch and dinner times
-    user_lunch_time = generate_eat_time_vectorized(mean=12, minimum=11, maximum=14, rng=rng)
+    user_lunch_time = generate_eat_time_vectorized(mean=np.full(number_of_users, 12), minimum=np.full(number_of_users, 11), maximum=np.full(number_of_users, 14), rng=rng)
     dinner_min = np.minimum(17, 24 + user_bed_time - 2)
     dinner_max = np.minimum(23, 24 + user_bed_time - 0.5)
     dinner_mean = np.minimum(20, 24 + user_bed_time - 1)
@@ -219,58 +193,3 @@ def create_random_user(number_of_users, start_id):
     })
 
     return optimize_df_users(df_new_users), optimize_df_USER(df_new_USER)
-
-##############################################################################
-# 5. Parallel execution to generate large user base
-##############################################################################
-
-def process_batch(args):
-    batch_size, start_id = args
-    return create_random_user(batch_size, start_id)
-
-if __name__ == '__main__':
-    import pyarrow as pa
-    import pyarrow.parquet as pq
-    
-    print('Creating random users...')
-    number_of_users = 1_000_000
-    batch_size = 2000
-    initial_id = users.shape[0]
-    import timeit
-    start_time = timeit.default_timer()
-    # Prepare batches with correct ID ranges
-    batches = [(min(batch_size, number_of_users - i), initial_id + i)
-               for i in range(0, number_of_users, batch_size)]
-
-    users_path = 'usuarios_full.parquet'
-    user_table_path = 'USERS.parquet'
-    
-    # Gerar o primeiro batch só pra pegar o schema
-    first_df_users, first_df_USER = create_random_user(*batches[0])
-    schema_users = pa.Schema.from_pandas(first_df_users)
-    schema_USER = pa.Schema.from_pandas(first_df_USER)
-
-    with pq.ParquetWriter(users_path, schema=schema_users, use_dictionary=True, compression='snappy') as user_writer, \
-        pq.ParquetWriter(user_table_path, schema=schema_USER, use_dictionary=True, compression='snappy') as user_table_writer:
-
-        with Pool() as pool:
-            for result in pool.imap_unordered(process_batch, batches, chunksize=4):
-                df_users, df_USER = result
-
-                table_users = pa.Table.from_pandas(df_users, schema=schema_users)
-                table_USER = pa.Table.from_pandas(df_USER, schema=schema_USER)
-
-                user_writer.write_table(table_users)
-                user_table_writer.write_table(table_USER)
-
-    
-    end_time = timeit.default_timer()
-    elapsed_time = end_time - start_time
-    print('Users created and saved.')
-    print(f'Elapsed time: {elapsed_time:.2f} seconds')
-    
-    df_users = pd.read_parquet(users_path)
-    df_USER = pd.read_parquet(user_table_path)
-    print('Memory Usage:')
-    print(df_users.memory_usage(deep=True).sum() / (1024 ** 2), 'MB')
-    print(df_USER.memory_usage(deep=True).sum() / (1024 ** 2), 'MB')
