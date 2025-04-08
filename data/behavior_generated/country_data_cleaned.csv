@@ -1,62 +1,62 @@
-ISO3,ISO-Numeric,Country,Population,Continent,Languages,Timezone
-ARE,784,United Arab Emirates,9630959,AS,"ar,fa,en,hi,ur",4.0
-ARG,32,Argentina,44494502,SA,"es,en,it,de,fr,gn",-3.0
-AUT,40,Austria,8847037,EU,"de,hr,hu,sl",1.0
-AUS,36,Australia,24992369,OC,en,10.0
-BEL,56,Belgium,11422068,EU,"nl,fr,de",1.0
-BGR,100,Bulgaria,7000039,EU,"bg,tr,rom",2.0
-BRA,76,Brazil,209469333,SA,"pt,es,en,fr",-3.0
-CAN,124,Canada,37058856,NA,"en,fr,iu",-5.0
-CHE,756,Switzerland,8516543,EU,"de,fr,it,rm",1.0
-CHL,152,Chile,18729160,SA,es,-4.0
-CHN,156,China,1411778724,AS,"zh,yue,wuu,dta,ug,za",8.0
-COL,170,Colombia,49648685,SA,es,-5.0
-CRI,188,Costa Rica,4999441,NA,"es,en",-6.0
-CYP,196,Cyprus,1189265,EU,"el,tr,en",2.0
-CZE,203,Czechia,10625695,EU,"cs,sk",1.0
-DEU,276,Germany,82927922,EU,de,1.0
-DNK,208,Denmark,5797446,EU,"da,en,fo,de",1.0
-ECU,218,Ecuador,17084357,SA,es,-5.0
-EST,233,Estonia,1320884,EU,"et,ru",2.0
-EGY,818,Egypt,98423595,AF,"ar,en,fr",2.0
-ESP,724,Spain,46723749,EU,"es,ca,gl,eu,oc",1.0
-FIN,246,Finland,5518050,EU,"fi,sv,smn",2.0
-FRA,250,France,66987244,EU,"fr,frp,br,co,ca,eu,oc",1.0
-GBR,826,United Kingdom,66488991,EU,"en,cy,gd",0.0
-GRC,300,Greece,10727668,EU,"el,en,fr",2.0
-HKG,344,Hong Kong,7491609,AS,"zh,yue,zh,en",8.0
-HRV,191,Croatia,3871833,EU,"hr,sr",1.0
-HUN,348,Hungary,9768785,EU,hu,1.0
-IDN,360,Indonesia,267663435,AS,"id,en,nl,jv",7.0
-IRL,372,Ireland,4853506,EU,"en,ga",0.0
-ISR,376,Israel,8883800,AS,"he,ar,en,",2.0
-IND,356,India,1352617328,AS,"en,hi,bn,te,mr,ta,ur,gu,kn,ml,or,pa,as,bh,sat,ks,ne,sd,kok,doi,mni,sit,sa,fr,lus,inc",5.5
-ITA,380,Italy,60431283,EU,"it,de,fr,sc,ca,co,sl",1.0
-JPN,392,Japan,126529100,AS,ja,9.0
-KOR,410,South Korea,51635256,AS,"ko,en",9.0
-LTU,440,Lithuania,2789533,EU,"lt,ru,pl",2.0
-LUX,442,Luxembourg,607728,EU,"lb,de,fr",1.0
-LVA,428,Latvia,1926542,EU,"lv,ru,lt",2.0
-MAR,504,Morocco,36029138,AF,"ar,ber,fr",1.0
-MEX,484,Mexico,126190788,NA,es,-6.0
-MYS,458,Malaysia,31528585,AS,"ms,en,zh,ta,te,ml,pa,th",8.0
-NLD,528,The Netherlands,17231017,EU,"nl,fy",1.0
-NOR,578,Norway,5314336,EU,"no,nb,nn,se,fi",1.0
-NZL,554,New Zealand,4885500,OC,"en,mi",12.0
-PER,604,Peru,31989256,SA,"es,qu,ay",-5.0
-PHL,608,Philippines,106651922,AS,"tl,en,fil,ceb,ilo,hil,war,pam,bik,bcl,pag,mrw,tsg,mdh,cbk,krj,sgd,msb,akl,ibg,yka,mta,abx",8.0
-POL,616,Poland,37978548,EU,pl,1.0
-PRT,620,Portugal,10281762,EU,"pt,mwl",0.0
-ROU,642,Romania,19473936,EU,"ro,hu,rom",2.0
-RUS,643,Russia,144478050,EU,"ru,tt,xal,cau,ady,kv,ce,tyv,cv,udm,tut,mns,bua,myv,mdf,chm,ba,inh,kbd,krc,av,sah,nog",3.0
-SAU,682,Saudi Arabia,33699947,AS,ar,3.0
-SWE,752,Sweden,10183175,EU,"sv,se,sma,fi",1.0
-SGP,702,Singapore,5638676,AS,"cmn,en,ms,ta,zh",8.0
-SVK,703,Slovakia,5447011,EU,"sk,hu",1.0
-THA,764,Thailand,69428524,AS,"th,en",7.0
-TUR,792,Turkey,82319724,AS,"tr,ku,diq,az,av",3.0
-TWN,158,Taiwan,23451837,AS,"zh,zh,nan,hak",8.0
-UKR,804,Ukraine,44622516,EU,"uk,ru,rom,pl,hu",2.0
-USA,840,United States,327167434,NA,"en,es,haw,fr",-5.0
-VNM,704,Vietnam,95540395,AS,"vi,en,fr,zh,km",7.0
-ZAF,710,South Africa,57779622,AF,"zu,xh,af,nso,en,tn,st,ts,ss,ve,nr",2.0
+ISO3,ISO-Numeric,Country,Population,Continent,Languages,Timezone,Population_Fraction
+ARE,784,United Arab Emirates,9630959,AS,"ar,fa,en,hi,ur",4.0,0.0017553012778795877
+ARG,32,Argentina,44494502,SA,"es,en,it,de,fr,gn",-3.0,0.008109395566860566
+AUT,40,Austria,8847037,EU,"de,hr,hu,sl",1.0,0.0016124266910022141
+AUS,36,Australia,24992369,OC,en,10.0,0.004555012355772482
+BEL,56,Belgium,11422068,EU,"nl,fr,de",1.0,0.0020817418656260034
+BGR,100,Bulgaria,7000039,EU,"bg,tr,rom",2.0,0.0012757999906247083
+BRA,76,Brazil,209469333,SA,"pt,es,en,fr",-3.0,0.03817706916740948
+CAN,124,Canada,37058856,NA,"en,fr,iu",-5.0,0.0067542035319178104
+CHE,756,Switzerland,8516543,EU,"de,fr,it,rm",1.0,0.0015521921348659524
+CHL,152,Chile,18729160,SA,es,-4.0,0.0034135041465352786
+CHN,156,China,1411778724,AS,"zh,yue,wuu,dta,ug,za",8.0,0.25730532113369126
+COL,170,Colombia,49648685,SA,es,-5.0,0.009048776993603765
+CRI,188,Costa Rica,4999441,NA,"es,en",-6.0,0.0009111787492796516
+CYP,196,Cyprus,1189265,EU,"el,tr,en",2.0,0.00021675083179540768
+CZE,203,Czechia,10625695,EU,"cs,sk",1.0,0.0019365980077226729
+DEU,276,Germany,82927922,EU,de,1.0,0.01511412180848229
+DNK,208,Denmark,5797446,EU,"da,en,fo,de",1.0,0.0010566200491807622
+ECU,218,Ecuador,17084357,SA,es,-5.0,0.0031137287235727075
+EST,233,Estonia,1320884,EU,"et,ru",2.0,0.0002407392008553563
+EGY,818,Egypt,98423595,AF,"ar,en,fr",2.0,0.017938303140632515
+ESP,724,Spain,46723749,EU,"es,ca,gl,eu,oc",1.0,0.008515689489180165
+FIN,246,Finland,5518050,EU,"fi,sv,smn",2.0,0.0010056984165754893
+FRA,250,France,66987244,EU,"fr,frp,br,co,ca,eu,oc",1.0,0.012208835588941012
+GBR,826,United Kingdom,66488991,EU,"en,cy,gd",0.0,0.01211802592734788
+GRC,300,Greece,10727668,EU,"el,en,fr",2.0,0.0019551832116685326
+HKG,344,Hong Kong,7491609,AS,"zh,yue,zh,en",8.0,0.0013653916345271763
+HRV,191,Croatia,3871833,EU,"hr,sr",1.0,0.000705665283450626
+HUN,348,Hungary,9768785,EU,hu,1.0,0.001780420910714182
+IDN,360,Indonesia,267663435,AS,"id,en,nl,jv",7.0,0.04878330075926395
+IRL,372,Ireland,4853506,EU,"en,ga",0.0,0.0008845812015185867
+ISR,376,Israel,8883800,AS,"he,ar,en,",2.0,0.0016191269729656913
+IND,356,India,1352617328,AS,"en,hi,bn,te,mr,ta,ur,gu,kn,ml,or,pa,as,bh,sat,ks,ne,sd,kok,doi,mni,sit,sa,fr,lus,inc",5.5,0.24652279428460586
+ITA,380,Italy,60431283,EU,"it,de,fr,sc,ca,co,sl",1.0,0.011013971534278466
+JPN,392,Japan,126529100,AS,ja,9.0,0.023060703603758892
+KOR,410,South Korea,51635256,AS,"ko,en",9.0,0.009410841728268145
+LTU,440,Lithuania,2789533,EU,"lt,ru,pl",2.0,0.0005084094781825237
+LUX,442,Luxembourg,607728,EU,"lb,de,fr",1.0,0.00011076215099692627
+LVA,428,Latvia,1926542,EU,"lv,ru,lt",2.0,0.00035112408167127453
+MAR,504,Morocco,36029138,AF,"ar,ber,fr",1.0,0.006566531118271816
+MEX,484,Mexico,126190788,NA,es,-6.0,0.022999044169228853
+MYS,458,Malaysia,31528585,AS,"ms,en,zh,ta,te,ml,pa,th",8.0,0.005746277763225365
+NLD,528,The Netherlands,17231017,EU,"nl,fy",1.0,0.0031404584070251883
+NOR,578,Norway,5314336,EU,"no,nb,nn,se,fi",1.0,0.0009685702921050227
+NZL,554,New Zealand,4885500,OC,"en,mi",12.0,0.0008904123040167366
+PER,604,Peru,31989256,SA,"es,qu,ay",-5.0,0.0058302378750877525
+PHL,608,Philippines,106651922,AS,"tl,en,fil,ceb,ilo,hil,war,pam,bik,bcl,pag,mrw,tsg,mdh,cbk,krj,sgd,msb,akl,ibg,yka,mta,abx",8.0,0.019437966143861073
+POL,616,Poland,37978548,EU,pl,1.0,0.006921823033034536
+PRT,620,Portugal,10281762,EU,"pt,mwl",0.0,0.0018739141115078765
+ROU,642,Romania,19473936,EU,"ro,hu,rom",2.0,0.0035492441351007006
+RUS,643,Russia,144478050,EU,"ru,tt,xal,cau,ady,kv,ce,tyv,cv,udm,tut,mns,bua,myv,mdf,chm,ba,inh,kbd,krc,av,sah,nog",3.0,0.02633200969815685
+SAU,682,Saudi Arabia,33699947,AS,ar,3.0,0.006142021789686196
+SWE,752,Sweden,10183175,EU,"sv,se,sma,fi",1.0,0.00185594602680496
+SGP,702,Singapore,5638676,AS,"cmn,en,ms,ta,zh",8.0,0.0010276832440413216
+SVK,703,Slovakia,5447011,EU,"sk,hu",1.0,0.0009927511236341232
+THA,764,Thailand,69428524,AS,"th,en",7.0,0.012653773824444027
+TUR,792,Turkey,82319724,AS,"tr,ku,diq,az,av",3.0,0.0150032739971061
+TWN,158,Taiwan,23451837,AS,"zh,zh,nan,hak",8.0,0.004274240961333528
+UKR,804,Ukraine,44622516,EU,"uk,ru,rom,pl,hu",2.0,0.008132726902585957
+USA,840,United States,327167434,NA,"en,es,haw,fr",-5.0,0.05962826910391641
+VNM,704,Vietnam,95540395,AS,"vi,en,fr,zh,km",7.0,0.017412822277887444
+ZAF,710,South Africa,57779622,AF,"zu,xh,af,nso,en,tn,st,ts,ss,ve,nr",2.0,0.010530690072712337

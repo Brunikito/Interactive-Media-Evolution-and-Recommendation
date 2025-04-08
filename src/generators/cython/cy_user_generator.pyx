@@ -33,15 +33,12 @@ def init_data():
     global country_data, sleep_lookup
     global occupation_to_work_time, occupation_to_free_time, occupation_to_days_work
     global iso3_to_languages, iso3_to_timezone, probabilities_country, work_data_jobs
-
-    actual_dir = os.path.dirname(os.path.abspath(__file__))
+    global DATA_PATH
     country_data = pd.read_csv(os.path.join(DATA_PATH, 'behavior_generated/country_data_cleaned.csv'))
     sleep_data = pd.read_csv(os.path.join(DATA_PATH, 'behavior_generated/sleep_hours_by_age_country.csv'))
     work_data = pd.read_csv(os.path.join(DATA_PATH, 'behavior_generated/work_behavior.csv'))
 
     # Probabilidades de país
-    total_population = country_data['Population'].sum()
-    country_data['Population_Fraction'] = country_data['Population'] / total_population
     probabilities_country = np.asarray(country_data['Population_Fraction'].values, dtype=np.float64)
 
     # Dicionários
@@ -50,11 +47,8 @@ def init_data():
         for _, row in sleep_data.iterrows()
     }
 
-    work_data.loc[:, 'work_time_hour'] = work_data['work_time'].str.split(':').str[0].astype(int)
-    work_data.loc[:, 'free_time_hour'] = work_data['free_from_work_time'].str.split(':').str[0].astype(int)
-
     occupation_to_work_time = work_data.set_index('ocupation')['work_time_hour'].to_dict()
-    occupation_to_free_time = work_data.set_index('ocupation')['free_time_hour'].to_dict()
+    occupation_to_free_time = work_data.set_index('ocupation')['free_from_work_time_hour'].to_dict()
     occupation_to_days_work = work_data.set_index('ocupation')['days_work'].to_dict()
 
     iso3_to_languages = {
@@ -95,15 +89,6 @@ cpdef np.ndarray get_wake_up_time_vectorized(np.ndarray user_work_time,
     minimum = user_work_time - minimum_dif
     maximum = user_work_time - maximum_dif
     mean = user_work_time - mean_dif
-    normalized_mean = (mean - minimum) / (maximum - minimum)
-    beta_param = alpha * (1 - normalized_mean) / normalized_mean
-    beta_values = rng.beta(alpha, beta_param)
-    return minimum + (maximum - minimum) * beta_values
-
-cpdef np.ndarray generate_eat_time_vectorized(np.ndarray mean, np.ndarray minimum, np.ndarray maximum,
-                                              int alpha=2, rng=None):
-    if rng is None:
-        rng = np.random.default_rng()
     normalized_mean = (mean - minimum) / (maximum - minimum)
     beta_param = alpha * (1 - normalized_mean) / normalized_mean
     beta_values = rng.beta(alpha, beta_param)

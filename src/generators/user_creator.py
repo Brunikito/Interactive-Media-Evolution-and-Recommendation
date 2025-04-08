@@ -2,7 +2,7 @@
 # 5. Parallel execution to generate large user base
 ##############################################################################
 
-from src.utils.processing import process_batch
+from utils.processing_ucreation import process_batch
 from .user_generator import create_random_user
 
 if __name__ == '__main__':
@@ -18,7 +18,7 @@ if __name__ == '__main__':
 
     print('Creating random users...')
     number_of_users = 1_000_000
-    batch_size = 2000
+    batch_size = 5000
     initial_id = users.shape[0]
     import timeit
     start_time = timeit.default_timer()
@@ -56,5 +56,5 @@ if __name__ == '__main__':
     df_users = pd.read_parquet(users_path)
     df_USER = pd.read_parquet(user_table_path)
     print('Memory Usage:')
-    print(df_users.memory_usage(deep=True).sum() / (1024 ** 2), 'MB')
-    print(df_USER.memory_usage(deep=True).sum() / (1024 ** 2), 'MB')
+    print(df_users.memory_usage().sum() / (1024 ** 2), 'MB')
+    print(df_USER.memory_usage().sum() / (1024 ** 2), 'MB')

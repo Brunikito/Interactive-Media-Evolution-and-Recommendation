@@ -4,7 +4,7 @@
 # 5. Parallel execution to generate large user base
 ##############################################################################
 
-from utils.processing import process_batch
+from utils.processing_ucreation import process_batch
 from generators.user_creator import create_random_user
 
 if __name__ == '__main__':
