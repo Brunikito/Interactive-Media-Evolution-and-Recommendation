@@ -2,6 +2,8 @@
 
 import numpy as np
 import pandas as pd
+from src import DATA_PATH, TABLES_PATH
+import os
 
 def initialize_tables():
 
@@ -26,7 +28,7 @@ def initialize_tables():
         'user_channel_id',
         'user_admin_channel_id',
     ])
-    users.to_csv('data/users.csv', index=False)
+    users.to_csv(os.path.join(DATA_PATH, 'users.csv'), index=False)
 
     channels = pd.DataFrame(columns=[
         'channel_id',
@@ -37,7 +39,7 @@ def initialize_tables():
         'channel_location',
         'channel_category',
     ])
-    channels.to_csv('data/channels.csv', index=False)
+    channels.to_csv(os.path.join(DATA_PATH, 'channels.csv'), index=False)
 
     content = pd.DataFrame(columns=[
         'content_id',
@@ -58,7 +60,7 @@ def initialize_tables():
         'content_is_live',
         'content_comments',
     ])
-    content.to_csv('data/content.csv', index=False)
+    content.to_csv(os.path.join(DATA_PATH, 'content.csv'), index=False)
 
     comments = pd.DataFrame(columns=[
         'content_id',
@@ -72,7 +74,7 @@ def initialize_tables():
         'comment_reply_count',
         'comment_replies',
     ])
-    comments.to_csv('data/comments.csv', index=False)
+    comments.to_csv(os.path.join(DATA_PATH, 'comments.csv'), index=False)
 
     user = pd.DataFrame(columns=[
         'UserID',
@@ -81,7 +83,7 @@ def initialize_tables():
         'UserPassword',
         'UserPhoto',
     ])
-    user.to_csv('data/tables/USER.csv', index=False)
+    user.to_csv(os.path.join(TABLES_PATH, 'USER.csv'), index=False)
 
     channel = pd.DataFrame(columns=[
         'ChannelID',
@@ -93,13 +95,13 @@ def initialize_tables():
         'CHBanner',
         'UserID',
     ])
-    channel.to_csv('data/tables/CHANNEL.csv', index=False)
+    channel.to_csv(os.path.join(TABLES_PATH, 'CHANNEL.csv'), index=False)
 
     uadminch = pd.DataFrame(columns=[
         'UserID',
         'ChannelID',
     ])
-    uadminch.to_csv('data/tables/UADMINCH.csv', index=False)
+    uadminch.to_csv(os.path.join(TABLES_PATH, 'UADMINCH.csv'), index=False)
 
     uinterestch = pd.DataFrame(columns=[
         'UisSubToCH',
@@ -108,7 +110,7 @@ def initialize_tables():
         'UserID',
         'ChannelID',
     ])
-    uinterestch.to_csv('data/tables/UINTERESTCH.csv', index=False)
+    uinterestch.to_csv(os.path.join(TABLES_PATH, 'UINTERESTCH.csv'), index=False)
 
     content = pd.DataFrame(columns=[
         'ContentID',
@@ -124,7 +126,7 @@ def initialize_tables():
         'CONTIndRating',
         'ChannelID',
     ])
-    content.to_csv('data/tables/CONTENT.csv', index=False)
+    content.to_csv(os.path.join(TABLES_PATH, 'CONTENT.csv'), index=False)
 
     uwatchingcont = pd.DataFrame(columns=[
         'UWatchDurationCONT',
@@ -134,19 +136,19 @@ def initialize_tables():
         'UserID',
         'ContentID',
     ])
-    uwatchingcont.to_csv('data/tables/UWATCHINGCONT.csv', index=False)
+    uwatchingcont.to_csv(os.path.join(TABLES_PATH, 'UWATCHINGCONT.csv'), index=False)
 
     live = pd.DataFrame(columns=[
         'LIVEBody',
         'ContentID',
     ])
-    live.to_csv('data/tables/LIVE.csv', index=False)
+    live.to_csv(os.path.join(TABLES_PATH, 'LIVE.csv'), index=False)
 
     video = pd.DataFrame(columns=[
         'VIDEOBody',
         'ContentID',
     ])
-    video.to_csv('data/tables/VIDEO.csv', index=False)
+    video.to_csv(os.path.join(TABLES_PATH, 'VIDEO.csv'), index=False)
 
     comment = pd.DataFrame(columns=[
         'CommentID',
@@ -155,19 +157,19 @@ def initialize_tables():
         'COMBody',
         'UserID',
     ])
-    comment.to_csv('data/tables/COMMENT.csv', index=False)
+    comment.to_csv(os.path.join(TABLES_PATH, 'COMMENT.csv'), index=False)
 
     livecomment = pd.DataFrame(columns=[
         'CommentID',
         'ContentID',
     ])
-    livecomment.to_csv('data/tables/LIVECOMMENT.csv', index=False)
+    livecomment.to_csv(os.path.join(TABLES_PATH, 'LIVECOMMENT.csv'), index=False)
 
     commentreply = pd.DataFrame(columns=[
         'CommentID',
         'COMisRepByCOMCommentID',
     ])
-    commentreply.to_csv('data/tables/COMMENTREPLY.csv', index=False)
+    commentreply.to_csv(os.path.join(TABLES_PATH, 'COMMENTREPLY.csv'), index=False)
 
     poll = pd.DataFrame(columns=[
         'POLLID',
@@ -176,7 +178,7 @@ def initialize_tables():
         'POLLBody',
         'ChannelID',
     ])
-    poll.to_csv('data/tables/POLL.csv', index=False)
+    poll.to_csv(os.path.join(TABLES_PATH, 'POLL.csv'), index=False)
 
     playlist = pd.DataFrame(columns=[
         'PlayID',
@@ -187,96 +189,96 @@ def initialize_tables():
         'PLAYThumb',
         'ChannelID',
     ])
-    playlist.to_csv('data/tables/PLAYLIST.csv', index=False)
+    playlist.to_csv(os.path.join(TABLES_PATH, 'PLAYLIST.csv'), index=False)
 
     playlistcontent = pd.DataFrame(columns=[
         'CONTAddDateTimePL',
         'ContentID',
         'PlayID',
     ])
-    playlistcontent.to_csv('data/tables/PLAYLISTCONTENT.csv', index=False)
+    playlistcontent.to_csv(os.path.join(TABLES_PATH, 'PLAYLISTCONTENT.csv'), index=False)
 
     videocomment = pd.DataFrame(columns=[
         'CommentID',
         'ContentID',
     ])
-    videocomment.to_csv('data/tables/VIDEOCOMMENT.csv', index=False)
+    videocomment.to_csv(os.path.join(TABLES_PATH, 'VIDEOCOMMENT.csv'), index=False)
 
     pollcomment = pd.DataFrame(columns=[
         'CommentID',
         'POLLID',
     ])
-    pollcomment.to_csv('data/tables/POLLCOMMENT.csv', index=False)
+    pollcomment.to_csv(os.path.join(TABLES_PATH, 'POLLCOMMENT.csv'), index=False)
 
     userinteraction = pd.DataFrame(columns=[
         'UINTType',
         'UINTID',
         'UserID',
     ])
-    userinteraction.to_csv('data/tables/USERINTERACTION.csv', index=False)
+    userinteraction.to_csv(os.path.join(TABLES_PATH, 'USERINTERACTION.csv'), index=False)
 
     ucontint = pd.DataFrame(columns=[
         'UINTID',
         'ContentID',
     ])
-    ucontint.to_csv('data/tables/UCONTINT.csv', index=False)
+    ucontint.to_csv(os.path.join(TABLES_PATH, 'UCONTINT.csv'), index=False)
 
     ucomint = pd.DataFrame(columns=[
         'UINTID',
         'CommentID',
     ])
-    ucomint.to_csv('data/tables/UCOMINT.csv', index=False)
+    ucomint.to_csv(os.path.join(TABLES_PATH, 'UCOMINT.csv'), index=False)
 
     uplayint = pd.DataFrame(columns=[
         'UINTID',
         'PlayID',
     ])
-    uplayint.to_csv('data/tables/UPLAYINT.csv', index=False)
+    uplayint.to_csv(os.path.join(TABLES_PATH, 'UPLAYINT.csv'), index=False)
 
     notification = pd.DataFrame(columns=[
         'NotificationID',
         'NOTBody',
         'ChannelID',
     ])
-    notification.to_csv('data/tables/NOTIFICATION.csv', index=False)
+    notification.to_csv(os.path.join(TABLES_PATH, 'NOTIFICATION.csv'), index=False)
 
     usernotified = pd.DataFrame(columns=[
         'NOTSentDateTime',
         'UserID',
         'NotificationID',
     ])
-    usernotified.to_csv('data/tables/USERNOTIFIED.csv', index=False)
+    usernotified.to_csv(os.path.join(TABLES_PATH, 'USERNOTIFIED.csv'), index=False)
 
     channel_chextlink = pd.DataFrame(columns=[
         'CHExtLink',
         'ChannelID',
     ])
-    channel_chextlink.to_csv('data/tables/CHANNEL_CHExtLink.csv', index=False)
+    channel_chextlink.to_csv(os.path.join(TABLES_PATH, 'CHANNEL_CHExtLink.csv'), index=False)
 
     content_conttag = pd.DataFrame(columns=[
         'CONTTag',
         'ContentID',
     ])
-    content_conttag.to_csv('data/tables/CONTENT_CONTTag.csv', index=False)
+    content_conttag.to_csv(os.path.join(TABLES_PATH, 'CONTENT_CONTTag.csv'), index=False)
 
     playlist_playtag = pd.DataFrame(columns=[
         'PLAYTag',
         'PlayID',
     ])
-    playlist_playtag.to_csv('data/tables/PLAYLIST_PLAYTag.csv', index=False)
+    playlist_playtag.to_csv(os.path.join(TABLES_PATH, 'PLAYLIST_PLAYTag.csv'), index=False)
 
     short = pd.DataFrame(columns=[
         'SHMusicLink',
         'SHORTBody',
         'ContentID',
     ])
-    short.to_csv('data/tables/SHORT.csv', index=False)
+    short.to_csv(os.path.join(TABLES_PATH, 'SHORT.csv'), index=False)
 
     shortcomment = pd.DataFrame(columns=[
         'CommentID',
         'ContentID',
     ])
-    shortcomment.to_csv('data/tables/SHORTCOMMENT.csv', index=False)
+    shortcomment.to_csv(os.path.join(TABLES_PATH, 'SHORTCOMMENT.csv'), index=False)
 
 if __name__ == "__main__":
     initialize_tables()
