@@ -57,7 +57,6 @@ def initialize_tables():
         'content_type',
         'content_is_live',
         'content_comments',
-        'content_comments_count',
     ])
     content.to_csv('data/content.csv', index=False)
 
