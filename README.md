@@ -28,6 +28,7 @@ src/
 ├── recommendation/ # Algoritmos de recomendação 
 ├── utils/ # Funções auxiliares 
 └── main.py # (opcional) ponto de entrada do sistema
+```
 
 ---
 
