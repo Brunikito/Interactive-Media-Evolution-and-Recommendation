@@ -1,8 +1,6 @@
 import pandas as pd
 import numpy as np
 import os
-from random_username.generate import generate_username
-from multiprocessing import Pool
 from src.generators.cython.cy_user_generator import (
     get_sleep_time_vectorized, get_wake_up_time_vectorized, init_data,
     generate_user_languages

@@ -1,11 +1,7 @@
 from src.generators.user_generator import create_random_user
 
 if __name__ == '__main__':
-    import pyarrow as pa
-    import pyarrow.parquet as pq
-    
     import pandas as pd
-    from multiprocessing import Pool
     import os
     from src import DATA_PATH, BASE_PATH
     
