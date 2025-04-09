@@ -13,6 +13,7 @@ Este projeto tem como objetivo simular dados de uso de uma plataforma de mídia 
 ---
 
 ## 🗂 Estrutura do Projeto
+```text
 data/ 
 ├── behavior_generated/ # Dados simulados 
 ├── behavior_imported/ # Dados reais (importados) 
