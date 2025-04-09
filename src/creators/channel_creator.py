@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
-from .cython.cy_channel_generator import create_random_channel
-from .feature_generators.channel_name_generator import generate_channel_name
+from src.generators.cython.cy_channel_generator import create_random_channel
+from src.generators.feature_generators.channel_name_generator import generate_channel_name
 from src import BASE_PATH
 import os
 
