@@ -1,4 +1,5 @@
-# cy_usergen.pyx
+# cython: boundscheck=False, wraparound=False, language_level=3
+# distutils: define_macros=NPY_NO_DEPRECATED_API=NPY_1_7_API_VERSION
 
 import numpy as np
 cimport numpy as np
@@ -6,8 +7,10 @@ import pandas as pd
 import os
 from random_username.generate import generate_username
 from libc.stdlib cimport rand, srand, malloc, free
+from libc.string cimport memcpy, strchr, strlen
 from libc.math cimport fmod
 from src import DATA_PATH
+from cython.parallel import prange
 
 # Typing aliases
 ctypedef np.int32_t int32_t
@@ -93,3 +96,24 @@ cpdef np.ndarray get_wake_up_time_vectorized(np.ndarray user_work_time,
     beta_param = alpha * (1 - normalized_mean) / normalized_mean
     beta_values = rng.beta(alpha, beta_param)
     return minimum + (maximum - minimum) * beta_values
+
+cpdef generate_user_languages(object[:] prim_langs, object[:, :] extra_langs):
+    cdef Py_ssize_t i, n = prim_langs.shape[0]
+    cdef list result = []
+    cdef object l1, l2, l3
+
+    for i in range(n):
+        l1 = prim_langs[i]
+        l2 = extra_langs[i, 0]
+        l3 = extra_langs[i, 1]
+
+        if l1 == l2 and l1 == l3:
+            result.append(l1)
+        elif l1 == l2:
+            result.append(f"{l1},{l3}")
+        elif l1 == l3 or l2 == l3:
+            result.append(f"{l1},{l2}")
+        else:
+            result.append(f"{l1},{l2},{l3}")
+
+    return np.array(result, dtype=str)

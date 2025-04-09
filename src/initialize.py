@@ -41,11 +41,11 @@ def initialize_tables():
 
     content = pd.DataFrame(columns=[
         'content_id',
+        'channel_id',
         'content_title',
         'content_description',
-        'content_status'
+        'content_status',
         'content_category',
-        'content_tags',
         'content_language',
         'content_duration',
         'content_creation_date',

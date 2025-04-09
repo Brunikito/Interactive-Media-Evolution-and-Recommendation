@@ -1,0 +1,24 @@
+Etapas de tempo para create_random_content:
+
+select_channels: 0.090415 segundos
+ids_and_names: 0.287803 segundos
+titles_and_data: 0.431318 segundos
+status: 0.014970 segundos
+category: 0.014919 segundos
+tags_rng: 0.011961 segundos
+tags: 0.112910 segundos
+languages_rng: 0.273625 segundos
+languages: 0.269737 segundos
+metrics: 0.000023 segundos
+duration: 0.084749 segundos
+hashes: 1.062411 segundos
+rating: 0.031587 segundos
+content_table: 0.395332 segundos
+CONTENT: 0.008009 segundos
+content_tag: 0.859734 segundos
+video: 0.046684 segundos
+shorts: 0.031354 segundos
+live: 0.016364 segundos
+content: 0.500114 segundos
+dataframes: 1.857604 segundos
+total: 4.544070 segundos

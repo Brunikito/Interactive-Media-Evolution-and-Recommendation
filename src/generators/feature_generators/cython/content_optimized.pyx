@@ -1,5 +1,9 @@
-# cython: boundscheck=False, wraparound=False, nonecheck=False, language_level=3
-# distutils: define_macros=NPY_NO_DEPRECATED_API=NPY_1_7_API_VERSION
+# cython: language_level=3
+# cython: boundscheck=False
+# cython: wraparound=False
+# cython: cdivision=True
+# cython: nonecheck=False
+# cython: initializedcheck=False
 
 import numpy as np
 cimport numpy as np
@@ -9,6 +13,9 @@ from libc.string cimport memcpy, strlen, strcpy, strcat
 from cpython.bytes cimport PyBytes_FromStringAndSize
 from cpython cimport PyUnicode_AsUTF8
 from libc.string cimport strchr
+from cython.parallel cimport prange
+from cpython.unicode cimport PyUnicode_FromStringAndSize
+from cpython.list cimport PyList_Append
 
 # Cache global (em nível de módulo)
 cdef dict CACHED_CATEGORY_BYTES = {}
@@ -58,77 +65,74 @@ def fast_hash(s):
         s = str(s)
     return xxhash.xxh64(s).hexdigest()[:12]
 
-# Limpeza de strings acelerada
-def clean_string(s):
-    cdef str str_s
-    if not isinstance(s, str):
-        str_s = str(s)
-    else:
-        str_s = s
-
-    cdef list result = []
-    cdef Py_UCS4 c
-    for c in str_s:
-        if c.isalnum():
-            result.append(c.lower())
-    return ''.join(result)
-
-def generate_tags(np.ndarray channel_categories, np.ndarray extra_tags_counts, object random_state):
-    cdef Py_ssize_t i, j, n
-    cdef bytes cat_bytes
-    cdef bytearray buffer
-    cdef list content_tags = [None] * len(extra_tags_counts)
-    cdef object extra_tags
-    cdef str category_str
-
-    for i in range(len(extra_tags_counts)):
-        n = extra_tags_counts[i]
-        category_str = str(channel_categories[i])
-        cat_bytes = CACHED_CATEGORY_BYTES[category_str]
-
-        if n == 0:
-            content_tags[i] = category_str
-            continue
-
-        extra_tags = random_state.choice(list(CACHED_CATEGORY_BYTES.keys()), size=n, replace=False)
-        buffer = bytearray()
-        buffer.extend(cat_bytes)
-
-        for j in range(n):
-            buffer.append(ord(','))
-            buffer.extend(CACHED_CATEGORY_BYTES[extra_tags[j]])
-
-        content_tags[i] = buffer.decode('utf-8')
-
-    return content_tags
-
-
 # Geração de linguagens otimizada
-def generate_languages(np.ndarray channel_langs, np.ndarray use_channel_lang, np.ndarray languages, object random_state):
+def generate_languages_nogil(
+    np.ndarray[np.uint8_t, ndim=1] use_channel_lang,
+    object channel_langs,       # array of bytes
+    object fallback_langs       # array of bytes
+):
     cdef Py_ssize_t i, n = use_channel_lang.shape[0]
     cdef np.ndarray result = np.empty(n, dtype=object)
-    cdef str lang_entry, first_lang
-    cdef bytes lang_bytes
-    cdef const char* raw_str
-    cdef const char* comma_pos
+    cdef char** chan_ptrs = <char**>malloc(n * sizeof(char*))
+    cdef char** fallback_ptrs = <char**>malloc(n * sizeof(char*))
+
+    # Prepara ponteiros em Python-safe GIL zone
+    for i in range(n):
+        chan_ptrs[i] = <char*> (<bytes>channel_langs[i])
+        fallback_ptrs[i] = <char*> (<bytes>fallback_langs[i])
+
+    cdef const char* raw
+    cdef const char* comma
+    cdef Py_ssize_t length
+
+    # Processa paralelo, sem acesso a Python
+    with nogil:
+        for i in prange(n):
+            if use_channel_lang[i]:
+                raw = chan_ptrs[i]
+                comma = strchr(raw, ord(','))
+                length = comma - raw if comma != NULL else strlen(raw)
+
+                with gil:
+                    result[i] = PyUnicode_FromStringAndSize(raw, length)
+            else:
+                with gil:
+                    result[i] = PyUnicode_FromStringAndSize(fallback_ptrs[i], strlen(fallback_ptrs[i]))
+
+    free(chan_ptrs)
+    free(fallback_ptrs)
+
+    return result
+
+def generate_tags_fast(np.ndarray[object] content_categories,
+                       np.ndarray[object] extra_tags):
+    cdef Py_ssize_t i, n = content_categories.shape[0]
+    cdef object tags, c1, c2, c3
+    cdef list result = []
 
     for i in range(n):
-        if use_channel_lang[i]:
-            # Converte para string Python pura
-            lang_entry = str(channel_langs[i])
+        c1 = content_categories[i]
+        c2 = extra_tags[2*i]
+        c3 = extra_tags[2*i+1]
 
-            # Armazena o resultado de .encode em variável Python
-            lang_bytes = lang_entry.encode('utf-8')
-            raw_str = lang_bytes
-            comma_pos = strchr(raw_str, ord(','))
+        tags = []
+        # Adiciona sem duplicatas
+        if c1 != c2 and c1 != c3:
+            tags.append(c1)
+        if c2 != c3:
+            tags.append(c2)
+        tags.append(c3)  # sempre adiciona o terceiro (pelo menos 1 garantido)
 
-            if comma_pos != NULL:
-                first_lang = lang_bytes[:comma_pos - raw_str].decode('utf-8')
-            else:
-                first_lang = lang_entry
+        result.append(tags)  # pode ser trocado por acima, se quiser mais controle
 
-            result[i] = first_lang
-        else:
-            result[i] = random_state.choice(languages)
+    return result
 
-    return result.astype(str)
+def generate_content_tags(np.ndarray[np.int32_t] content_ids, list tag_lists):
+    cdef list result = []
+    cdef Py_ssize_t i, j, n = len(tag_lists)
+    cdef object tag, cid
+    for i in range(n):
+        cid = content_ids[i]
+        for tag in tag_lists[i]:
+            result.append((tag, cid))
+    return result

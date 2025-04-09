@@ -1,0 +1,14 @@
+Etapas de tempo para create_random_content:
+
+ids_and_names: 0.010572 segundos
+demographics: 0.090924 segundos
+occupation: 0.021169 segundos
+work_attributes: 0.266692 segundos
+sleep: 0.207064 segundos
+meals: 0.130288 segundos
+languages: 0.520650 segundos
+education: 0.036675 segundos
+watch_profile: 0.139687 segundos
+df_new_users: 0.652708 segundos
+df_new_USER: 0.010921 segundos
+total: 2.087381 segundos
