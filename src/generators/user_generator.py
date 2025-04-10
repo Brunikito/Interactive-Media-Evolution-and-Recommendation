@@ -173,7 +173,7 @@ def create_random_user(number_of_users, start_id):
         'user_education': user_education.astype(np.int8),
         'user_video_watching_time': user_video_watching_time.astype(np.float16),
         'user_video_retention_time': user_video_retention_time.astype(np.float16),
-        'user_channel_id': zeros,
+        'user_channel_id': np.full(number_of_users, np.nan).astype(np.float32),
         'user_admin_channel_id': zeros,
     })
     

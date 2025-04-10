@@ -32,3 +32,11 @@ if __name__ == '__main__':
         for step, duration in result["timings"].items():
             f.write(f"{step}: {duration:.6f} segundos\n")
     
+    result['df_content'].to_parquet(os.path.join(BASE_PATH, 'df_content.parquet'))
+    result['df_content_table'].to_parquet(os.path.join(BASE_PATH, 'df_content_table.parquet'))
+    result['df_CONTENT'].to_parquet(os.path.join(BASE_PATH, 'CONTENT.parquet'))
+    result['df_content_tag'].to_parquet(os.path.join(BASE_PATH, 'CONTENT_TAG.parquet'))
+    result['df_video'].to_parquet(os.path.join(BASE_PATH, 'VIDEO.parquet'))
+    result['df_short'].to_parquet(os.path.join(BASE_PATH, 'SHORT.parquet'))
+    result['df_live'].to_parquet(os.path.join(BASE_PATH, 'LIVE.parquet'))
+    

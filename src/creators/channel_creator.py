@@ -15,7 +15,7 @@ if __name__ == "__main__":
     # Gerando os canais
     print("Criando canais aleatórios...")
     start_time = timeit.default_timer()
-    users, channels = create_random_channel(users, 1, 0, 0, generate_channel_name)
+    users, channels, CHANNELS = create_random_channel(users, 1, 0, 0, generate_channel_name)
     end_time = timeit.default_timer()
     elapsed_time = end_time - start_time
     print("Canais criados e salvos.")
@@ -23,9 +23,11 @@ if __name__ == "__main__":
     print("Uso de memória:")
     print(users.memory_usage().sum() / (1024 ** 2), "MB")
     print(channels.memory_usage().sum() / (1024 ** 2), "MB")
+    print(CHANNELS.memory_usage().sum() / (1024 ** 2), "MB")
     # Imprimindo as primeiras linhas dos canais
     print("Canais gerados")
     print("Salvando canais...")
-    users.to_parquet(os.path.join(BASE_PATH, "usuarios_full_chCreate.parquet"), index=False)
+    users.to_parquet(os.path.join(BASE_PATH, "usuarios_full.parquet"), index=False)
     channels.to_parquet(os.path.join(BASE_PATH, "channels_full.parquet"), index=False)
+    CHANNELS.to_parquet(os.path.join(BASE_PATH, "CHANNELS.parquet"), index=False)
     print("Canais salvos.")
