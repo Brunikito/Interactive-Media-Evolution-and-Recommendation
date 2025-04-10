@@ -1,0 +1,14 @@
+# Compilados Cython
+*.c
+*.cpp
+*.so
+*.pyd
+
+# Bytecode Python
+__pycache__/
+
+# Ignorar todos os arquivos .parquet
+**/*.parquet
+
+# Ignorar todas as pastas chamadas build em qualquer lugar
+**/build/

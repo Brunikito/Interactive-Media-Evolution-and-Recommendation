@@ -85,7 +85,7 @@ def generate_channel_name(categories: np.ndarray) -> np.ndarray:
     adjectives_np = np.array(adjectives)
     nouns_np = np.array(nouns)
 
-    category_indices = np.array([category_to_index[c] for c in categories], dtype=np.int32)
+    category_indices = (categories-1).astype(np.int32)
     suffixes_lengths = np.array([len(sa) for sa in suffix_array], dtype=np.int32)
 
     adj_ids, noun_ids, suffix_ids = generate_indices(

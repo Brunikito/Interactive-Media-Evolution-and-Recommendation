@@ -1,7 +1,7 @@
 from src.recommendation.recommendate import recommendate
 import pandas as pd
 import numpy as np
-
+import time
 
 '''recommendations = recommendate(
     n, 
@@ -41,7 +41,10 @@ def create_random_uwatching_cont(
 ):
     rng = np.random.default_rng()
 
+    total_start = time.time()  # Timer total da função
+
     # 1. Filtrar usuários que estão assistindo no máximo 4 conteúdos
+    start = time.time()
     watching_now = uwatchingcont[uwatchingcont['UIsWatchingCONTNow']]
     if watching_now.empty:
         valid_users = users.copy()
@@ -49,15 +52,19 @@ def create_random_uwatching_cont(
         counts = watching_now.groupby("UserID").size()
         valid_user_ids = counts[counts <= 4].index.values
         valid_users = users[users['user_id'].isin(valid_user_ids)].reset_index(drop=True)
+    print(f"Etapa 1 - Filtragem de usuários: {time.time() - start:.4f}s")
 
-    # 3. Amostrar usuários com base na proporção
+    # 2. Amostragem de usuários
+    start = time.time()
     num_users = int(valid_users.shape[0] * num_watching_ratio)
     user_sampled = valid_users.sample(num_users, replace=False).reset_index(drop=True)
     user_ids = user_sampled['user_id'].values.astype(np.int32)
     USER_sampled = USERS.iloc[user_ids]
+    print(f"Etapa 2 - Amostragem de usuários: {time.time() - start:.4f}s")
 
+    # 3. Geração de recomendações
+    start = time.time()
     print('Antes de recomendar')
-    # 4. Gerar recomendações (ndarray com UserID, ContentID, Rank)
     recommendations = recommendate(
         num_recommendations, 
         USER_sampled, 
@@ -72,31 +79,30 @@ def create_random_uwatching_cont(
         shortcomment)
     print(recommendations[-10:])
     rec_matrix = recommendations[:, 1].reshape((num_users, num_recommendations))
-    print('depois de recomendar')
-    
-    # 5. 60% recomendação, 40% conteúdo aleatório
+    print('Depois de recomendar')
+    print(f"Etapa 3 - Recomendações: {time.time() - start:.4f}s")
+
+    # 4. Escolha entre recomendação ou conteúdo aleatório
+    start = time.time()
     use_recommendation = rng.random(num_users) < 0.6
     random_indices = rng.integers(0, num_recommendations, size=num_users)
-
-    # Conteúdos recomendados e aleatórios
     recommended_contents = rec_matrix[np.arange(num_users), random_indices]
     random_contents = rng.choice(content["content_id"].values, size=num_users)
-
     final_contents = np.where(use_recommendation, recommended_contents, random_contents).astype(np.int32)
+    print(f"Etapa 4 - Seleção de conteúdo: {time.time() - start:.4f}s")
 
-    # 6. Pegar durações dos vídeos assistidos
+    # 5. Determinação de durações assistidas
+    start = time.time()
     content_ids_arr = content["content_id"].values
     durations_arr = content["content_duration"].values
     content_duration_map = dict(zip(content_ids_arr, durations_arr))
     durations = np.array([content_duration_map[cid] for cid in final_contents], dtype=np.float32)
-
-    # 7. Gerar durações assistidas com beta(2, 2)
     watched_durations = rng.beta(2, 2, size=num_users) * durations
+    print(f"Etapa 5 - Duração assistida: {time.time() - start:.4f}s")
 
-    # 8. Criar novo UWATCHCONTID incremental
+    # 6. Criação dos IDs e do DataFrame final
+    start = time.time()
     uwatch_ids = np.arange(uwatchingcont.shape[0], uwatchingcont.shape[0] + num_users, dtype=np.int32)
-
-    # 9. Criar o DataFrame resultante
     df_new_watch = pd.DataFrame({
         'UWatchDurationCONT': watched_durations.astype(np.int16),
         'UWatchCONTDateTime': np.full(num_users, current_datetime),
@@ -105,14 +111,16 @@ def create_random_uwatching_cont(
         'UserID': user_ids,
         'ContentID': final_contents
     })
+    print(f"Etapa 6 - Criação do DataFrame: {time.time() - start:.4f}s")
 
+    print(f"Tempo total da função: {time.time() - total_start:.4f}s")
     return df_new_watch
 
 
 if __name__ == '__main__':
     from src import BASE_PATH, DATA_PATH
     import os
-    num_watching_ratio = 0.5
+    num_watching_ratio = 1
     users = pd.read_parquet(os.path.join(BASE_PATH, 'usuarios_full.parquet'))
     USERS = pd.read_parquet(os.path.join(BASE_PATH, 'USERS.parquet'))
     content = pd.read_parquet(os.path.join(BASE_PATH, 'df_content.parquet'))
@@ -125,7 +133,7 @@ if __name__ == '__main__':
     livecomment = pd.read_csv(os.path.join(DATA_PATH, 'tables', 'LIVECOMMENT.csv'))
     videocomment = pd.read_csv(os.path.join(DATA_PATH, 'tables', 'VIDEOCOMMENT.csv'))
     shortcomment = pd.read_csv(os.path.join(DATA_PATH, 'tables', 'SHORTCOMMENT.csv'))
-    num_recommendations = 5
+    num_recommendations = 50
     current_datetime = 0
     print("Colunas do uwatchingcont:", uwatchingcont.columns)
     
@@ -147,5 +155,53 @@ if __name__ == '__main__':
     current_datetime
     )
     print(df_new_watch.head())
+    
+    df_new_watch.to_parquet(os.path.join(BASE_PATH, 'UWATCHINGCONT.parquet'))
+    num_watching_ratio = 0.3
+    before_time = time.time()
+    for i in range(5):
+        uwatchingcont = pd.read_parquet(os.path.join(BASE_PATH, 'UWATCHINGCONT.parquet'))
+        df_new_watch = create_random_uwatching_cont(
+        num_watching_ratio,
+        users,
+        USERS,
+        content,
+        CONTENT,
+        uwatchingcont,
+        content_tags,
+        userinteraction,
+        ucontint,
+        comment,
+        livecomment,
+        videocomment,
+        shortcomment,
+        num_recommendations,
+        current_datetime
+        )
+        uwatchingcont_updated = pd.concat([uwatchingcont, df_new_watch], ignore_index=True)
+        uwatchingcont_updated.to_parquet(os.path.join(BASE_PATH, 'UWATCHINGCONT.parquet'), index=False)
+    print(f'5 iterations: {time.time() - before_time}s')
+    uwatchingcont = pd.read_parquet(os.path.join(BASE_PATH, 'UWATCHINGCONT.parquet'))
+    df_new_watch = create_random_uwatching_cont(
+        num_watching_ratio,
+        users,
+        USERS,
+        content,
+        CONTENT,
+        uwatchingcont,
+        content_tags,
+        userinteraction,
+        ucontint,
+        comment,
+        livecomment,
+        videocomment,
+        shortcomment,
+        num_recommendations,
+        current_datetime
+        )
+    print(df_new_watch.head())
+    
+    
+        
     
     

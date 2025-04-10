@@ -1700,7 +1700,7 @@ typedef npy_longdouble __pyx_t_5numpy_longdouble_t;
  * # Tipagem esttica
  * ctypedef cnp.int32_t int32_t             # <<<<<<<<<<<<<<
  * 
- * # Hard-coded categories
+ * def create_random_channel(object users_df, float new_channel_ratio, int initial_id, object current_date, object generate_channel_name):
  */
 typedef __pyx_t_5numpy_int32_t __pyx_t_20cy_channel_generator_int32_t;
 /* #### Code section: complex_type_declarations ### */
@@ -2553,9 +2553,9 @@ int __pyx_module_is_main_cy_channel_generator = 0;
 static PyObject *__pyx_builtin_object;
 static PyObject *__pyx_builtin_ImportError;
 /* #### Code section: string_decls ### */
-static const char __pyx_k__3[] = "";
-static const char __pyx_k__4[] = "*";
-static const char __pyx_k__7[] = "?";
+static const char __pyx_k__4[] = "";
+static const char __pyx_k__5[] = "*";
+static const char __pyx_k__8[] = "?";
 static const char __pyx_k_np[] = "np";
 static const char __pyx_k_pd[] = "pd";
 static const char __pyx_k_idx[] = "idx";
@@ -2563,6 +2563,7 @@ static const char __pyx_k_loc[] = "loc";
 static const char __pyx_k_sum[] = "sum";
 static const char __pyx_k_uns[] = "uns";
 static const char __pyx_k_full[] = "full";
+static const char __pyx_k_int8[] = "int8";
 static const char __pyx_k_isna[] = "isna";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_mask[] = "mask";
@@ -2571,8 +2572,6 @@ static const char __pyx_k_ones[] = "ones";
 static const char __pyx_k_size[] = "size";
 static const char __pyx_k_spec[] = "__spec__";
 static const char __pyx_k_test[] = "__test__";
-static const char __pyx_k_Music[] = "Music";
-static const char __pyx_k_array[] = "array";
 static const char __pyx_k_dtype[] = "dtype";
 static const char __pyx_k_int32[] = "int32";
 static const char __pyx_k_numpy[] = "numpy";
@@ -2580,9 +2579,6 @@ static const char __pyx_k_shape[] = "shape";
 static const char __pyx_k_where[] = "where";
 static const char __pyx_k_CHDesc[] = "CHDesc";
 static const char __pyx_k_CHName[] = "CHName";
-static const char __pyx_k_Comedy[] = "Comedy";
-static const char __pyx_k_Gaming[] = "Gaming";
-static const char __pyx_k_Sports[] = "Sports";
 static const char __pyx_k_UserID[] = "UserID";
 static const char __pyx_k_arange[] = "arange";
 static const char __pyx_k_choice[] = "choice";
@@ -2590,8 +2586,8 @@ static const char __pyx_k_import[] = "__import__";
 static const char __pyx_k_object[] = "object";
 static const char __pyx_k_pandas[] = "pandas";
 static const char __pyx_k_random[] = "random";
-static const char __pyx_k_Animals[] = "Animals";
 static const char __pyx_k_columns[] = "columns";
+static const char __pyx_k_randint[] = "randint";
 static const char __pyx_k_replace[] = "replace";
 static const char __pyx_k_user_id[] = "user_id";
 static const char __pyx_k_CHBanner[] = "CHBanner";
@@ -2603,34 +2599,25 @@ static const char __pyx_k_user_loc[] = "user_loc";
 static const char __pyx_k_users_df[] = "users_df";
 static const char __pyx_k_ChannelID[] = "ChannelID";
 static const char __pyx_k_DataFrame[] = "DataFrame";
-static const char __pyx_k_Education[] = "Education";
 static const char __pyx_k_num_users[] = "num_users";
 static const char __pyx_k_user_lang[] = "user_lang";
-static const char __pyx_k_CATEGORIES[] = "CATEGORIES";
 static const char __pyx_k_ChannelURL[] = "ChannelURL";
 static const char __pyx_k_channel_id[] = "channel_id";
 static const char __pyx_k_df_CHANNEL[] = "df_CHANNEL";
 static const char __pyx_k_initial_id[] = "initial_id";
-static const char __pyx_k_Automobiles[] = "Automobiles";
 static const char __pyx_k_Categorical[] = "Categorical";
 static const char __pyx_k_ImportError[] = "ImportError";
 static const char __pyx_k_CHWelcomeVID[] = "CHWelcomeVID";
-static const char __pyx_k_How_to_Style[] = "How-to & Style";
-static const char __pyx_k_People_Blogs[] = "People & Blogs";
 static const char __pyx_k_channel_name[] = "channel_name";
 static const char __pyx_k_current_date[] = "current_date";
 static const char __pyx_k_initializing[] = "_initializing";
 static const char __pyx_k_is_coroutine[] = "_is_coroutine";
 static const char __pyx_k_num_channels[] = "num_channels";
 static const char __pyx_k_selected_idx[] = "selected_idx";
-static const char __pyx_k_Entertainment[] = "Entertainment";
-static const char __pyx_k_News_Politics[] = "News & Politics";
-static const char __pyx_k_Travel_Events[] = "Travel & Events";
 static const char __pyx_k_class_getitem[] = "__class_getitem__";
 static const char __pyx_k_user_language[] = "user_language";
 static const char __pyx_k_user_location[] = "user_location";
 static const char __pyx_k_CHCreationDate[] = "CHCreationDate";
-static const char __pyx_k_Film_Animation[] = "Film & Animation";
 static const char __pyx_k_available_users[] = "available_users";
 static const char __pyx_k_user_channel_id[] = "user_channel_id";
 static const char __pyx_k_channel_category[] = "channel_category";
@@ -2638,10 +2625,8 @@ static const char __pyx_k_channel_language[] = "channel_language";
 static const char __pyx_k_channel_location[] = "channel_location";
 static const char __pyx_k_empty_channel_df[] = "empty_channel_df";
 static const char __pyx_k_new_channel_ratio[] = "new_channel_ratio";
-static const char __pyx_k_Science_Technology[] = "Science & Technology";
 static const char __pyx_k_asyncio_coroutines[] = "asyncio.coroutines";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
-static const char __pyx_k_Nonprofits_Activism[] = "Nonprofits & Activism";
 static const char __pyx_k_channel_description[] = "channel_description";
 static const char __pyx_k_cy_channel_generator[] = "cy_channel_generator";
 static const char __pyx_k_channel_creation_date[] = "channel_creation_date";
@@ -2715,9 +2700,6 @@ typedef struct {
   PyTypeObject *__pyx_ptype_5numpy_ufunc;
   #if CYTHON_USE_MODULE_STATE
   #endif
-  PyObject *__pyx_n_u_Animals;
-  PyObject *__pyx_n_u_Automobiles;
-  PyObject *__pyx_n_s_CATEGORIES;
   PyObject *__pyx_n_u_CHBanner;
   PyObject *__pyx_n_u_CHCreationDate;
   PyObject *__pyx_n_u_CHDesc;
@@ -2726,27 +2708,13 @@ typedef struct {
   PyObject *__pyx_n_s_Categorical;
   PyObject *__pyx_n_u_ChannelID;
   PyObject *__pyx_n_u_ChannelURL;
-  PyObject *__pyx_n_u_Comedy;
   PyObject *__pyx_n_s_DataFrame;
-  PyObject *__pyx_n_u_Education;
-  PyObject *__pyx_n_u_Entertainment;
-  PyObject *__pyx_kp_u_Film_Animation;
-  PyObject *__pyx_n_u_Gaming;
-  PyObject *__pyx_kp_u_How_to_Style;
   PyObject *__pyx_n_s_ImportError;
-  PyObject *__pyx_n_u_Music;
-  PyObject *__pyx_kp_u_News_Politics;
-  PyObject *__pyx_kp_u_Nonprofits_Activism;
-  PyObject *__pyx_kp_u_People_Blogs;
-  PyObject *__pyx_kp_u_Science_Technology;
-  PyObject *__pyx_n_u_Sports;
-  PyObject *__pyx_kp_u_Travel_Events;
   PyObject *__pyx_n_u_UserID;
-  PyObject *__pyx_kp_u__3;
-  PyObject *__pyx_n_s__4;
-  PyObject *__pyx_n_s__7;
+  PyObject *__pyx_kp_u__4;
+  PyObject *__pyx_n_s__5;
+  PyObject *__pyx_n_s__8;
   PyObject *__pyx_n_s_arange;
-  PyObject *__pyx_n_s_array;
   PyObject *__pyx_n_s_asyncio_coroutines;
   PyObject *__pyx_n_s_available_users;
   PyObject *__pyx_n_s_channel_category;
@@ -2781,6 +2749,7 @@ typedef struct {
   PyObject *__pyx_n_s_initial_id;
   PyObject *__pyx_n_s_initializing;
   PyObject *__pyx_n_s_int32;
+  PyObject *__pyx_n_s_int8;
   PyObject *__pyx_n_s_is_coroutine;
   PyObject *__pyx_n_s_isna;
   PyObject *__pyx_n_s_loc;
@@ -2798,6 +2767,7 @@ typedef struct {
   PyObject *__pyx_n_s_ones;
   PyObject *__pyx_n_s_pandas;
   PyObject *__pyx_n_s_pd;
+  PyObject *__pyx_n_s_randint;
   PyObject *__pyx_n_s_random;
   PyObject *__pyx_n_s_replace;
   PyObject *__pyx_n_s_selected_idx;
@@ -2817,10 +2787,13 @@ typedef struct {
   PyObject *__pyx_n_u_user_location;
   PyObject *__pyx_n_s_users_df;
   PyObject *__pyx_n_s_where;
+  PyObject *__pyx_int_1;
+  PyObject *__pyx_int_16;
   PyObject *__pyx_tuple_;
   PyObject *__pyx_tuple__2;
-  PyObject *__pyx_tuple__5;
-  PyObject *__pyx_codeobj__6;
+  PyObject *__pyx_tuple__3;
+  PyObject *__pyx_tuple__6;
+  PyObject *__pyx_codeobj__7;
 } __pyx_mstate;
 
 #if CYTHON_USE_MODULE_STATE
@@ -2879,9 +2852,6 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_ptype_5numpy_flexible);
   Py_CLEAR(clear_module_state->__pyx_ptype_5numpy_character);
   Py_CLEAR(clear_module_state->__pyx_ptype_5numpy_ufunc);
-  Py_CLEAR(clear_module_state->__pyx_n_u_Animals);
-  Py_CLEAR(clear_module_state->__pyx_n_u_Automobiles);
-  Py_CLEAR(clear_module_state->__pyx_n_s_CATEGORIES);
   Py_CLEAR(clear_module_state->__pyx_n_u_CHBanner);
   Py_CLEAR(clear_module_state->__pyx_n_u_CHCreationDate);
   Py_CLEAR(clear_module_state->__pyx_n_u_CHDesc);
@@ -2890,27 +2860,13 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_Categorical);
   Py_CLEAR(clear_module_state->__pyx_n_u_ChannelID);
   Py_CLEAR(clear_module_state->__pyx_n_u_ChannelURL);
-  Py_CLEAR(clear_module_state->__pyx_n_u_Comedy);
   Py_CLEAR(clear_module_state->__pyx_n_s_DataFrame);
-  Py_CLEAR(clear_module_state->__pyx_n_u_Education);
-  Py_CLEAR(clear_module_state->__pyx_n_u_Entertainment);
-  Py_CLEAR(clear_module_state->__pyx_kp_u_Film_Animation);
-  Py_CLEAR(clear_module_state->__pyx_n_u_Gaming);
-  Py_CLEAR(clear_module_state->__pyx_kp_u_How_to_Style);
   Py_CLEAR(clear_module_state->__pyx_n_s_ImportError);
-  Py_CLEAR(clear_module_state->__pyx_n_u_Music);
-  Py_CLEAR(clear_module_state->__pyx_kp_u_News_Politics);
-  Py_CLEAR(clear_module_state->__pyx_kp_u_Nonprofits_Activism);
-  Py_CLEAR(clear_module_state->__pyx_kp_u_People_Blogs);
-  Py_CLEAR(clear_module_state->__pyx_kp_u_Science_Technology);
-  Py_CLEAR(clear_module_state->__pyx_n_u_Sports);
-  Py_CLEAR(clear_module_state->__pyx_kp_u_Travel_Events);
   Py_CLEAR(clear_module_state->__pyx_n_u_UserID);
-  Py_CLEAR(clear_module_state->__pyx_kp_u__3);
-  Py_CLEAR(clear_module_state->__pyx_n_s__4);
-  Py_CLEAR(clear_module_state->__pyx_n_s__7);
+  Py_CLEAR(clear_module_state->__pyx_kp_u__4);
+  Py_CLEAR(clear_module_state->__pyx_n_s__5);
+  Py_CLEAR(clear_module_state->__pyx_n_s__8);
   Py_CLEAR(clear_module_state->__pyx_n_s_arange);
-  Py_CLEAR(clear_module_state->__pyx_n_s_array);
   Py_CLEAR(clear_module_state->__pyx_n_s_asyncio_coroutines);
   Py_CLEAR(clear_module_state->__pyx_n_s_available_users);
   Py_CLEAR(clear_module_state->__pyx_n_s_channel_category);
@@ -2945,6 +2901,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_initial_id);
   Py_CLEAR(clear_module_state->__pyx_n_s_initializing);
   Py_CLEAR(clear_module_state->__pyx_n_s_int32);
+  Py_CLEAR(clear_module_state->__pyx_n_s_int8);
   Py_CLEAR(clear_module_state->__pyx_n_s_is_coroutine);
   Py_CLEAR(clear_module_state->__pyx_n_s_isna);
   Py_CLEAR(clear_module_state->__pyx_n_s_loc);
@@ -2962,6 +2919,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_ones);
   Py_CLEAR(clear_module_state->__pyx_n_s_pandas);
   Py_CLEAR(clear_module_state->__pyx_n_s_pd);
+  Py_CLEAR(clear_module_state->__pyx_n_s_randint);
   Py_CLEAR(clear_module_state->__pyx_n_s_random);
   Py_CLEAR(clear_module_state->__pyx_n_s_replace);
   Py_CLEAR(clear_module_state->__pyx_n_s_selected_idx);
@@ -2981,10 +2939,13 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_u_user_location);
   Py_CLEAR(clear_module_state->__pyx_n_s_users_df);
   Py_CLEAR(clear_module_state->__pyx_n_s_where);
+  Py_CLEAR(clear_module_state->__pyx_int_1);
+  Py_CLEAR(clear_module_state->__pyx_int_16);
   Py_CLEAR(clear_module_state->__pyx_tuple_);
   Py_CLEAR(clear_module_state->__pyx_tuple__2);
-  Py_CLEAR(clear_module_state->__pyx_tuple__5);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__6);
+  Py_CLEAR(clear_module_state->__pyx_tuple__3);
+  Py_CLEAR(clear_module_state->__pyx_tuple__6);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__7);
   return 0;
 }
 #endif
@@ -3021,9 +2982,6 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_ptype_5numpy_flexible);
   Py_VISIT(traverse_module_state->__pyx_ptype_5numpy_character);
   Py_VISIT(traverse_module_state->__pyx_ptype_5numpy_ufunc);
-  Py_VISIT(traverse_module_state->__pyx_n_u_Animals);
-  Py_VISIT(traverse_module_state->__pyx_n_u_Automobiles);
-  Py_VISIT(traverse_module_state->__pyx_n_s_CATEGORIES);
   Py_VISIT(traverse_module_state->__pyx_n_u_CHBanner);
   Py_VISIT(traverse_module_state->__pyx_n_u_CHCreationDate);
   Py_VISIT(traverse_module_state->__pyx_n_u_CHDesc);
@@ -3032,27 +2990,13 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_Categorical);
   Py_VISIT(traverse_module_state->__pyx_n_u_ChannelID);
   Py_VISIT(traverse_module_state->__pyx_n_u_ChannelURL);
-  Py_VISIT(traverse_module_state->__pyx_n_u_Comedy);
   Py_VISIT(traverse_module_state->__pyx_n_s_DataFrame);
-  Py_VISIT(traverse_module_state->__pyx_n_u_Education);
-  Py_VISIT(traverse_module_state->__pyx_n_u_Entertainment);
-  Py_VISIT(traverse_module_state->__pyx_kp_u_Film_Animation);
-  Py_VISIT(traverse_module_state->__pyx_n_u_Gaming);
-  Py_VISIT(traverse_module_state->__pyx_kp_u_How_to_Style);
   Py_VISIT(traverse_module_state->__pyx_n_s_ImportError);
-  Py_VISIT(traverse_module_state->__pyx_n_u_Music);
-  Py_VISIT(traverse_module_state->__pyx_kp_u_News_Politics);
-  Py_VISIT(traverse_module_state->__pyx_kp_u_Nonprofits_Activism);
-  Py_VISIT(traverse_module_state->__pyx_kp_u_People_Blogs);
-  Py_VISIT(traverse_module_state->__pyx_kp_u_Science_Technology);
-  Py_VISIT(traverse_module_state->__pyx_n_u_Sports);
-  Py_VISIT(traverse_module_state->__pyx_kp_u_Travel_Events);
   Py_VISIT(traverse_module_state->__pyx_n_u_UserID);
-  Py_VISIT(traverse_module_state->__pyx_kp_u__3);
-  Py_VISIT(traverse_module_state->__pyx_n_s__4);
-  Py_VISIT(traverse_module_state->__pyx_n_s__7);
+  Py_VISIT(traverse_module_state->__pyx_kp_u__4);
+  Py_VISIT(traverse_module_state->__pyx_n_s__5);
+  Py_VISIT(traverse_module_state->__pyx_n_s__8);
   Py_VISIT(traverse_module_state->__pyx_n_s_arange);
-  Py_VISIT(traverse_module_state->__pyx_n_s_array);
   Py_VISIT(traverse_module_state->__pyx_n_s_asyncio_coroutines);
   Py_VISIT(traverse_module_state->__pyx_n_s_available_users);
   Py_VISIT(traverse_module_state->__pyx_n_s_channel_category);
@@ -3087,6 +3031,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_initial_id);
   Py_VISIT(traverse_module_state->__pyx_n_s_initializing);
   Py_VISIT(traverse_module_state->__pyx_n_s_int32);
+  Py_VISIT(traverse_module_state->__pyx_n_s_int8);
   Py_VISIT(traverse_module_state->__pyx_n_s_is_coroutine);
   Py_VISIT(traverse_module_state->__pyx_n_s_isna);
   Py_VISIT(traverse_module_state->__pyx_n_s_loc);
@@ -3104,6 +3049,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_ones);
   Py_VISIT(traverse_module_state->__pyx_n_s_pandas);
   Py_VISIT(traverse_module_state->__pyx_n_s_pd);
+  Py_VISIT(traverse_module_state->__pyx_n_s_randint);
   Py_VISIT(traverse_module_state->__pyx_n_s_random);
   Py_VISIT(traverse_module_state->__pyx_n_s_replace);
   Py_VISIT(traverse_module_state->__pyx_n_s_selected_idx);
@@ -3123,10 +3069,13 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_u_user_location);
   Py_VISIT(traverse_module_state->__pyx_n_s_users_df);
   Py_VISIT(traverse_module_state->__pyx_n_s_where);
+  Py_VISIT(traverse_module_state->__pyx_int_1);
+  Py_VISIT(traverse_module_state->__pyx_int_16);
   Py_VISIT(traverse_module_state->__pyx_tuple_);
   Py_VISIT(traverse_module_state->__pyx_tuple__2);
-  Py_VISIT(traverse_module_state->__pyx_tuple__5);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__6);
+  Py_VISIT(traverse_module_state->__pyx_tuple__3);
+  Py_VISIT(traverse_module_state->__pyx_tuple__6);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__7);
   return 0;
 }
 #endif
@@ -3191,9 +3140,6 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_ptype_5numpy_ufunc __pyx_mstate_global->__pyx_ptype_5numpy_ufunc
 #if CYTHON_USE_MODULE_STATE
 #endif
-#define __pyx_n_u_Animals __pyx_mstate_global->__pyx_n_u_Animals
-#define __pyx_n_u_Automobiles __pyx_mstate_global->__pyx_n_u_Automobiles
-#define __pyx_n_s_CATEGORIES __pyx_mstate_global->__pyx_n_s_CATEGORIES
 #define __pyx_n_u_CHBanner __pyx_mstate_global->__pyx_n_u_CHBanner
 #define __pyx_n_u_CHCreationDate __pyx_mstate_global->__pyx_n_u_CHCreationDate
 #define __pyx_n_u_CHDesc __pyx_mstate_global->__pyx_n_u_CHDesc
@@ -3202,27 +3148,13 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_Categorical __pyx_mstate_global->__pyx_n_s_Categorical
 #define __pyx_n_u_ChannelID __pyx_mstate_global->__pyx_n_u_ChannelID
 #define __pyx_n_u_ChannelURL __pyx_mstate_global->__pyx_n_u_ChannelURL
-#define __pyx_n_u_Comedy __pyx_mstate_global->__pyx_n_u_Comedy
 #define __pyx_n_s_DataFrame __pyx_mstate_global->__pyx_n_s_DataFrame
-#define __pyx_n_u_Education __pyx_mstate_global->__pyx_n_u_Education
-#define __pyx_n_u_Entertainment __pyx_mstate_global->__pyx_n_u_Entertainment
-#define __pyx_kp_u_Film_Animation __pyx_mstate_global->__pyx_kp_u_Film_Animation
-#define __pyx_n_u_Gaming __pyx_mstate_global->__pyx_n_u_Gaming
-#define __pyx_kp_u_How_to_Style __pyx_mstate_global->__pyx_kp_u_How_to_Style
 #define __pyx_n_s_ImportError __pyx_mstate_global->__pyx_n_s_ImportError
-#define __pyx_n_u_Music __pyx_mstate_global->__pyx_n_u_Music
-#define __pyx_kp_u_News_Politics __pyx_mstate_global->__pyx_kp_u_News_Politics
-#define __pyx_kp_u_Nonprofits_Activism __pyx_mstate_global->__pyx_kp_u_Nonprofits_Activism
-#define __pyx_kp_u_People_Blogs __pyx_mstate_global->__pyx_kp_u_People_Blogs
-#define __pyx_kp_u_Science_Technology __pyx_mstate_global->__pyx_kp_u_Science_Technology
-#define __pyx_n_u_Sports __pyx_mstate_global->__pyx_n_u_Sports
-#define __pyx_kp_u_Travel_Events __pyx_mstate_global->__pyx_kp_u_Travel_Events
 #define __pyx_n_u_UserID __pyx_mstate_global->__pyx_n_u_UserID
-#define __pyx_kp_u__3 __pyx_mstate_global->__pyx_kp_u__3
-#define __pyx_n_s__4 __pyx_mstate_global->__pyx_n_s__4
-#define __pyx_n_s__7 __pyx_mstate_global->__pyx_n_s__7
+#define __pyx_kp_u__4 __pyx_mstate_global->__pyx_kp_u__4
+#define __pyx_n_s__5 __pyx_mstate_global->__pyx_n_s__5
+#define __pyx_n_s__8 __pyx_mstate_global->__pyx_n_s__8
 #define __pyx_n_s_arange __pyx_mstate_global->__pyx_n_s_arange
-#define __pyx_n_s_array __pyx_mstate_global->__pyx_n_s_array
 #define __pyx_n_s_asyncio_coroutines __pyx_mstate_global->__pyx_n_s_asyncio_coroutines
 #define __pyx_n_s_available_users __pyx_mstate_global->__pyx_n_s_available_users
 #define __pyx_n_s_channel_category __pyx_mstate_global->__pyx_n_s_channel_category
@@ -3257,6 +3189,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_initial_id __pyx_mstate_global->__pyx_n_s_initial_id
 #define __pyx_n_s_initializing __pyx_mstate_global->__pyx_n_s_initializing
 #define __pyx_n_s_int32 __pyx_mstate_global->__pyx_n_s_int32
+#define __pyx_n_s_int8 __pyx_mstate_global->__pyx_n_s_int8
 #define __pyx_n_s_is_coroutine __pyx_mstate_global->__pyx_n_s_is_coroutine
 #define __pyx_n_s_isna __pyx_mstate_global->__pyx_n_s_isna
 #define __pyx_n_s_loc __pyx_mstate_global->__pyx_n_s_loc
@@ -3274,6 +3207,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_ones __pyx_mstate_global->__pyx_n_s_ones
 #define __pyx_n_s_pandas __pyx_mstate_global->__pyx_n_s_pandas
 #define __pyx_n_s_pd __pyx_mstate_global->__pyx_n_s_pd
+#define __pyx_n_s_randint __pyx_mstate_global->__pyx_n_s_randint
 #define __pyx_n_s_random __pyx_mstate_global->__pyx_n_s_random
 #define __pyx_n_s_replace __pyx_mstate_global->__pyx_n_s_replace
 #define __pyx_n_s_selected_idx __pyx_mstate_global->__pyx_n_s_selected_idx
@@ -3293,10 +3227,13 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_u_user_location __pyx_mstate_global->__pyx_n_u_user_location
 #define __pyx_n_s_users_df __pyx_mstate_global->__pyx_n_s_users_df
 #define __pyx_n_s_where __pyx_mstate_global->__pyx_n_s_where
+#define __pyx_int_1 __pyx_mstate_global->__pyx_int_1
+#define __pyx_int_16 __pyx_mstate_global->__pyx_int_16
 #define __pyx_tuple_ __pyx_mstate_global->__pyx_tuple_
 #define __pyx_tuple__2 __pyx_mstate_global->__pyx_tuple__2
-#define __pyx_tuple__5 __pyx_mstate_global->__pyx_tuple__5
-#define __pyx_codeobj__6 __pyx_mstate_global->__pyx_codeobj__6
+#define __pyx_tuple__3 __pyx_mstate_global->__pyx_tuple__3
+#define __pyx_tuple__6 __pyx_mstate_global->__pyx_tuple__6
+#define __pyx_codeobj__7 __pyx_mstate_global->__pyx_codeobj__7
 /* #### Code section: module_code ### */
 
 /* "../../../../../../../../ProgramData/anaconda3/Lib/site-packages/numpy/__init__.cython-30.pxd":245
@@ -4561,8 +4498,8 @@ static CYTHON_INLINE NPY_DATETIMEUNIT __pyx_f_5numpy_get_datetime64_unit(PyObjec
   return __pyx_r;
 }
 
-/* "cy_channel_generator.pyx":16
- * ], dtype=object)
+/* "cy_channel_generator.pyx":9
+ * ctypedef cnp.int32_t int32_t
  * 
  * def create_random_channel(object users_df, float new_channel_ratio, int initial_id, object current_date, object generate_channel_name):             # <<<<<<<<<<<<<<
  *     cdef int num_users = users_df.shape[0]
@@ -4634,7 +4571,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 16, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 9, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -4642,9 +4579,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 16, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 9, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("create_random_channel", 1, 5, 5, 1); __PYX_ERR(0, 16, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("create_random_channel", 1, 5, 5, 1); __PYX_ERR(0, 9, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
@@ -4652,9 +4589,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[2]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 16, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 9, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("create_random_channel", 1, 5, 5, 2); __PYX_ERR(0, 16, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("create_random_channel", 1, 5, 5, 2); __PYX_ERR(0, 9, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -4662,9 +4599,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[3]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 16, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 9, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("create_random_channel", 1, 5, 5, 3); __PYX_ERR(0, 16, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("create_random_channel", 1, 5, 5, 3); __PYX_ERR(0, 9, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  4:
@@ -4672,14 +4609,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[4]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 16, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 9, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("create_random_channel", 1, 5, 5, 4); __PYX_ERR(0, 16, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("create_random_channel", 1, 5, 5, 4); __PYX_ERR(0, 9, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "create_random_channel") < 0)) __PYX_ERR(0, 16, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "create_random_channel") < 0)) __PYX_ERR(0, 9, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 5)) {
       goto __pyx_L5_argtuple_error;
@@ -4691,14 +4628,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       values[4] = __Pyx_Arg_FASTCALL(__pyx_args, 4);
     }
     __pyx_v_users_df = values[0];
-    __pyx_v_new_channel_ratio = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_new_channel_ratio == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 16, __pyx_L3_error)
-    __pyx_v_initial_id = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_initial_id == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 16, __pyx_L3_error)
+    __pyx_v_new_channel_ratio = __pyx_PyFloat_AsFloat(values[1]); if (unlikely((__pyx_v_new_channel_ratio == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 9, __pyx_L3_error)
+    __pyx_v_initial_id = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_initial_id == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 9, __pyx_L3_error)
     __pyx_v_current_date = values[3];
     __pyx_v_generate_channel_name = values[4];
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("create_random_channel", 1, 5, 5, __pyx_nargs); __PYX_ERR(0, 16, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("create_random_channel", 1, 5, 5, __pyx_nargs); __PYX_ERR(0, 9, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4761,32 +4698,32 @@ static PyObject *__pyx_pf_20cy_channel_generator_create_random_channel(CYTHON_UN
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("create_random_channel", 1);
 
-  /* "cy_channel_generator.pyx":17
+  /* "cy_channel_generator.pyx":10
  * 
  * def create_random_channel(object users_df, float new_channel_ratio, int initial_id, object current_date, object generate_channel_name):
  *     cdef int num_users = users_df.shape[0]             # <<<<<<<<<<<<<<
  * 
  *     # Mscara de usurios sem canal
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_users_df, __pyx_n_s_shape); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_users_df, __pyx_n_s_shape); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 10, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 10, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 17, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 10, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_num_users = __pyx_t_3;
 
-  /* "cy_channel_generator.pyx":20
+  /* "cy_channel_generator.pyx":13
  * 
  *     # Mscara de usurios sem canal
  *     mask = users_df["user_channel_id"].isna().to_numpy()             # <<<<<<<<<<<<<<
  *     cdef int available_users = int(mask.sum())
  *     cdef int num_channels = int(available_users * new_channel_ratio)
  */
-  __pyx_t_4 = __Pyx_PyObject_Dict_GetItem(__pyx_v_users_df, __pyx_n_u_user_channel_id); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Dict_GetItem(__pyx_v_users_df, __pyx_n_u_user_channel_id); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 13, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_isna); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_isna); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 13, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_t_4 = NULL;
@@ -4807,11 +4744,11 @@ static PyObject *__pyx_pf_20cy_channel_generator_create_random_channel(CYTHON_UN
     PyObject *__pyx_callargs[2] = {__pyx_t_4, NULL};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_5, __pyx_callargs+1-__pyx_t_6, 0+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 20, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 13, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_to_numpy); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 20, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_to_numpy); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 13, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = NULL;
@@ -4832,21 +4769,21 @@ static PyObject *__pyx_pf_20cy_channel_generator_create_random_channel(CYTHON_UN
     PyObject *__pyx_callargs[2] = {__pyx_t_1, NULL};
     __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_5, __pyx_callargs+1-__pyx_t_6, 0+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 20, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 13, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
   __pyx_v_mask = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "cy_channel_generator.pyx":21
+  /* "cy_channel_generator.pyx":14
  *     # Mscara de usurios sem canal
  *     mask = users_df["user_channel_id"].isna().to_numpy()
  *     cdef int available_users = int(mask.sum())             # <<<<<<<<<<<<<<
  *     cdef int num_channels = int(available_users * new_channel_ratio)
  * 
  */
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_mask, __pyx_n_s_sum); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 21, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_mask, __pyx_n_s_sum); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 14, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_1 = NULL;
   __pyx_t_6 = 0;
@@ -4866,18 +4803,18 @@ static PyObject *__pyx_pf_20cy_channel_generator_create_random_channel(CYTHON_UN
     PyObject *__pyx_callargs[2] = {__pyx_t_1, NULL};
     __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_5, __pyx_callargs+1-__pyx_t_6, 0+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 21, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 14, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
-  __pyx_t_5 = __Pyx_PyNumber_Int(__pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 21, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyNumber_Int(__pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 14, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_5); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 21, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_5); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 14, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_available_users = __pyx_t_3;
 
-  /* "cy_channel_generator.pyx":22
+  /* "cy_channel_generator.pyx":15
  *     mask = users_df["user_channel_id"].isna().to_numpy()
  *     cdef int available_users = int(mask.sum())
  *     cdef int num_channels = int(available_users * new_channel_ratio)             # <<<<<<<<<<<<<<
@@ -4886,7 +4823,7 @@ static PyObject *__pyx_pf_20cy_channel_generator_create_random_channel(CYTHON_UN
  */
   __pyx_v_num_channels = ((int)(__pyx_v_available_users * __pyx_v_new_channel_ratio));
 
-  /* "cy_channel_generator.pyx":24
+  /* "cy_channel_generator.pyx":17
  *     cdef int num_channels = int(available_users * new_channel_ratio)
  * 
  *     if num_channels == 0:             # <<<<<<<<<<<<<<
@@ -4896,102 +4833,102 @@ static PyObject *__pyx_pf_20cy_channel_generator_create_random_channel(CYTHON_UN
   __pyx_t_7 = (__pyx_v_num_channels == 0);
   if (__pyx_t_7) {
 
-    /* "cy_channel_generator.pyx":25
+    /* "cy_channel_generator.pyx":18
  * 
  *     if num_channels == 0:
  *         empty_df = pd.DataFrame(columns=[             # <<<<<<<<<<<<<<
  *             "channel_id", "channel_name", "channel_creation_date",
  *             "channel_description", "channel_language", "channel_location",
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_pd); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 25, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_pd); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 18, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_DataFrame); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 25, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_DataFrame); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 18, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 25, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 18, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_1 = PyList_New(7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 25, __pyx_L1_error)
+    __pyx_t_1 = PyList_New(7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 18, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_INCREF(__pyx_n_u_channel_id);
     __Pyx_GIVEREF(__pyx_n_u_channel_id);
-    if (__Pyx_PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_u_channel_id)) __PYX_ERR(0, 25, __pyx_L1_error);
+    if (__Pyx_PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_u_channel_id)) __PYX_ERR(0, 18, __pyx_L1_error);
     __Pyx_INCREF(__pyx_n_u_channel_name);
     __Pyx_GIVEREF(__pyx_n_u_channel_name);
-    if (__Pyx_PyList_SET_ITEM(__pyx_t_1, 1, __pyx_n_u_channel_name)) __PYX_ERR(0, 25, __pyx_L1_error);
+    if (__Pyx_PyList_SET_ITEM(__pyx_t_1, 1, __pyx_n_u_channel_name)) __PYX_ERR(0, 18, __pyx_L1_error);
     __Pyx_INCREF(__pyx_n_u_channel_creation_date);
     __Pyx_GIVEREF(__pyx_n_u_channel_creation_date);
-    if (__Pyx_PyList_SET_ITEM(__pyx_t_1, 2, __pyx_n_u_channel_creation_date)) __PYX_ERR(0, 25, __pyx_L1_error);
+    if (__Pyx_PyList_SET_ITEM(__pyx_t_1, 2, __pyx_n_u_channel_creation_date)) __PYX_ERR(0, 18, __pyx_L1_error);
     __Pyx_INCREF(__pyx_n_u_channel_description);
     __Pyx_GIVEREF(__pyx_n_u_channel_description);
-    if (__Pyx_PyList_SET_ITEM(__pyx_t_1, 3, __pyx_n_u_channel_description)) __PYX_ERR(0, 25, __pyx_L1_error);
+    if (__Pyx_PyList_SET_ITEM(__pyx_t_1, 3, __pyx_n_u_channel_description)) __PYX_ERR(0, 18, __pyx_L1_error);
     __Pyx_INCREF(__pyx_n_u_channel_language);
     __Pyx_GIVEREF(__pyx_n_u_channel_language);
-    if (__Pyx_PyList_SET_ITEM(__pyx_t_1, 4, __pyx_n_u_channel_language)) __PYX_ERR(0, 25, __pyx_L1_error);
+    if (__Pyx_PyList_SET_ITEM(__pyx_t_1, 4, __pyx_n_u_channel_language)) __PYX_ERR(0, 18, __pyx_L1_error);
     __Pyx_INCREF(__pyx_n_u_channel_location);
     __Pyx_GIVEREF(__pyx_n_u_channel_location);
-    if (__Pyx_PyList_SET_ITEM(__pyx_t_1, 5, __pyx_n_u_channel_location)) __PYX_ERR(0, 25, __pyx_L1_error);
+    if (__Pyx_PyList_SET_ITEM(__pyx_t_1, 5, __pyx_n_u_channel_location)) __PYX_ERR(0, 18, __pyx_L1_error);
     __Pyx_INCREF(__pyx_n_u_channel_category);
     __Pyx_GIVEREF(__pyx_n_u_channel_category);
-    if (__Pyx_PyList_SET_ITEM(__pyx_t_1, 6, __pyx_n_u_channel_category)) __PYX_ERR(0, 25, __pyx_L1_error);
-    if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_columns, __pyx_t_1) < 0) __PYX_ERR(0, 25, __pyx_L1_error)
+    if (__Pyx_PyList_SET_ITEM(__pyx_t_1, 6, __pyx_n_u_channel_category)) __PYX_ERR(0, 18, __pyx_L1_error);
+    if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_columns, __pyx_t_1) < 0) __PYX_ERR(0, 18, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 25, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 18, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_v_empty_df = __pyx_t_1;
     __pyx_t_1 = 0;
 
-    /* "cy_channel_generator.pyx":30
+    /* "cy_channel_generator.pyx":23
  *             "channel_category"
  *         ])
  *         empty_channel_df = pd.DataFrame(columns=[             # <<<<<<<<<<<<<<
  *             'ChannelID', 'ChannelURL', 'CHCreationDate', 'CHName', 'CHDesc',
  *             'CHWelcomeVID', 'CHBanner', 'UserID'
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_pd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 30, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_pd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 23, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_DataFrame); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 30, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_DataFrame); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 23, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 30, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 23, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = PyList_New(8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 30, __pyx_L1_error)
+    __pyx_t_2 = PyList_New(8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 23, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_INCREF(__pyx_n_u_ChannelID);
     __Pyx_GIVEREF(__pyx_n_u_ChannelID);
-    if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_u_ChannelID)) __PYX_ERR(0, 30, __pyx_L1_error);
+    if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_u_ChannelID)) __PYX_ERR(0, 23, __pyx_L1_error);
     __Pyx_INCREF(__pyx_n_u_ChannelURL);
     __Pyx_GIVEREF(__pyx_n_u_ChannelURL);
-    if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 1, __pyx_n_u_ChannelURL)) __PYX_ERR(0, 30, __pyx_L1_error);
+    if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 1, __pyx_n_u_ChannelURL)) __PYX_ERR(0, 23, __pyx_L1_error);
     __Pyx_INCREF(__pyx_n_u_CHCreationDate);
     __Pyx_GIVEREF(__pyx_n_u_CHCreationDate);
-    if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 2, __pyx_n_u_CHCreationDate)) __PYX_ERR(0, 30, __pyx_L1_error);
+    if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 2, __pyx_n_u_CHCreationDate)) __PYX_ERR(0, 23, __pyx_L1_error);
     __Pyx_INCREF(__pyx_n_u_CHName);
     __Pyx_GIVEREF(__pyx_n_u_CHName);
-    if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 3, __pyx_n_u_CHName)) __PYX_ERR(0, 30, __pyx_L1_error);
+    if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 3, __pyx_n_u_CHName)) __PYX_ERR(0, 23, __pyx_L1_error);
     __Pyx_INCREF(__pyx_n_u_CHDesc);
     __Pyx_GIVEREF(__pyx_n_u_CHDesc);
-    if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 4, __pyx_n_u_CHDesc)) __PYX_ERR(0, 30, __pyx_L1_error);
+    if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 4, __pyx_n_u_CHDesc)) __PYX_ERR(0, 23, __pyx_L1_error);
     __Pyx_INCREF(__pyx_n_u_CHWelcomeVID);
     __Pyx_GIVEREF(__pyx_n_u_CHWelcomeVID);
-    if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 5, __pyx_n_u_CHWelcomeVID)) __PYX_ERR(0, 30, __pyx_L1_error);
+    if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 5, __pyx_n_u_CHWelcomeVID)) __PYX_ERR(0, 23, __pyx_L1_error);
     __Pyx_INCREF(__pyx_n_u_CHBanner);
     __Pyx_GIVEREF(__pyx_n_u_CHBanner);
-    if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 6, __pyx_n_u_CHBanner)) __PYX_ERR(0, 30, __pyx_L1_error);
+    if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 6, __pyx_n_u_CHBanner)) __PYX_ERR(0, 23, __pyx_L1_error);
     __Pyx_INCREF(__pyx_n_u_UserID);
     __Pyx_GIVEREF(__pyx_n_u_UserID);
-    if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 7, __pyx_n_u_UserID)) __PYX_ERR(0, 30, __pyx_L1_error);
-    if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_columns, __pyx_t_2) < 0) __PYX_ERR(0, 30, __pyx_L1_error)
+    if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 7, __pyx_n_u_UserID)) __PYX_ERR(0, 23, __pyx_L1_error);
+    if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_columns, __pyx_t_2) < 0) __PYX_ERR(0, 23, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 30, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 23, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_v_empty_channel_df = __pyx_t_2;
     __pyx_t_2 = 0;
 
-    /* "cy_channel_generator.pyx":34
+    /* "cy_channel_generator.pyx":27
  *             'CHWelcomeVID', 'CHBanner', 'UserID'
  *         ])
  *         return users_df, empty_df, empty_channel_df             # <<<<<<<<<<<<<<
@@ -4999,22 +4936,22 @@ static PyObject *__pyx_pf_20cy_channel_generator_create_random_channel(CYTHON_UN
  *     # Selecionar ndices de usurios disponveis
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_2 = PyTuple_New(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 34, __pyx_L1_error)
+    __pyx_t_2 = PyTuple_New(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 27, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_INCREF(__pyx_v_users_df);
     __Pyx_GIVEREF(__pyx_v_users_df);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_v_users_df)) __PYX_ERR(0, 34, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_v_users_df)) __PYX_ERR(0, 27, __pyx_L1_error);
     __Pyx_INCREF(__pyx_v_empty_df);
     __Pyx_GIVEREF(__pyx_v_empty_df);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_empty_df)) __PYX_ERR(0, 34, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_empty_df)) __PYX_ERR(0, 27, __pyx_L1_error);
     __Pyx_INCREF(__pyx_v_empty_channel_df);
     __Pyx_GIVEREF(__pyx_v_empty_channel_df);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 2, __pyx_v_empty_channel_df)) __PYX_ERR(0, 34, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 2, __pyx_v_empty_channel_df)) __PYX_ERR(0, 27, __pyx_L1_error);
     __pyx_r = __pyx_t_2;
     __pyx_t_2 = 0;
     goto __pyx_L0;
 
-    /* "cy_channel_generator.pyx":24
+    /* "cy_channel_generator.pyx":17
  *     cdef int num_channels = int(available_users * new_channel_ratio)
  * 
  *     if num_channels == 0:             # <<<<<<<<<<<<<<
@@ -5023,16 +4960,16 @@ static PyObject *__pyx_pf_20cy_channel_generator_create_random_channel(CYTHON_UN
  */
   }
 
-  /* "cy_channel_generator.pyx":37
+  /* "cy_channel_generator.pyx":30
  * 
  *     # Selecionar ndices de usurios disponveis
  *     idx = np.where(mask)[0]             # <<<<<<<<<<<<<<
  *     selected_idx = np.random.choice(idx, size=num_channels, replace=False)
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 30, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_where); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_where); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 30, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = NULL;
@@ -5053,44 +4990,44 @@ static PyObject *__pyx_pf_20cy_channel_generator_create_random_channel(CYTHON_UN
     PyObject *__pyx_callargs[2] = {__pyx_t_1, __pyx_v_mask};
     __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_5, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 37, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 30, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
-  __pyx_t_5 = __Pyx_GetItemInt(__pyx_t_2, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 37, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_GetItemInt(__pyx_t_2, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 30, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_idx = __pyx_t_5;
   __pyx_t_5 = 0;
 
-  /* "cy_channel_generator.pyx":38
+  /* "cy_channel_generator.pyx":31
  *     # Selecionar ndices de usurios disponveis
  *     idx = np.where(mask)[0]
  *     selected_idx = np.random.choice(idx, size=num_channels, replace=False)             # <<<<<<<<<<<<<<
  * 
  *     # Extrair informaes dos usurios selecionados
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 31, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_random); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_random); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 31, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_choice); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_choice); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 31, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 31, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_v_idx);
   __Pyx_GIVEREF(__pyx_v_idx);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_v_idx)) __PYX_ERR(0, 38, __pyx_L1_error);
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 38, __pyx_L1_error)
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_v_idx)) __PYX_ERR(0, 31, __pyx_L1_error);
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 31, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_num_channels); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 38, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_num_channels); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 31, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_size, __pyx_t_4) < 0) __PYX_ERR(0, 38, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_size, __pyx_t_4) < 0) __PYX_ERR(0, 31, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_replace, Py_False) < 0) __PYX_ERR(0, 38, __pyx_L1_error)
-  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 38, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_replace, Py_False) < 0) __PYX_ERR(0, 31, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 31, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -5098,16 +5035,16 @@ static PyObject *__pyx_pf_20cy_channel_generator_create_random_channel(CYTHON_UN
   __pyx_v_selected_idx = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "cy_channel_generator.pyx":41
+  /* "cy_channel_generator.pyx":34
  * 
  *     # Extrair informaes dos usurios selecionados
  *     user_lang = users_df["user_language"].to_numpy()[selected_idx]             # <<<<<<<<<<<<<<
  *     user_loc = users_df["user_location"].to_numpy()[selected_idx]
  *     user_ids = users_df["user_id"].to_numpy()[selected_idx]
  */
-  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_users_df, __pyx_n_u_user_language); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_users_df, __pyx_n_u_user_language); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_to_numpy); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_to_numpy); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = NULL;
@@ -5128,26 +5065,26 @@ static PyObject *__pyx_pf_20cy_channel_generator_create_random_channel(CYTHON_UN
     PyObject *__pyx_callargs[2] = {__pyx_t_1, NULL};
     __pyx_t_4 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_6, 0+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 41, __pyx_L1_error)
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 34, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
-  __pyx_t_2 = __Pyx_PyObject_GetItem(__pyx_t_4, __pyx_v_selected_idx); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetItem(__pyx_t_4, __pyx_v_selected_idx); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 34, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_v_user_lang = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "cy_channel_generator.pyx":42
+  /* "cy_channel_generator.pyx":35
  *     # Extrair informaes dos usurios selecionados
  *     user_lang = users_df["user_language"].to_numpy()[selected_idx]
  *     user_loc = users_df["user_location"].to_numpy()[selected_idx]             # <<<<<<<<<<<<<<
  *     user_ids = users_df["user_id"].to_numpy()[selected_idx]
  * 
  */
-  __pyx_t_4 = __Pyx_PyObject_Dict_GetItem(__pyx_v_users_df, __pyx_n_u_user_location); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Dict_GetItem(__pyx_v_users_df, __pyx_n_u_user_location); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_to_numpy); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_to_numpy); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_t_4 = NULL;
@@ -5168,26 +5105,26 @@ static PyObject *__pyx_pf_20cy_channel_generator_create_random_channel(CYTHON_UN
     PyObject *__pyx_callargs[2] = {__pyx_t_4, NULL};
     __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_1, __pyx_callargs+1-__pyx_t_6, 0+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 42, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 35, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   }
-  __pyx_t_1 = __Pyx_PyObject_GetItem(__pyx_t_2, __pyx_v_selected_idx); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetItem(__pyx_t_2, __pyx_v_selected_idx); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_user_loc = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "cy_channel_generator.pyx":43
+  /* "cy_channel_generator.pyx":36
  *     user_lang = users_df["user_language"].to_numpy()[selected_idx]
  *     user_loc = users_df["user_location"].to_numpy()[selected_idx]
  *     user_ids = users_df["user_id"].to_numpy()[selected_idx]             # <<<<<<<<<<<<<<
  * 
  *     # Gerar dados de canais
  */
-  __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_users_df, __pyx_n_u_user_id); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_v_users_df, __pyx_n_u_user_id); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_to_numpy); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_to_numpy); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -5208,50 +5145,50 @@ static PyObject *__pyx_pf_20cy_channel_generator_create_random_channel(CYTHON_UN
     PyObject *__pyx_callargs[2] = {__pyx_t_2, NULL};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_6, 0+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 43, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 36, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
-  __pyx_t_4 = __Pyx_PyObject_GetItem(__pyx_t_1, __pyx_v_selected_idx); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetItem(__pyx_t_1, __pyx_v_selected_idx); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_user_ids = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "cy_channel_generator.pyx":46
+  /* "cy_channel_generator.pyx":39
  * 
  *     # Gerar dados de canais
  *     channel_id = np.arange(initial_id, initial_id + num_channels, dtype=np.int32)             # <<<<<<<<<<<<<<
- *     channel_category = np.random.choice(CATEGORIES, size=num_channels)
+ *     channel_category = np.random.randint(1, 16, size=num_channels, dtype=np.int8)
  *     channel_name = generate_channel_name(channel_category)
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_arange); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_arange); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_initial_id); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyInt_From_int(__pyx_v_initial_id); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_2 = __Pyx_PyInt_From_int((__pyx_v_initial_id + __pyx_v_num_channels)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int((__pyx_v_initial_id + __pyx_v_num_channels)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_GIVEREF(__pyx_t_4);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_4)) __PYX_ERR(0, 46, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_4)) __PYX_ERR(0, 39, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_2);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_2)) __PYX_ERR(0, 46, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_2)) __PYX_ERR(0, 39, __pyx_L1_error);
   __pyx_t_4 = 0;
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_np); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_int32); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_int32); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_8) < 0) __PYX_ERR(0, 46, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_8) < 0) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_5, __pyx_t_2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_5, __pyx_t_2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -5259,58 +5196,57 @@ static PyObject *__pyx_pf_20cy_channel_generator_create_random_channel(CYTHON_UN
   __pyx_v_channel_id = __pyx_t_8;
   __pyx_t_8 = 0;
 
-  /* "cy_channel_generator.pyx":47
+  /* "cy_channel_generator.pyx":40
  *     # Gerar dados de canais
  *     channel_id = np.arange(initial_id, initial_id + num_channels, dtype=np.int32)
- *     channel_category = np.random.choice(CATEGORIES, size=num_channels)             # <<<<<<<<<<<<<<
+ *     channel_category = np.random.randint(1, 16, size=num_channels, dtype=np.int8)             # <<<<<<<<<<<<<<
  *     channel_name = generate_channel_name(channel_category)
  *     channel_description = np.full(num_channels, '', dtype=object)
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_np); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_np); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_random); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_random); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_choice); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_randint); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_CATEGORIES); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_num_channels); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_GIVEREF(__pyx_t_2);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_2)) __PYX_ERR(0, 47, __pyx_L1_error);
-  __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 47, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_num_channels); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_size, __pyx_t_5) < 0) __PYX_ERR(0, 40, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 40, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_int8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_size, __pyx_t_1) < 0) __PYX_ERR(0, 47, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_t_1) < 0) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_t_5, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_tuple__3, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_channel_category = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "cy_channel_generator.pyx":48
+  /* "cy_channel_generator.pyx":41
  *     channel_id = np.arange(initial_id, initial_id + num_channels, dtype=np.int32)
- *     channel_category = np.random.choice(CATEGORIES, size=num_channels)
+ *     channel_category = np.random.randint(1, 16, size=num_channels, dtype=np.int8)
  *     channel_name = generate_channel_name(channel_category)             # <<<<<<<<<<<<<<
  *     channel_description = np.full(num_channels, '', dtype=object)
  *     channel_creation_date = np.full(num_channels, current_date)
  */
   __Pyx_INCREF(__pyx_v_generate_channel_name);
-  __pyx_t_2 = __pyx_v_generate_channel_name; __pyx_t_5 = NULL;
+  __pyx_t_2 = __pyx_v_generate_channel_name; __pyx_t_8 = NULL;
   __pyx_t_6 = 0;
   #if CYTHON_UNPACK_METHODS
   if (unlikely(PyMethod_Check(__pyx_t_2))) {
-    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_2);
-    if (likely(__pyx_t_5)) {
+    __pyx_t_8 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_8)) {
       PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
-      __Pyx_INCREF(__pyx_t_5);
+      __Pyx_INCREF(__pyx_t_8);
       __Pyx_INCREF(function);
       __Pyx_DECREF_SET(__pyx_t_2, function);
       __pyx_t_6 = 1;
@@ -5318,225 +5254,225 @@ static PyObject *__pyx_pf_20cy_channel_generator_create_random_channel(CYTHON_UN
   }
   #endif
   {
-    PyObject *__pyx_callargs[2] = {__pyx_t_5, __pyx_v_channel_category};
+    PyObject *__pyx_callargs[2] = {__pyx_t_8, __pyx_v_channel_category};
     __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
-    __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
+    __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 41, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
   __pyx_v_channel_name = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "cy_channel_generator.pyx":49
- *     channel_category = np.random.choice(CATEGORIES, size=num_channels)
+  /* "cy_channel_generator.pyx":42
+ *     channel_category = np.random.randint(1, 16, size=num_channels, dtype=np.int8)
  *     channel_name = generate_channel_name(channel_category)
  *     channel_description = np.full(num_channels, '', dtype=object)             # <<<<<<<<<<<<<<
  *     channel_creation_date = np.full(num_channels, current_date)
  *     uns = np.ones(num_channels, dtype=bool)
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 49, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 42, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_full); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 49, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_full); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 42, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_num_channels); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 49, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_num_channels); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 42, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 49, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_GIVEREF(__pyx_t_1);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_1)) __PYX_ERR(0, 49, __pyx_L1_error);
-  __Pyx_INCREF(__pyx_kp_u__3);
-  __Pyx_GIVEREF(__pyx_kp_u__3);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_kp_u__3)) __PYX_ERR(0, 49, __pyx_L1_error);
-  __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 49, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_dtype, __pyx_builtin_object) < 0) __PYX_ERR(0, 49, __pyx_L1_error)
-  __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, __pyx_t_1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 49, __pyx_L1_error)
+  __pyx_t_8 = PyTuple_New(2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 42, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
+  __Pyx_GIVEREF(__pyx_t_1);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_1)) __PYX_ERR(0, 42, __pyx_L1_error);
+  __Pyx_INCREF(__pyx_kp_u__4);
+  __Pyx_GIVEREF(__pyx_kp_u__4);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_8, 1, __pyx_kp_u__4)) __PYX_ERR(0, 42, __pyx_L1_error);
+  __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_dtype, __pyx_builtin_object) < 0) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_8, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_v_channel_description = __pyx_t_8;
-  __pyx_t_8 = 0;
+  __pyx_v_channel_description = __pyx_t_5;
+  __pyx_t_5 = 0;
 
-  /* "cy_channel_generator.pyx":50
+  /* "cy_channel_generator.pyx":43
  *     channel_name = generate_channel_name(channel_category)
  *     channel_description = np.full(num_channels, '', dtype=object)
  *     channel_creation_date = np.full(num_channels, current_date)             # <<<<<<<<<<<<<<
  *     uns = np.ones(num_channels, dtype=bool)
  * 
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_full); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 50, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_full); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 43, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_num_channels); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 50, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_num_channels); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 43, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_2 = NULL;
   __pyx_t_6 = 0;
   #if CYTHON_UNPACK_METHODS
-  if (unlikely(PyMethod_Check(__pyx_t_5))) {
-    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_5);
+  if (unlikely(PyMethod_Check(__pyx_t_8))) {
+    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_8);
     if (likely(__pyx_t_2)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_5);
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_8);
       __Pyx_INCREF(__pyx_t_2);
       __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_5, function);
+      __Pyx_DECREF_SET(__pyx_t_8, function);
       __pyx_t_6 = 1;
     }
   }
   #endif
   {
     PyObject *__pyx_callargs[3] = {__pyx_t_2, __pyx_t_1, __pyx_v_current_date};
-    __pyx_t_8 = __Pyx_PyObject_FastCall(__pyx_t_5, __pyx_callargs+1-__pyx_t_6, 2+__pyx_t_6);
+    __pyx_t_5 = __Pyx_PyObject_FastCall(__pyx_t_8, __pyx_callargs+1-__pyx_t_6, 2+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 50, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_8);
-    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 43, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
+    __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
   }
-  __pyx_v_channel_creation_date = __pyx_t_8;
-  __pyx_t_8 = 0;
+  __pyx_v_channel_creation_date = __pyx_t_5;
+  __pyx_t_5 = 0;
 
-  /* "cy_channel_generator.pyx":51
+  /* "cy_channel_generator.pyx":44
  *     channel_description = np.full(num_channels, '', dtype=object)
  *     channel_creation_date = np.full(num_channels, current_date)
  *     uns = np.ones(num_channels, dtype=bool)             # <<<<<<<<<<<<<<
  * 
  *     # Atualizar o DataFrame de usurios
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_8, __pyx_n_s_np); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 51, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_ones); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 51, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_n_s_np); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-  __pyx_t_8 = __Pyx_PyInt_From_int(__pyx_v_num_channels); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_ones); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 44, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 51, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __Pyx_GIVEREF(__pyx_t_8);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_8)) __PYX_ERR(0, 51, __pyx_L1_error);
-  __pyx_t_8 = 0;
-  __pyx_t_8 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 51, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_8);
-  if (PyDict_SetItem(__pyx_t_8, __pyx_n_s_dtype, ((PyObject*)&PyBool_Type)) < 0) __PYX_ERR(0, 51, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_1, __pyx_t_8); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 51, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_num_channels); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_GIVEREF(__pyx_t_5);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_5)) __PYX_ERR(0, 44, __pyx_L1_error);
+  __pyx_t_5 = 0;
+  __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_dtype, ((PyObject*)&PyBool_Type)) < 0) __PYX_ERR(0, 44, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_t_1, __pyx_t_5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 44, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __pyx_v_uns = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "cy_channel_generator.pyx":54
+  /* "cy_channel_generator.pyx":47
  * 
  *     # Atualizar o DataFrame de usurios
  *     users_df.loc[selected_idx, "user_channel_id"] = channel_id             # <<<<<<<<<<<<<<
  * 
  *     # Criar DataFrame de canais completo
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_users_df, __pyx_n_s_loc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 54, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_users_df, __pyx_n_s_loc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_8 = PyTuple_New(2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 54, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_8);
+  __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
   __Pyx_INCREF(__pyx_v_selected_idx);
   __Pyx_GIVEREF(__pyx_v_selected_idx);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_v_selected_idx)) __PYX_ERR(0, 54, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_v_selected_idx)) __PYX_ERR(0, 47, __pyx_L1_error);
   __Pyx_INCREF(__pyx_n_u_user_channel_id);
   __Pyx_GIVEREF(__pyx_n_u_user_channel_id);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_8, 1, __pyx_n_u_user_channel_id)) __PYX_ERR(0, 54, __pyx_L1_error);
-  if (unlikely((PyObject_SetItem(__pyx_t_2, __pyx_t_8, __pyx_v_channel_id) < 0))) __PYX_ERR(0, 54, __pyx_L1_error)
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_n_u_user_channel_id)) __PYX_ERR(0, 47, __pyx_L1_error);
+  if (unlikely((PyObject_SetItem(__pyx_t_2, __pyx_t_5, __pyx_v_channel_id) < 0))) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "cy_channel_generator.pyx":57
+  /* "cy_channel_generator.pyx":50
  * 
  *     # Criar DataFrame de canais completo
  *     channels = pd.DataFrame({             # <<<<<<<<<<<<<<
  *         "channel_id": channel_id,
  *         "channel_name": channel_name,
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_pd); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_pd); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 50, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_DataFrame); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 57, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_DataFrame); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 50, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cy_channel_generator.pyx":58
+  /* "cy_channel_generator.pyx":51
  *     # Criar DataFrame de canais completo
  *     channels = pd.DataFrame({
  *         "channel_id": channel_id,             # <<<<<<<<<<<<<<
  *         "channel_name": channel_name,
  *         "channel_creation_date": channel_creation_date,
  */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_u_channel_id, __pyx_v_channel_id) < 0) __PYX_ERR(0, 58, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_u_channel_id, __pyx_v_channel_id) < 0) __PYX_ERR(0, 51, __pyx_L1_error)
 
-  /* "cy_channel_generator.pyx":59
+  /* "cy_channel_generator.pyx":52
  *     channels = pd.DataFrame({
  *         "channel_id": channel_id,
  *         "channel_name": channel_name,             # <<<<<<<<<<<<<<
  *         "channel_creation_date": channel_creation_date,
  *         "channel_description": channel_description,
  */
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_u_channel_name, __pyx_v_channel_name) < 0) __PYX_ERR(0, 58, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_u_channel_name, __pyx_v_channel_name) < 0) __PYX_ERR(0, 51, __pyx_L1_error)
 
-  /* "cy_channel_generator.pyx":60
+  /* "cy_channel_generator.pyx":53
  *         "channel_id": channel_id,
  *         "channel_name": channel_name,
  *         "channel_creation_date": channel_creation_date,             # <<<<<<<<<<<<<<
  *         "channel_description": channel_description,
  *         "channel_language": user_lang,
  */
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_u_channel_creation_date, __pyx_v_channel_creation_date) < 0) __PYX_ERR(0, 58, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_u_channel_creation_date, __pyx_v_channel_creation_date) < 0) __PYX_ERR(0, 51, __pyx_L1_error)
 
-  /* "cy_channel_generator.pyx":61
+  /* "cy_channel_generator.pyx":54
  *         "channel_name": channel_name,
  *         "channel_creation_date": channel_creation_date,
  *         "channel_description": channel_description,             # <<<<<<<<<<<<<<
  *         "channel_language": user_lang,
  *         "channel_location": user_loc,
  */
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_u_channel_description, __pyx_v_channel_description) < 0) __PYX_ERR(0, 58, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_u_channel_description, __pyx_v_channel_description) < 0) __PYX_ERR(0, 51, __pyx_L1_error)
 
-  /* "cy_channel_generator.pyx":62
+  /* "cy_channel_generator.pyx":55
  *         "channel_creation_date": channel_creation_date,
  *         "channel_description": channel_description,
  *         "channel_language": user_lang,             # <<<<<<<<<<<<<<
  *         "channel_location": user_loc,
  *         "channel_category": channel_category
  */
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_u_channel_language, __pyx_v_user_lang) < 0) __PYX_ERR(0, 58, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_u_channel_language, __pyx_v_user_lang) < 0) __PYX_ERR(0, 51, __pyx_L1_error)
 
-  /* "cy_channel_generator.pyx":63
+  /* "cy_channel_generator.pyx":56
  *         "channel_description": channel_description,
  *         "channel_language": user_lang,
  *         "channel_location": user_loc,             # <<<<<<<<<<<<<<
  *         "channel_category": channel_category
  *     })
  */
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_u_channel_location, __pyx_v_user_loc) < 0) __PYX_ERR(0, 58, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_u_channel_location, __pyx_v_user_loc) < 0) __PYX_ERR(0, 51, __pyx_L1_error)
 
-  /* "cy_channel_generator.pyx":64
+  /* "cy_channel_generator.pyx":57
  *         "channel_language": user_lang,
  *         "channel_location": user_loc,
  *         "channel_category": channel_category             # <<<<<<<<<<<<<<
  *     })
  * 
  */
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_u_channel_category, __pyx_v_channel_category) < 0) __PYX_ERR(0, 58, __pyx_L1_error)
-  __pyx_t_5 = NULL;
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_u_channel_category, __pyx_v_channel_category) < 0) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_t_8 = NULL;
   __pyx_t_6 = 0;
   #if CYTHON_UNPACK_METHODS
   if (unlikely(PyMethod_Check(__pyx_t_1))) {
-    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_1);
-    if (likely(__pyx_t_5)) {
+    __pyx_t_8 = PyMethod_GET_SELF(__pyx_t_1);
+    if (likely(__pyx_t_8)) {
       PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
-      __Pyx_INCREF(__pyx_t_5);
+      __Pyx_INCREF(__pyx_t_8);
       __Pyx_INCREF(function);
       __Pyx_DECREF_SET(__pyx_t_1, function);
       __pyx_t_6 = 1;
@@ -5544,60 +5480,60 @@ static PyObject *__pyx_pf_20cy_channel_generator_create_random_channel(CYTHON_UN
   }
   #endif
   {
-    PyObject *__pyx_callargs[2] = {__pyx_t_5, __pyx_t_2};
-    __pyx_t_8 = __Pyx_PyObject_FastCall(__pyx_t_1, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
-    __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+    PyObject *__pyx_callargs[2] = {__pyx_t_8, __pyx_t_2};
+    __pyx_t_5 = __Pyx_PyObject_FastCall(__pyx_t_1, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
+    __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 57, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_8);
+    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 50, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   }
-  __pyx_v_channels = __pyx_t_8;
-  __pyx_t_8 = 0;
+  __pyx_v_channels = __pyx_t_5;
+  __pyx_t_5 = 0;
 
-  /* "cy_channel_generator.pyx":68
+  /* "cy_channel_generator.pyx":61
  * 
  *     # Criar CHANNEL (verso reduzida com nomes padronizados)
  *     df_CHANNEL = pd.DataFrame({             # <<<<<<<<<<<<<<
  *         'ChannelID': channel_id,
  *         'ChannelURL': channel_id,  # pode ser convertido em hash depois
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_pd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 68, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_pd); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_DataFrame); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 68, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_DataFrame); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 61, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cy_channel_generator.pyx":69
+  /* "cy_channel_generator.pyx":62
  *     # Criar CHANNEL (verso reduzida com nomes padronizados)
  *     df_CHANNEL = pd.DataFrame({
  *         'ChannelID': channel_id,             # <<<<<<<<<<<<<<
  *         'ChannelURL': channel_id,  # pode ser convertido em hash depois
  *         'CHCreationDate': pd.Categorical(channel_creation_date),
  */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 69, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 62, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_u_ChannelID, __pyx_v_channel_id) < 0) __PYX_ERR(0, 69, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_u_ChannelID, __pyx_v_channel_id) < 0) __PYX_ERR(0, 62, __pyx_L1_error)
 
-  /* "cy_channel_generator.pyx":70
+  /* "cy_channel_generator.pyx":63
  *     df_CHANNEL = pd.DataFrame({
  *         'ChannelID': channel_id,
  *         'ChannelURL': channel_id,  # pode ser convertido em hash depois             # <<<<<<<<<<<<<<
  *         'CHCreationDate': pd.Categorical(channel_creation_date),
  *         'CHName': channel_name,
  */
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_u_ChannelURL, __pyx_v_channel_id) < 0) __PYX_ERR(0, 69, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_u_ChannelURL, __pyx_v_channel_id) < 0) __PYX_ERR(0, 62, __pyx_L1_error)
 
-  /* "cy_channel_generator.pyx":71
+  /* "cy_channel_generator.pyx":64
  *         'ChannelID': channel_id,
  *         'ChannelURL': channel_id,  # pode ser convertido em hash depois
  *         'CHCreationDate': pd.Categorical(channel_creation_date),             # <<<<<<<<<<<<<<
  *         'CHName': channel_name,
  *         'CHDesc': channel_description,
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_pd); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_pd); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_Categorical); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 71, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_Categorical); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_t_4 = NULL;
@@ -5616,67 +5552,67 @@ static PyObject *__pyx_pf_20cy_channel_generator_create_random_channel(CYTHON_UN
   #endif
   {
     PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_v_channel_creation_date};
-    __pyx_t_5 = __Pyx_PyObject_FastCall(__pyx_t_9, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
+    __pyx_t_8 = __Pyx_PyObject_FastCall(__pyx_t_9, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 71, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_5);
+    if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 64, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
   }
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_u_CHCreationDate, __pyx_t_5) < 0) __PYX_ERR(0, 69, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_u_CHCreationDate, __pyx_t_8) < 0) __PYX_ERR(0, 62, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-  /* "cy_channel_generator.pyx":72
+  /* "cy_channel_generator.pyx":65
  *         'ChannelURL': channel_id,  # pode ser convertido em hash depois
  *         'CHCreationDate': pd.Categorical(channel_creation_date),
  *         'CHName': channel_name,             # <<<<<<<<<<<<<<
  *         'CHDesc': channel_description,
  *         'CHWelcomeVID': uns,     # placeholder padro
  */
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_u_CHName, __pyx_v_channel_name) < 0) __PYX_ERR(0, 69, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_u_CHName, __pyx_v_channel_name) < 0) __PYX_ERR(0, 62, __pyx_L1_error)
 
-  /* "cy_channel_generator.pyx":73
+  /* "cy_channel_generator.pyx":66
  *         'CHCreationDate': pd.Categorical(channel_creation_date),
  *         'CHName': channel_name,
  *         'CHDesc': channel_description,             # <<<<<<<<<<<<<<
  *         'CHWelcomeVID': uns,     # placeholder padro
  *         'CHBanner': uns,         # placeholder padro
  */
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_u_CHDesc, __pyx_v_channel_description) < 0) __PYX_ERR(0, 69, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_u_CHDesc, __pyx_v_channel_description) < 0) __PYX_ERR(0, 62, __pyx_L1_error)
 
-  /* "cy_channel_generator.pyx":74
+  /* "cy_channel_generator.pyx":67
  *         'CHName': channel_name,
  *         'CHDesc': channel_description,
  *         'CHWelcomeVID': uns,     # placeholder padro             # <<<<<<<<<<<<<<
  *         'CHBanner': uns,         # placeholder padro
  *         'UserID': user_ids
  */
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_u_CHWelcomeVID, __pyx_v_uns) < 0) __PYX_ERR(0, 69, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_u_CHWelcomeVID, __pyx_v_uns) < 0) __PYX_ERR(0, 62, __pyx_L1_error)
 
-  /* "cy_channel_generator.pyx":75
+  /* "cy_channel_generator.pyx":68
  *         'CHDesc': channel_description,
  *         'CHWelcomeVID': uns,     # placeholder padro
  *         'CHBanner': uns,         # placeholder padro             # <<<<<<<<<<<<<<
  *         'UserID': user_ids
  *     })
  */
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_u_CHBanner, __pyx_v_uns) < 0) __PYX_ERR(0, 69, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_u_CHBanner, __pyx_v_uns) < 0) __PYX_ERR(0, 62, __pyx_L1_error)
 
-  /* "cy_channel_generator.pyx":76
+  /* "cy_channel_generator.pyx":69
  *         'CHWelcomeVID': uns,     # placeholder padro
  *         'CHBanner': uns,         # placeholder padro
  *         'UserID': user_ids             # <<<<<<<<<<<<<<
  *     })
  * 
  */
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_u_UserID, __pyx_v_user_ids) < 0) __PYX_ERR(0, 69, __pyx_L1_error)
-  __pyx_t_5 = NULL;
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_u_UserID, __pyx_v_user_ids) < 0) __PYX_ERR(0, 62, __pyx_L1_error)
+  __pyx_t_8 = NULL;
   __pyx_t_6 = 0;
   #if CYTHON_UNPACK_METHODS
   if (unlikely(PyMethod_Check(__pyx_t_2))) {
-    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_2);
-    if (likely(__pyx_t_5)) {
+    __pyx_t_8 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_8)) {
       PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
-      __Pyx_INCREF(__pyx_t_5);
+      __Pyx_INCREF(__pyx_t_8);
       __Pyx_INCREF(function);
       __Pyx_DECREF_SET(__pyx_t_2, function);
       __pyx_t_6 = 1;
@@ -5684,40 +5620,40 @@ static PyObject *__pyx_pf_20cy_channel_generator_create_random_channel(CYTHON_UN
   }
   #endif
   {
-    PyObject *__pyx_callargs[2] = {__pyx_t_5, __pyx_t_1};
-    __pyx_t_8 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
-    __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+    PyObject *__pyx_callargs[2] = {__pyx_t_8, __pyx_t_1};
+    __pyx_t_5 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_6, 1+__pyx_t_6);
+    __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 68, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_8);
+    if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 61, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   }
-  __pyx_v_df_CHANNEL = __pyx_t_8;
-  __pyx_t_8 = 0;
+  __pyx_v_df_CHANNEL = __pyx_t_5;
+  __pyx_t_5 = 0;
 
-  /* "cy_channel_generator.pyx":79
+  /* "cy_channel_generator.pyx":72
  *     })
  * 
  *     return users_df, channels, df_CHANNEL             # <<<<<<<<<<<<<<
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_8 = PyTuple_New(3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 79, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_8);
+  __pyx_t_5 = PyTuple_New(3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 72, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
   __Pyx_INCREF(__pyx_v_users_df);
   __Pyx_GIVEREF(__pyx_v_users_df);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_v_users_df)) __PYX_ERR(0, 79, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_v_users_df)) __PYX_ERR(0, 72, __pyx_L1_error);
   __Pyx_INCREF(__pyx_v_channels);
   __Pyx_GIVEREF(__pyx_v_channels);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_8, 1, __pyx_v_channels)) __PYX_ERR(0, 79, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_v_channels)) __PYX_ERR(0, 72, __pyx_L1_error);
   __Pyx_INCREF(__pyx_v_df_CHANNEL);
   __Pyx_GIVEREF(__pyx_v_df_CHANNEL);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_8, 2, __pyx_v_df_CHANNEL)) __PYX_ERR(0, 79, __pyx_L1_error);
-  __pyx_r = __pyx_t_8;
-  __pyx_t_8 = 0;
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 2, __pyx_v_df_CHANNEL)) __PYX_ERR(0, 72, __pyx_L1_error);
+  __pyx_r = __pyx_t_5;
+  __pyx_t_5 = 0;
   goto __pyx_L0;
 
-  /* "cy_channel_generator.pyx":16
- * ], dtype=object)
+  /* "cy_channel_generator.pyx":9
+ * ctypedef cnp.int32_t int32_t
  * 
  * def create_random_channel(object users_df, float new_channel_ratio, int initial_id, object current_date, object generate_channel_name):             # <<<<<<<<<<<<<<
  *     cdef int num_users = users_df.shape[0]
@@ -5772,9 +5708,6 @@ static PyMethodDef __pyx_methods[] = {
 
 static int __Pyx_CreateStringTabAndInitStrings(void) {
   __Pyx_StringTabEntry __pyx_string_tab[] = {
-    {&__pyx_n_u_Animals, __pyx_k_Animals, sizeof(__pyx_k_Animals), 0, 1, 0, 1},
-    {&__pyx_n_u_Automobiles, __pyx_k_Automobiles, sizeof(__pyx_k_Automobiles), 0, 1, 0, 1},
-    {&__pyx_n_s_CATEGORIES, __pyx_k_CATEGORIES, sizeof(__pyx_k_CATEGORIES), 0, 0, 1, 1},
     {&__pyx_n_u_CHBanner, __pyx_k_CHBanner, sizeof(__pyx_k_CHBanner), 0, 1, 0, 1},
     {&__pyx_n_u_CHCreationDate, __pyx_k_CHCreationDate, sizeof(__pyx_k_CHCreationDate), 0, 1, 0, 1},
     {&__pyx_n_u_CHDesc, __pyx_k_CHDesc, sizeof(__pyx_k_CHDesc), 0, 1, 0, 1},
@@ -5783,27 +5716,13 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_Categorical, __pyx_k_Categorical, sizeof(__pyx_k_Categorical), 0, 0, 1, 1},
     {&__pyx_n_u_ChannelID, __pyx_k_ChannelID, sizeof(__pyx_k_ChannelID), 0, 1, 0, 1},
     {&__pyx_n_u_ChannelURL, __pyx_k_ChannelURL, sizeof(__pyx_k_ChannelURL), 0, 1, 0, 1},
-    {&__pyx_n_u_Comedy, __pyx_k_Comedy, sizeof(__pyx_k_Comedy), 0, 1, 0, 1},
     {&__pyx_n_s_DataFrame, __pyx_k_DataFrame, sizeof(__pyx_k_DataFrame), 0, 0, 1, 1},
-    {&__pyx_n_u_Education, __pyx_k_Education, sizeof(__pyx_k_Education), 0, 1, 0, 1},
-    {&__pyx_n_u_Entertainment, __pyx_k_Entertainment, sizeof(__pyx_k_Entertainment), 0, 1, 0, 1},
-    {&__pyx_kp_u_Film_Animation, __pyx_k_Film_Animation, sizeof(__pyx_k_Film_Animation), 0, 1, 0, 0},
-    {&__pyx_n_u_Gaming, __pyx_k_Gaming, sizeof(__pyx_k_Gaming), 0, 1, 0, 1},
-    {&__pyx_kp_u_How_to_Style, __pyx_k_How_to_Style, sizeof(__pyx_k_How_to_Style), 0, 1, 0, 0},
     {&__pyx_n_s_ImportError, __pyx_k_ImportError, sizeof(__pyx_k_ImportError), 0, 0, 1, 1},
-    {&__pyx_n_u_Music, __pyx_k_Music, sizeof(__pyx_k_Music), 0, 1, 0, 1},
-    {&__pyx_kp_u_News_Politics, __pyx_k_News_Politics, sizeof(__pyx_k_News_Politics), 0, 1, 0, 0},
-    {&__pyx_kp_u_Nonprofits_Activism, __pyx_k_Nonprofits_Activism, sizeof(__pyx_k_Nonprofits_Activism), 0, 1, 0, 0},
-    {&__pyx_kp_u_People_Blogs, __pyx_k_People_Blogs, sizeof(__pyx_k_People_Blogs), 0, 1, 0, 0},
-    {&__pyx_kp_u_Science_Technology, __pyx_k_Science_Technology, sizeof(__pyx_k_Science_Technology), 0, 1, 0, 0},
-    {&__pyx_n_u_Sports, __pyx_k_Sports, sizeof(__pyx_k_Sports), 0, 1, 0, 1},
-    {&__pyx_kp_u_Travel_Events, __pyx_k_Travel_Events, sizeof(__pyx_k_Travel_Events), 0, 1, 0, 0},
     {&__pyx_n_u_UserID, __pyx_k_UserID, sizeof(__pyx_k_UserID), 0, 1, 0, 1},
-    {&__pyx_kp_u__3, __pyx_k__3, sizeof(__pyx_k__3), 0, 1, 0, 0},
-    {&__pyx_n_s__4, __pyx_k__4, sizeof(__pyx_k__4), 0, 0, 1, 1},
-    {&__pyx_n_s__7, __pyx_k__7, sizeof(__pyx_k__7), 0, 0, 1, 1},
+    {&__pyx_kp_u__4, __pyx_k__4, sizeof(__pyx_k__4), 0, 1, 0, 0},
+    {&__pyx_n_s__5, __pyx_k__5, sizeof(__pyx_k__5), 0, 0, 1, 1},
+    {&__pyx_n_s__8, __pyx_k__8, sizeof(__pyx_k__8), 0, 0, 1, 1},
     {&__pyx_n_s_arange, __pyx_k_arange, sizeof(__pyx_k_arange), 0, 0, 1, 1},
-    {&__pyx_n_s_array, __pyx_k_array, sizeof(__pyx_k_array), 0, 0, 1, 1},
     {&__pyx_n_s_asyncio_coroutines, __pyx_k_asyncio_coroutines, sizeof(__pyx_k_asyncio_coroutines), 0, 0, 1, 1},
     {&__pyx_n_s_available_users, __pyx_k_available_users, sizeof(__pyx_k_available_users), 0, 0, 1, 1},
     {&__pyx_n_s_channel_category, __pyx_k_channel_category, sizeof(__pyx_k_channel_category), 0, 0, 1, 1},
@@ -5838,6 +5757,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_initial_id, __pyx_k_initial_id, sizeof(__pyx_k_initial_id), 0, 0, 1, 1},
     {&__pyx_n_s_initializing, __pyx_k_initializing, sizeof(__pyx_k_initializing), 0, 0, 1, 1},
     {&__pyx_n_s_int32, __pyx_k_int32, sizeof(__pyx_k_int32), 0, 0, 1, 1},
+    {&__pyx_n_s_int8, __pyx_k_int8, sizeof(__pyx_k_int8), 0, 0, 1, 1},
     {&__pyx_n_s_is_coroutine, __pyx_k_is_coroutine, sizeof(__pyx_k_is_coroutine), 0, 0, 1, 1},
     {&__pyx_n_s_isna, __pyx_k_isna, sizeof(__pyx_k_isna), 0, 0, 1, 1},
     {&__pyx_n_s_loc, __pyx_k_loc, sizeof(__pyx_k_loc), 0, 0, 1, 1},
@@ -5855,6 +5775,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_ones, __pyx_k_ones, sizeof(__pyx_k_ones), 0, 0, 1, 1},
     {&__pyx_n_s_pandas, __pyx_k_pandas, sizeof(__pyx_k_pandas), 0, 0, 1, 1},
     {&__pyx_n_s_pd, __pyx_k_pd, sizeof(__pyx_k_pd), 0, 0, 1, 1},
+    {&__pyx_n_s_randint, __pyx_k_randint, sizeof(__pyx_k_randint), 0, 0, 1, 1},
     {&__pyx_n_s_random, __pyx_k_random, sizeof(__pyx_k_random), 0, 0, 1, 1},
     {&__pyx_n_s_replace, __pyx_k_replace, sizeof(__pyx_k_replace), 0, 0, 1, 1},
     {&__pyx_n_s_selected_idx, __pyx_k_selected_idx, sizeof(__pyx_k_selected_idx), 0, 0, 1, 1},
@@ -5880,7 +5801,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
 }
 /* #### Code section: cached_builtins ### */
 static CYTHON_SMALL_CODE int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_object = __Pyx_GetBuiltinName(__pyx_n_s_object); if (!__pyx_builtin_object) __PYX_ERR(0, 14, __pyx_L1_error)
+  __pyx_builtin_object = __Pyx_GetBuiltinName(__pyx_n_s_object); if (!__pyx_builtin_object) __PYX_ERR(0, 42, __pyx_L1_error)
   __pyx_builtin_ImportError = __Pyx_GetBuiltinName(__pyx_n_s_ImportError); if (!__pyx_builtin_ImportError) __PYX_ERR(1, 984, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
@@ -5914,17 +5835,28 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "cy_channel_generator.pyx":16
- * ], dtype=object)
+  /* "cy_channel_generator.pyx":40
+ *     # Gerar dados de canais
+ *     channel_id = np.arange(initial_id, initial_id + num_channels, dtype=np.int32)
+ *     channel_category = np.random.randint(1, 16, size=num_channels, dtype=np.int8)             # <<<<<<<<<<<<<<
+ *     channel_name = generate_channel_name(channel_category)
+ *     channel_description = np.full(num_channels, '', dtype=object)
+ */
+  __pyx_tuple__3 = PyTuple_Pack(2, __pyx_int_1, __pyx_int_16); if (unlikely(!__pyx_tuple__3)) __PYX_ERR(0, 40, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__3);
+  __Pyx_GIVEREF(__pyx_tuple__3);
+
+  /* "cy_channel_generator.pyx":9
+ * ctypedef cnp.int32_t int32_t
  * 
  * def create_random_channel(object users_df, float new_channel_ratio, int initial_id, object current_date, object generate_channel_name):             # <<<<<<<<<<<<<<
  *     cdef int num_users = users_df.shape[0]
  * 
  */
-  __pyx_tuple__5 = PyTuple_Pack(24, __pyx_n_s_users_df, __pyx_n_s_new_channel_ratio, __pyx_n_s_initial_id, __pyx_n_s_current_date, __pyx_n_s_generate_channel_name, __pyx_n_s_num_users, __pyx_n_s_mask, __pyx_n_s_available_users, __pyx_n_s_num_channels, __pyx_n_s_empty_df, __pyx_n_s_empty_channel_df, __pyx_n_s_idx, __pyx_n_s_selected_idx, __pyx_n_s_user_lang, __pyx_n_s_user_loc, __pyx_n_s_user_ids, __pyx_n_s_channel_id, __pyx_n_s_channel_category, __pyx_n_s_channel_name, __pyx_n_s_channel_description, __pyx_n_s_channel_creation_date, __pyx_n_s_uns, __pyx_n_s_channels, __pyx_n_s_df_CHANNEL); if (unlikely(!__pyx_tuple__5)) __PYX_ERR(0, 16, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__5);
-  __Pyx_GIVEREF(__pyx_tuple__5);
-  __pyx_codeobj__6 = (PyObject*)__Pyx_PyCode_New(5, 0, 0, 24, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__5, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cy_channel_generator_pyx, __pyx_n_s_create_random_channel, 16, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__6)) __PYX_ERR(0, 16, __pyx_L1_error)
+  __pyx_tuple__6 = PyTuple_Pack(24, __pyx_n_s_users_df, __pyx_n_s_new_channel_ratio, __pyx_n_s_initial_id, __pyx_n_s_current_date, __pyx_n_s_generate_channel_name, __pyx_n_s_num_users, __pyx_n_s_mask, __pyx_n_s_available_users, __pyx_n_s_num_channels, __pyx_n_s_empty_df, __pyx_n_s_empty_channel_df, __pyx_n_s_idx, __pyx_n_s_selected_idx, __pyx_n_s_user_lang, __pyx_n_s_user_loc, __pyx_n_s_user_ids, __pyx_n_s_channel_id, __pyx_n_s_channel_category, __pyx_n_s_channel_name, __pyx_n_s_channel_description, __pyx_n_s_channel_creation_date, __pyx_n_s_uns, __pyx_n_s_channels, __pyx_n_s_df_CHANNEL); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 9, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__6);
+  __Pyx_GIVEREF(__pyx_tuple__6);
+  __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(5, 0, 0, 24, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__6, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cy_channel_generator_pyx, __pyx_n_s_create_random_channel, 9, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) __PYX_ERR(0, 9, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -5935,6 +5867,8 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
 
 static CYTHON_SMALL_CODE int __Pyx_InitConstants(void) {
   if (__Pyx_CreateStringTabAndInitStrings() < 0) __PYX_ERR(0, 1, __pyx_L1_error);
+  __pyx_int_1 = PyInt_FromLong(1); if (unlikely(!__pyx_int_1)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_int_16 = PyInt_FromLong(16); if (unlikely(!__pyx_int_16)) __PYX_ERR(0, 1, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -6232,9 +6166,6 @@ static CYTHON_SMALL_CODE int __pyx_pymod_exec_cy_channel_generator(PyObject *__p
   #endif
   PyObject *__pyx_t_1 = NULL;
   PyObject *__pyx_t_2 = NULL;
-  PyObject *__pyx_t_3 = NULL;
-  PyObject *__pyx_t_4 = NULL;
-  PyObject *__pyx_t_5 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -6373,127 +6304,33 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_pd, __pyx_t_2) < 0) __PYX_ERR(0, 4, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cy_channel_generator.pyx":10
- * 
- * # Hard-coded categories
- * CATEGORIES = np.array([             # <<<<<<<<<<<<<<
- *     'Animals', 'Automobiles', 'Science & Technology', 'Comedy', 'Education',
- *     'Entertainment', 'Sports', 'Film & Animation', 'How-to & Style', 'Gaming',
- */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 10, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_array); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 10, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyList_New(15); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 10, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_INCREF(__pyx_n_u_Animals);
-  __Pyx_GIVEREF(__pyx_n_u_Animals);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_u_Animals)) __PYX_ERR(0, 10, __pyx_L1_error);
-  __Pyx_INCREF(__pyx_n_u_Automobiles);
-  __Pyx_GIVEREF(__pyx_n_u_Automobiles);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 1, __pyx_n_u_Automobiles)) __PYX_ERR(0, 10, __pyx_L1_error);
-  __Pyx_INCREF(__pyx_kp_u_Science_Technology);
-  __Pyx_GIVEREF(__pyx_kp_u_Science_Technology);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 2, __pyx_kp_u_Science_Technology)) __PYX_ERR(0, 10, __pyx_L1_error);
-  __Pyx_INCREF(__pyx_n_u_Comedy);
-  __Pyx_GIVEREF(__pyx_n_u_Comedy);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 3, __pyx_n_u_Comedy)) __PYX_ERR(0, 10, __pyx_L1_error);
-  __Pyx_INCREF(__pyx_n_u_Education);
-  __Pyx_GIVEREF(__pyx_n_u_Education);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 4, __pyx_n_u_Education)) __PYX_ERR(0, 10, __pyx_L1_error);
-  __Pyx_INCREF(__pyx_n_u_Entertainment);
-  __Pyx_GIVEREF(__pyx_n_u_Entertainment);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 5, __pyx_n_u_Entertainment)) __PYX_ERR(0, 10, __pyx_L1_error);
-  __Pyx_INCREF(__pyx_n_u_Sports);
-  __Pyx_GIVEREF(__pyx_n_u_Sports);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 6, __pyx_n_u_Sports)) __PYX_ERR(0, 10, __pyx_L1_error);
-  __Pyx_INCREF(__pyx_kp_u_Film_Animation);
-  __Pyx_GIVEREF(__pyx_kp_u_Film_Animation);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 7, __pyx_kp_u_Film_Animation)) __PYX_ERR(0, 10, __pyx_L1_error);
-  __Pyx_INCREF(__pyx_kp_u_How_to_Style);
-  __Pyx_GIVEREF(__pyx_kp_u_How_to_Style);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 8, __pyx_kp_u_How_to_Style)) __PYX_ERR(0, 10, __pyx_L1_error);
-  __Pyx_INCREF(__pyx_n_u_Gaming);
-  __Pyx_GIVEREF(__pyx_n_u_Gaming);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 9, __pyx_n_u_Gaming)) __PYX_ERR(0, 10, __pyx_L1_error);
-  __Pyx_INCREF(__pyx_n_u_Music);
-  __Pyx_GIVEREF(__pyx_n_u_Music);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 10, __pyx_n_u_Music)) __PYX_ERR(0, 10, __pyx_L1_error);
-  __Pyx_INCREF(__pyx_kp_u_News_Politics);
-  __Pyx_GIVEREF(__pyx_kp_u_News_Politics);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 11, __pyx_kp_u_News_Politics)) __PYX_ERR(0, 10, __pyx_L1_error);
-  __Pyx_INCREF(__pyx_kp_u_People_Blogs);
-  __Pyx_GIVEREF(__pyx_kp_u_People_Blogs);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 12, __pyx_kp_u_People_Blogs)) __PYX_ERR(0, 10, __pyx_L1_error);
-  __Pyx_INCREF(__pyx_kp_u_Nonprofits_Activism);
-  __Pyx_GIVEREF(__pyx_kp_u_Nonprofits_Activism);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 13, __pyx_kp_u_Nonprofits_Activism)) __PYX_ERR(0, 10, __pyx_L1_error);
-  __Pyx_INCREF(__pyx_kp_u_Travel_Events);
-  __Pyx_GIVEREF(__pyx_kp_u_Travel_Events);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 14, __pyx_kp_u_Travel_Events)) __PYX_ERR(0, 10, __pyx_L1_error);
-  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 10, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_GIVEREF(__pyx_t_2);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2)) __PYX_ERR(0, 10, __pyx_L1_error);
-  __pyx_t_2 = 0;
-
-  /* "cy_channel_generator.pyx":14
- *     'Entertainment', 'Sports', 'Film & Animation', 'How-to & Style', 'Gaming',
- *     'Music', 'News & Politics', 'People & Blogs', 'Nonprofits & Activism', 'Travel & Events'
- * ], dtype=object)             # <<<<<<<<<<<<<<
- * 
- * def create_random_channel(object users_df, float new_channel_ratio, int initial_id, object current_date, object generate_channel_name):
- */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 14, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_builtin_object) < 0) __PYX_ERR(0, 14, __pyx_L1_error)
-
-  /* "cy_channel_generator.pyx":10
- * 
- * # Hard-coded categories
- * CATEGORIES = np.array([             # <<<<<<<<<<<<<<
- *     'Animals', 'Automobiles', 'Science & Technology', 'Comedy', 'Education',
- *     'Entertainment', 'Sports', 'Film & Animation', 'How-to & Style', 'Gaming',
- */
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 10, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_CATEGORIES, __pyx_t_5) < 0) __PYX_ERR(0, 10, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-
-  /* "cy_channel_generator.pyx":16
- * ], dtype=object)
+  /* "cy_channel_generator.pyx":9
+ * ctypedef cnp.int32_t int32_t
  * 
  * def create_random_channel(object users_df, float new_channel_ratio, int initial_id, object current_date, object generate_channel_name):             # <<<<<<<<<<<<<<
  *     cdef int num_users = users_df.shape[0]
  * 
  */
-  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_20cy_channel_generator_1create_random_channel, 0, __pyx_n_s_create_random_channel, NULL, __pyx_n_s_cy_channel_generator, __pyx_d, ((PyObject *)__pyx_codeobj__6)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 16, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_create_random_channel, __pyx_t_5) < 0) __PYX_ERR(0, 16, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_20cy_channel_generator_1create_random_channel, 0, __pyx_n_s_create_random_channel, NULL, __pyx_n_s_cy_channel_generator, __pyx_d, ((PyObject *)__pyx_codeobj__7)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 9, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_create_random_channel, __pyx_t_2) < 0) __PYX_ERR(0, 9, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "cy_channel_generator.pyx":1
  * # cy_channel_generator.pyx             # <<<<<<<<<<<<<<
  * import numpy as np
  * cimport numpy as cnp
  */
-  __pyx_t_5 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_5) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_2) < 0) __PYX_ERR(0, 1, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /*--- Wrapped vars code ---*/
 
   goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_XDECREF(__pyx_t_4);
-  __Pyx_XDECREF(__pyx_t_5);
   if (__pyx_m) {
     if (__pyx_d && stringtab_initialized) {
       __Pyx_AddTraceback("init cy_channel_generator", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -8186,7 +8023,7 @@ static PyObject *__Pyx_ImportDottedModule_WalkParts(PyObject *module, PyObject *
 #endif
 static PyObject *__Pyx__ImportDottedModule(PyObject *name, PyObject *parts_tuple) {
 #if PY_MAJOR_VERSION < 3
-    PyObject *module, *from_list, *star = __pyx_n_s__4;
+    PyObject *module, *from_list, *star = __pyx_n_s__5;
     CYTHON_UNUSED_VAR(parts_tuple);
     from_list = PyList_New(1);
     if (unlikely(!from_list))
@@ -10555,7 +10392,7 @@ __Pyx_PyType_GetName(PyTypeObject* tp)
     if (unlikely(name == NULL) || unlikely(!PyUnicode_Check(name))) {
         PyErr_Clear();
         Py_XDECREF(name);
-        name = __Pyx_NewRef(__pyx_n_s__7);
+        name = __Pyx_NewRef(__pyx_n_s__8);
     }
     return name;
 }

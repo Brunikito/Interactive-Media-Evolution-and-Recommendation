@@ -170,6 +170,24 @@ def initialize_tables():
         'COMisRepByCOMCommentID',
     ])
     commentreply.to_csv(os.path.join(TABLES_PATH, 'COMMENTREPLY.csv'), index=False)
+    
+    videocomment = pd.DataFrame(columns=[
+        'CommentID',
+        'ContentID',
+    ])
+    videocomment.to_csv(os.path.join(TABLES_PATH, 'VIDEOCOMMENT.csv'), index=False)
+
+    pollcomment = pd.DataFrame(columns=[
+        'CommentID',
+        'POLLID',
+    ])
+    pollcomment.to_csv(os.path.join(TABLES_PATH, 'POLLCOMMENT.csv'), index=False)
+    
+    shortcomment = pd.DataFrame(columns=[
+        'CommentID',
+        'ContentID',
+    ])
+    shortcomment.to_csv(os.path.join(TABLES_PATH, 'SHORTCOMMENT.csv'), index=False)
 
     poll = pd.DataFrame(columns=[
         'POLLID',
@@ -197,18 +215,6 @@ def initialize_tables():
         'PlayID',
     ])
     playlistcontent.to_csv(os.path.join(TABLES_PATH, 'PLAYLISTCONTENT.csv'), index=False)
-
-    videocomment = pd.DataFrame(columns=[
-        'CommentID',
-        'ContentID',
-    ])
-    videocomment.to_csv(os.path.join(TABLES_PATH, 'VIDEOCOMMENT.csv'), index=False)
-
-    pollcomment = pd.DataFrame(columns=[
-        'CommentID',
-        'POLLID',
-    ])
-    pollcomment.to_csv(os.path.join(TABLES_PATH, 'POLLCOMMENT.csv'), index=False)
 
     userinteraction = pd.DataFrame(columns=[
         'UINTType',
@@ -273,12 +279,6 @@ def initialize_tables():
         'ContentID',
     ])
     short.to_csv(os.path.join(TABLES_PATH, 'SHORT.csv'), index=False)
-
-    shortcomment = pd.DataFrame(columns=[
-        'CommentID',
-        'ContentID',
-    ])
-    shortcomment.to_csv(os.path.join(TABLES_PATH, 'SHORTCOMMENT.csv'), index=False)
 
 if __name__ == "__main__":
     initialize_tables()

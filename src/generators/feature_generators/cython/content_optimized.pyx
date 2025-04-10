@@ -104,35 +104,38 @@ def generate_languages_nogil(
 
     return result
 
-def generate_tags_fast(np.ndarray[object] content_categories,
-                       np.ndarray[object] extra_tags):
+def generate_tags_fast(np.ndarray[np.int8_t, ndim=1] content_categories,
+                       np.ndarray[np.int8_t, ndim=1] extra_tags):
     cdef Py_ssize_t i, n = content_categories.shape[0]
-    cdef object tags, c1, c2, c3
-    cdef list result = []
+    cdef np.ndarray[np.int8_t, ndim=2] result = np.full((n, 3), -1, dtype=np.int8)
+    cdef np.ndarray[np.int8_t, ndim=1] indexes = np.full(n, 0, dtype=np.int8)
+    cdef np.int8_t c1, c2, c3
 
-    for i in range(n):
+    for i in prange(n, nogil=True):
         c1 = content_categories[i]
         c2 = extra_tags[2*i]
         c3 = extra_tags[2*i+1]
 
-        tags = []
         # Adiciona sem duplicatas
         if c1 != c2 and c1 != c3:
-            tags.append(c1)
+            result[i, indexes[i]] = c1
+            indexes[i] += 1
         if c2 != c3:
-            tags.append(c2)
-        tags.append(c3)  # sempre adiciona o terceiro (pelo menos 1 garantido)
+            result[i, indexes[i]] = c2
+            indexes[i] += 1
+        result[i, indexes[i]] = c3  # sempre adiciona o terceiro (pelo menos 1 garantido)
+        indexes[i] += 1
 
-        result.append(tags)  # pode ser trocado por acima, se quiser mais controle
+    return result, indexes
 
-    return result
-
-def generate_content_tags(np.ndarray[np.int32_t] content_ids, list tag_lists):
+def generate_content_tags(np.ndarray[np.int32_t] content_ids, np.ndarray[np.int8_t, ndim=2] tags, np.ndarray[np.int8_t, ndim=1] indexes):
     cdef list result = []
-    cdef Py_ssize_t i, j, n = len(tag_lists)
-    cdef object tag, cid
+    cdef Py_ssize_t i, j, 
+    cdef int n = tags.shape[0]
+    cdef np.int32_t cid
+    cdef np.int8_t tag
     for i in range(n):
         cid = content_ids[i]
-        for tag in tag_lists[i]:
+        for tag in tags[i, :indexes[i]]:
             result.append((tag, cid))
     return result

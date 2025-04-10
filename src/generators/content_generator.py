@@ -7,11 +7,7 @@ from src.generators.feature_generators.cython.content_optimized import to_base62
 country_data = pd.read_csv(os.path.join(DATA_PATH, 'behavior_generated', 'country_data_cleaned.csv'))
 languages = np.unique(np.concatenate(country_data['Languages'].str.split(',')))
 
-CATEGORIES = np.array([
-    'Animals', 'Automobiles', 'Science & Technology', 'Comedy', 'Education',
-    'Entertainment', 'Sports', 'Film & Animation', 'How-to & Style', 'Gaming',
-    'Music', 'News & Politics', 'People & Blogs', 'Nonprofits & Activism', 'Travel & Events'
-    ], dtype=object)
+CATEGORIES = np.arange(1, 16, dtype=np.int8)
     
 # Inicializar categorias em cache
 
@@ -60,15 +56,15 @@ def create_random_content(channels, categories, content_ratio, initial_id, curre
     t1 = time.perf_counter()
     channel_categories = content_channel['channel_category'].values
     use_channel_cat = rng.random(num_content) < 0.8
-    content_category = np.where(use_channel_cat, channel_categories, rng.choice(categories, size=num_content))
+    content_category = np.where(use_channel_cat, channel_categories, rng.choice(categories, size=num_content)).astype(np.int8)
     timings['category'] = time.perf_counter() - t1
 
     # Tags
     t1 = time.perf_counter()
-    extra_tags = rng.choice(categories, size=num_content*2, replace=True)
+    extra_tags = rng.integers(1, 16, size=num_content*2, dtype=np.int8)
     timings['tags_rng'] = time.perf_counter() - t1
     t1 = time.perf_counter()
-    content_tags_list = generate_tags_fast(content_category, extra_tags)
+    content_tags_array, content_tags_indexes = generate_tags_fast(content_category, extra_tags)
     timings['tags'] = time.perf_counter() - t1
 
     # Idiomas
@@ -145,7 +141,7 @@ def create_random_content(channels, categories, content_ratio, initial_id, curre
     cid_subset = content_id.astype(np.int32)
 
     # Chamada Cython
-    tag_rows = generate_content_tags(cid_subset, content_tags_list)
+    tag_rows = generate_content_tags(cid_subset, content_tags_array, content_tags_indexes)
 
     # Conversão final
     df_content_tag = pd.DataFrame(tag_rows, columns=["CONTTag", "ContentID"])

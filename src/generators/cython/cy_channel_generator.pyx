@@ -6,13 +6,6 @@ import pandas as pd
 # Tipagem estática
 ctypedef cnp.int32_t int32_t
 
-# Hard-coded categories
-CATEGORIES = np.array([
-    'Animals', 'Automobiles', 'Science & Technology', 'Comedy', 'Education',
-    'Entertainment', 'Sports', 'Film & Animation', 'How-to & Style', 'Gaming',
-    'Music', 'News & Politics', 'People & Blogs', 'Nonprofits & Activism', 'Travel & Events'
-], dtype=object)
-
 def create_random_channel(object users_df, float new_channel_ratio, int initial_id, object current_date, object generate_channel_name):
     cdef int num_users = users_df.shape[0]
 
@@ -44,7 +37,7 @@ def create_random_channel(object users_df, float new_channel_ratio, int initial_
 
     # Gerar dados de canais
     channel_id = np.arange(initial_id, initial_id + num_channels, dtype=np.int32)
-    channel_category = np.random.choice(CATEGORIES, size=num_channels)
+    channel_category = np.random.randint(1, 16, size=num_channels, dtype=np.int8)
     channel_name = generate_channel_name(channel_category)
     channel_description = np.full(num_channels, '', dtype=object)
     channel_creation_date = np.full(num_channels, current_date)
