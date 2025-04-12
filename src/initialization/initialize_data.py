@@ -710,7 +710,7 @@ def generate_country_behavior():
     total_population = df['Population'].sum()
     df['Population_Fraction'] = df['Population'] / total_population
     
-    df.to_csv(os.path.join(DATA_PATH, 'behavior_generated', 'country_data_cleaned.csv'), index=False)
+    df.to_parquet(os.path.join(DATA_PATH, 'behavior_generated', 'country_data_cleaned.parquet'), index=False)
     return
 
 def generate_sleep_behavior():
@@ -765,7 +765,7 @@ def generate_sleep_behavior():
     # Converter a lista de resultados em um DataFrame
     sleep_hours_by_age_country = pd.DataFrame(sleep_hours_by_age_country)
     
-    sleep_hours_by_age_country.to_csv(os.path.join(DATA_PATH, 'behavior_generated', 'sleep_hours_by_age_country.csv'), index=False)
+    sleep_hours_by_age_country.to_parquet(os.path.join(DATA_PATH, 'behavior_generated', 'sleep_hours_by_age_country.parquet'), index=False)
     
     return sleep_hours_by_age_country
     
@@ -790,7 +790,7 @@ def generate_work_behavior():
     df['work_time_hour'] = df['work_time'].str.split(':').str[0].astype(int)
     df['free_from_work_time'] = df['free_from_work_time'].astype(str)
     df['free_from_work_time_hour'] = df['free_from_work_time'].str.split(':').str[0].astype(int)
-    df.to_csv(os.path.join(DATA_PATH, 'behavior_generated', 'work_behavior.csv'), index=False)
+    df.to_parquet(os.path.join(DATA_PATH, 'behavior_generated', 'work_behavior.parquet'), index=False)
     
     return df
 

@@ -1,10 +1,60 @@
+"""
+Module: user_interaction_generator
+----------------------------------
+
+Este módulo gera interações sintéticas de usuários com conteúdos (como likes, dislikes ou neutras),
+baseando-se em usuários que estão atualmente assistindo conteúdo (`UIsWatchingCONTNow`).
+
+Ele verifica quais usuários ainda **não interagiram** com os conteúdos que estão assistindo
+e gera novas interações para uma fração deles, definida por `interaction_ratio`.
+
+Dependências:
+- Dados de usuários assistindo conteúdo (`UWATCHINGCONT.parquet`)
+- Tabelas de interações (`USERINTERACTION.csv`, `UCONTINT.csv`)
+- NumPy para amostragem aleatória vetorial
+"""
+
 import pandas as pd
 import numpy as np
 import os
 import time
 from src import BASE_PATH, DATA_PATH
 
-def random_user_interactions(interaction_ratio, uwatchingcont, userinteraction, ucontint):
+def create_random_user_interactions(
+    interaction_ratio: float,
+    uwatchingcont: pd.DataFrame,
+    userinteraction: pd.DataFrame,
+    ucontint: pd.DataFrame
+) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """
+    Gera interações sintéticas (like, dislike, neutro) entre usuários e conteúdos que estão assistindo,
+    considerando apenas os casos onde ainda não houve interação registrada.
+
+    Parâmetros:
+    - interaction_ratio (float): Proporção de usuários assistindo que devem interagir com os conteúdos.
+    - uwatchingcont (pd.DataFrame): DataFrame com usuários assistindo conteúdos no momento.
+    - userinteraction (pd.DataFrame): Interações de usuário existentes (UINTID, UserID, UINTType).
+    - ucontint (pd.DataFrame): Mapeamento entre interações e conteúdos (UINTID, ContentID).
+
+    Retorno:
+    - tuple de pd.DataFrame:
+        - userinteraction: Novas interações de usuários (com tipo e ID).
+        - ucontint: Novas associações entre interações e conteúdos.
+    """
+    if uwatchingcont.shape[0] < 10:
+        userinteraction = pd.DataFrame(columns=[
+            'UINTType',
+            'UINTID',
+            'UserID',
+            ])
+
+        ucontint = pd.DataFrame(columns=[
+            'UINTID',
+            'ContentID',
+            ])
+        
+        return userinteraction, ucontint
+    
     total_start = time.time()
 
     # 1. Filtrar usuários que estão assistindo agora
@@ -81,5 +131,5 @@ if __name__ == '__main__':
     ucontint = pd.read_csv(os.path.join(DATA_PATH, 'tables', 'UCONTINT.csv'))
     print('Executando...')
     init_timer = time.time()
-    uint_df, ucontint_df = random_user_interactions(interaction_ratio, uwatchingcont, userinteraction, ucontint)
+    uint_df, ucontint_df = create_random_user_interactions(interaction_ratio, uwatchingcont, userinteraction, ucontint)
     print(f'Executado em: {time.time() - init_timer :.6f}s')

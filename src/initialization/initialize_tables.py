@@ -28,7 +28,7 @@ def initialize_tables():
         'user_channel_id',
         'user_admin_channel_id',
     ])
-    users.to_csv(os.path.join(DATA_PATH, 'users.csv'), index=False)
+    users.to_parquet(os.path.join(DATA_PATH, 'users.parquet'), index=False)
 
     channels = pd.DataFrame(columns=[
         'channel_id',
@@ -39,7 +39,7 @@ def initialize_tables():
         'channel_location',
         'channel_category',
     ])
-    channels.to_csv(os.path.join(DATA_PATH, 'channels.csv'), index=False)
+    channels.to_parquet(os.path.join(DATA_PATH, 'channels.parquet'), index=False)
 
     content = pd.DataFrame(columns=[
         'content_id',
@@ -60,7 +60,7 @@ def initialize_tables():
         'content_is_live',
         'content_comments',
     ])
-    content.to_csv(os.path.join(DATA_PATH, 'content.csv'), index=False)
+    content.to_parquet(os.path.join(DATA_PATH, 'content.parquet'), index=False)
 
     comments = pd.DataFrame(columns=[
         'content_id',
@@ -74,7 +74,7 @@ def initialize_tables():
         'comment_reply_count',
         'comment_replies',
     ])
-    comments.to_csv(os.path.join(DATA_PATH, 'comments.csv'), index=False)
+    comments.to_parquet(os.path.join(DATA_PATH, 'comments.parquet'), index=False)
 
     user = pd.DataFrame(columns=[
         'UserID',
@@ -83,7 +83,7 @@ def initialize_tables():
         'UserPassword',
         'UserPhoto',
     ])
-    user.to_csv(os.path.join(TABLES_PATH, 'USER.csv'), index=False)
+    user.to_parquet(os.path.join(TABLES_PATH, 'USER.parquet'), index=False)
 
     channel = pd.DataFrame(columns=[
         'ChannelID',
@@ -95,13 +95,13 @@ def initialize_tables():
         'CHBanner',
         'UserID',
     ])
-    channel.to_csv(os.path.join(TABLES_PATH, 'CHANNEL.csv'), index=False)
+    channel.to_parquet(os.path.join(TABLES_PATH, 'CHANNEL.parquet'), index=False)
 
     uadminch = pd.DataFrame(columns=[
         'UserID',
         'ChannelID',
     ])
-    uadminch.to_csv(os.path.join(TABLES_PATH, 'UADMINCH.csv'), index=False)
+    uadminch.to_parquet(os.path.join(TABLES_PATH, 'UADMINCH.parquet'), index=False)
 
     uinterestch = pd.DataFrame(columns=[
         'UisSubToCH',
@@ -110,7 +110,7 @@ def initialize_tables():
         'UserID',
         'ChannelID',
     ])
-    uinterestch.to_csv(os.path.join(TABLES_PATH, 'UINTERESTCH.csv'), index=False)
+    uinterestch.to_parquet(os.path.join(TABLES_PATH, 'UINTERESTCH.parquet'), index=False)
 
     content = pd.DataFrame(columns=[
         'ContentID',
@@ -126,7 +126,7 @@ def initialize_tables():
         'CONTIndRating',
         'ChannelID',
     ])
-    content.to_csv(os.path.join(TABLES_PATH, 'CONTENT.csv'), index=False)
+    content.to_parquet(os.path.join(TABLES_PATH, 'CONTENT.parquet'), index=False)
 
     uwatchingcont = pd.DataFrame(columns=[
         'UWatchDurationCONT',
@@ -136,19 +136,26 @@ def initialize_tables():
         'UserID',
         'ContentID',
     ])
-    uwatchingcont.to_csv(os.path.join(TABLES_PATH, 'UWATCHINGCONT.csv'), index=False)
+    uwatchingcont.to_parquet(os.path.join(TABLES_PATH, 'UWATCHINGCONT.parquet'), index=False)
 
     live = pd.DataFrame(columns=[
         'LIVEBody',
         'ContentID',
     ])
-    live.to_csv(os.path.join(TABLES_PATH, 'LIVE.csv'), index=False)
+    live.to_parquet(os.path.join(TABLES_PATH, 'LIVE.parquet'), index=False)
 
     video = pd.DataFrame(columns=[
         'VIDEOBody',
         'ContentID',
     ])
-    video.to_csv(os.path.join(TABLES_PATH, 'VIDEO.csv'), index=False)
+    video.to_parquet(os.path.join(TABLES_PATH, 'VIDEO.parquet'), index=False)
+    
+    short = pd.DataFrame(columns=[
+        'SHMusicLink',
+        'SHORTBody',
+        'ContentID',
+    ])
+    short.to_parquet(os.path.join(TABLES_PATH, 'SHORT.parquet'), index=False)
 
     comment = pd.DataFrame(columns=[
         'CommentID',
@@ -157,37 +164,37 @@ def initialize_tables():
         'COMBody',
         'UserID',
     ])
-    comment.to_csv(os.path.join(TABLES_PATH, 'COMMENT.csv'), index=False)
+    comment.to_parquet(os.path.join(TABLES_PATH, 'COMMENT.parquet'), index=False)
 
     livecomment = pd.DataFrame(columns=[
         'CommentID',
         'ContentID',
     ])
-    livecomment.to_csv(os.path.join(TABLES_PATH, 'LIVECOMMENT.csv'), index=False)
+    livecomment.to_parquet(os.path.join(TABLES_PATH, 'LIVECOMMENT.parquet'), index=False)
 
     commentreply = pd.DataFrame(columns=[
         'CommentID',
         'COMisRepByCOMCommentID',
     ])
-    commentreply.to_csv(os.path.join(TABLES_PATH, 'COMMENTREPLY.csv'), index=False)
+    commentreply.to_parquet(os.path.join(TABLES_PATH, 'COMMENTREPLY.parquet'), index=False)
     
     videocomment = pd.DataFrame(columns=[
         'CommentID',
         'ContentID',
     ])
-    videocomment.to_csv(os.path.join(TABLES_PATH, 'VIDEOCOMMENT.csv'), index=False)
+    videocomment.to_parquet(os.path.join(TABLES_PATH, 'VIDEOCOMMENT.parquet'), index=False)
 
     pollcomment = pd.DataFrame(columns=[
         'CommentID',
         'POLLID',
     ])
-    pollcomment.to_csv(os.path.join(TABLES_PATH, 'POLLCOMMENT.csv'), index=False)
+    pollcomment.to_parquet(os.path.join(TABLES_PATH, 'POLLCOMMENT.parquet'), index=False)
     
     shortcomment = pd.DataFrame(columns=[
         'CommentID',
         'ContentID',
     ])
-    shortcomment.to_csv(os.path.join(TABLES_PATH, 'SHORTCOMMENT.csv'), index=False)
+    shortcomment.to_parquet(os.path.join(TABLES_PATH, 'SHORTCOMMENT.parquet'), index=False)
 
     poll = pd.DataFrame(columns=[
         'POLLID',
@@ -196,7 +203,7 @@ def initialize_tables():
         'POLLBody',
         'ChannelID',
     ])
-    poll.to_csv(os.path.join(TABLES_PATH, 'POLL.csv'), index=False)
+    poll.to_parquet(os.path.join(TABLES_PATH, 'POLL.parquet'), index=False)
 
     playlist = pd.DataFrame(columns=[
         'PlayID',
@@ -207,78 +214,111 @@ def initialize_tables():
         'PLAYThumb',
         'ChannelID',
     ])
-    playlist.to_csv(os.path.join(TABLES_PATH, 'PLAYLIST.csv'), index=False)
+    playlist.to_parquet(os.path.join(TABLES_PATH, 'PLAYLIST.parquet'), index=False)
 
     playlistcontent = pd.DataFrame(columns=[
         'CONTAddDateTimePL',
         'ContentID',
         'PlayID',
     ])
-    playlistcontent.to_csv(os.path.join(TABLES_PATH, 'PLAYLISTCONTENT.csv'), index=False)
+    playlistcontent.to_parquet(os.path.join(TABLES_PATH, 'PLAYLISTCONTENT.parquet'), index=False)
 
     userinteraction = pd.DataFrame(columns=[
         'UINTType',
         'UINTID',
         'UserID',
     ])
-    userinteraction.to_csv(os.path.join(TABLES_PATH, 'USERINTERACTION.csv'), index=False)
+    userinteraction.to_parquet(os.path.join(TABLES_PATH, 'USERINTERACTION.parquet'), index=False)
 
     ucontint = pd.DataFrame(columns=[
         'UINTID',
         'ContentID',
     ])
-    ucontint.to_csv(os.path.join(TABLES_PATH, 'UCONTINT.csv'), index=False)
+    ucontint.to_parquet(os.path.join(TABLES_PATH, 'UCONTINT.parquet'), index=False)
 
     ucomint = pd.DataFrame(columns=[
         'UINTID',
         'CommentID',
     ])
-    ucomint.to_csv(os.path.join(TABLES_PATH, 'UCOMINT.csv'), index=False)
+    ucomint.to_parquet(os.path.join(TABLES_PATH, 'UCOMINT.parquet'), index=False)
 
     uplayint = pd.DataFrame(columns=[
         'UINTID',
         'PlayID',
     ])
-    uplayint.to_csv(os.path.join(TABLES_PATH, 'UPLAYINT.csv'), index=False)
+    uplayint.to_parquet(os.path.join(TABLES_PATH, 'UPLAYINT.parquet'), index=False)
 
     notification = pd.DataFrame(columns=[
         'NotificationID',
         'NOTBody',
         'ChannelID',
     ])
-    notification.to_csv(os.path.join(TABLES_PATH, 'NOTIFICATION.csv'), index=False)
+    notification.to_parquet(os.path.join(TABLES_PATH, 'NOTIFICATION.parquet'), index=False)
 
     usernotified = pd.DataFrame(columns=[
         'NOTSentDateTime',
         'UserID',
         'NotificationID',
     ])
-    usernotified.to_csv(os.path.join(TABLES_PATH, 'USERNOTIFIED.csv'), index=False)
+    usernotified.to_parquet(os.path.join(TABLES_PATH, 'USERNOTIFIED.parquet'), index=False)
 
     channel_chextlink = pd.DataFrame(columns=[
         'CHExtLink',
         'ChannelID',
     ])
-    channel_chextlink.to_csv(os.path.join(TABLES_PATH, 'CHANNEL_CHExtLink.csv'), index=False)
+    channel_chextlink.to_parquet(os.path.join(TABLES_PATH, 'CHANNEL_CHExtLink.parquet'), index=False)
 
     content_conttag = pd.DataFrame(columns=[
         'CONTTag',
         'ContentID',
     ])
-    content_conttag.to_csv(os.path.join(TABLES_PATH, 'CONTENT_CONTTag.csv'), index=False)
+    content_conttag.to_parquet(os.path.join(TABLES_PATH, 'CONTENT_CONTTag.parquet'), index=False)
 
     playlist_playtag = pd.DataFrame(columns=[
         'PLAYTag',
         'PlayID',
     ])
-    playlist_playtag.to_csv(os.path.join(TABLES_PATH, 'PLAYLIST_PLAYTag.csv'), index=False)
+    playlist_playtag.to_parquet(os.path.join(TABLES_PATH, 'PLAYLIST_PLAYTag.parquet'), index=False)
+    
+    return
 
-    short = pd.DataFrame(columns=[
-        'SHMusicLink',
-        'SHORTBody',
-        'ContentID',
-    ])
-    short.to_csv(os.path.join(TABLES_PATH, 'SHORT.csv'), index=False)
+TABLE_PATHS = {
+    # DATA_PATH
+    "users": os.path.join(DATA_PATH, 'users.parquet'),
+    "channels": os.path.join(DATA_PATH, 'channels.parquet'),
+    "content": os.path.join(DATA_PATH, 'content.parquet'),
+    "comments": os.path.join(DATA_PATH, 'comments.parquet'),
+
+    # TABLES_PATH
+    "USER": os.path.join(TABLES_PATH, 'USER.parquet'),
+    "CHANNEL": os.path.join(TABLES_PATH, 'CHANNEL.parquet'),
+    "UADMINCH": os.path.join(TABLES_PATH, 'UADMINCH.parquet'),
+    "UINTERESTCH": os.path.join(TABLES_PATH, 'UINTERESTCH.parquet'),
+    "CONTENT": os.path.join(TABLES_PATH, 'CONTENT.parquet'),
+    "UWATCHINGCONT": os.path.join(TABLES_PATH, 'UWATCHINGCONT.parquet'),
+    "LIVE": os.path.join(TABLES_PATH, 'LIVE.parquet'),
+    "VIDEO": os.path.join(TABLES_PATH, 'VIDEO.parquet'),
+    "SHORT": os.path.join(TABLES_PATH, 'SHORT.parquet'),
+    "COMMENT": os.path.join(TABLES_PATH, 'COMMENT.parquet'),
+    "LIVECOMMENT": os.path.join(TABLES_PATH, 'LIVECOMMENT.parquet'),
+    "COMMENTREPLY": os.path.join(TABLES_PATH, 'COMMENTREPLY.parquet'),
+    "VIDEOCOMMENT": os.path.join(TABLES_PATH, 'VIDEOCOMMENT.parquet'),
+    "POLLCOMMENT": os.path.join(TABLES_PATH, 'POLLCOMMENT.parquet'),
+    "SHORTCOMMENT": os.path.join(TABLES_PATH, 'SHORTCOMMENT.parquet'),
+    "POLL": os.path.join(TABLES_PATH, 'POLL.parquet'),
+    "PLAYLIST": os.path.join(TABLES_PATH, 'PLAYLIST.parquet'),
+    "PLAYLISTCONTENT": os.path.join(TABLES_PATH, 'PLAYLISTCONTENT.parquet'),
+    "USERINTERACTION": os.path.join(TABLES_PATH, 'USERINTERACTION.parquet'),
+    "UCONTINT": os.path.join(TABLES_PATH, 'UCONTINT.parquet'),
+    "UCOMINT": os.path.join(TABLES_PATH, 'UCOMINT.parquet'),
+    "UPLAYINT": os.path.join(TABLES_PATH, 'UPLAYINT.parquet'),
+    "NOTIFICATION": os.path.join(TABLES_PATH, 'NOTIFICATION.parquet'),
+    "USERNOTIFIED": os.path.join(TABLES_PATH, 'USERNOTIFIED.parquet'),
+    "CHANNEL_CHExtLink": os.path.join(TABLES_PATH, 'CHANNEL_CHExtLink.parquet'),
+    "CONTENT_CONTTag": os.path.join(TABLES_PATH, 'CONTENT_CONTTag.parquet'),
+    "PLAYLIST_PLAYTag": os.path.join(TABLES_PATH, 'PLAYLIST_PLAYTag.parquet'),
+    }
+
 
 if __name__ == "__main__":
     initialize_tables()

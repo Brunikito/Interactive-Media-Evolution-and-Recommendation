@@ -1,30 +1,83 @@
+"""
+Module: content_generator
+-------------------------
+
+Este módulo é responsável pela geração de conteúdo sintético (como vídeos, lives e shorts) com base nos canais existentes. 
+Utiliza funções otimizadas em Cython para acelerar o processamento de linguagens, tags e hashes.
+
+O conteúdo gerado inclui informações como título, categoria, status, idioma, duração, tipo e métricas, além de tabelas auxiliares 
+para vídeos, shorts, lives e tags associadas. A geração é vetorizada e otimizada para escalabilidade.
+
+Dependências:
+- to_base62_fast, fast_hash: Funções otimizadas para codificação e hashing.
+- generate_languages_nogil: Geração de idiomas com Cython sem GIL.
+- generate_tags_fast: Geração vetorizada de tags por categoria.
+- generate_content_tags: Mapeamento de conteúdo para tags.
+"""
+
 import pandas as pd
 import numpy as np
 import os
 from src import DATA_PATH, BASE_PATH
-from src.generators.feature_generators.cython.content_optimized import to_base62_fast, fast_hash, generate_languages_nogil, generate_tags_fast, generate_content_tags
-# Pré-carregar dados
-country_data = pd.read_csv(os.path.join(DATA_PATH, 'behavior_generated', 'country_data_cleaned.csv'))
-languages = np.unique(np.concatenate(country_data['Languages'].str.split(',')))
-
-CATEGORIES = np.arange(1, 16, dtype=np.int8)
-    
-# Inicializar categorias em cache
-
+from src.generators.feature_generators.cython.content_optimized import (
+    to_base62_fast,
+    fast_hash,
+    generate_languages_nogil,
+    generate_tags_fast,
+    generate_content_tags
+)
 import time
 
-def generate_languages_fast(channel_langs, use_channel_lang, languages, rng):
-    # Gera todos aleatórios de uma vez
+# Pré-carrega dados de país e extrai lista única de idiomas
+country_data = pd.read_parquet(os.path.join(DATA_PATH, 'behavior_generated', 'country_data_cleaned.parquet'))
+languages = np.unique(np.concatenate(country_data['Languages'].str.split(',')))
+
+# Categorias disponíveis
+CATEGORIES = np.arange(1, 16, dtype=np.int8)
+
+def generate_languages_fast(
+    channel_langs: np.ndarray,
+    use_channel_lang: np.ndarray,
+    languages: np.ndarray,
+    rng: np.random.Generator
+) -> np.ndarray:
+    """
+    Gera vetorialmente os idiomas dos conteúdos com base na linguagem do canal ou um idioma aleatório.
+
+    Parâmetros:
+    - channel_langs (np.ndarray): Idiomas dos canais em formato string.
+    - use_channel_lang (np.ndarray): Máscara booleana indicando se deve usar o idioma do canal.
+    - languages (np.ndarray): Lista de idiomas disponíveis.
+    - rng (np.random.Generator): Gerador de números aleatórios.
+
+    Retorno:
+    - np.ndarray: Idiomas finais atribuídos ao conteúdo.
+    """
     random_langs = rng.choice(languages, size=len(channel_langs))
-
-    # Extrai só o primeiro idioma de cada string (assumindo separado por vírgula)
-    # Não faz loop: faz vetor de strings, aplica split, pega primeira parte
     first_langs = np.char.partition(channel_langs.astype(str), ',')[:, 0]
-
-    # Combina de forma vetorial: onde usar canal, pega do canal, senão aleatório
     return np.where(use_channel_lang, first_langs, random_langs)
 
-def create_random_content(channels, categories, content_ratio, initial_id, current_date):
+def create_random_content(
+    channels: pd.DataFrame,
+    categories: np.ndarray,
+    content_ratio: float,
+    initial_id: int,
+    current_date: float
+) -> dict:
+    """
+    Gera conteúdos sintéticos com base em canais fornecidos, utilizando funções otimizadas para gerar
+    IDs, títulos, status, categorias, idiomas, métricas, hashes e tipos específicos como vídeos, lives e shorts.
+
+    Parâmetros:
+    - channels (pd.DataFrame): DataFrame com os canais existentes.
+    - categories (np.ndarray): Array com as categorias possíveis.
+    - content_ratio (float): Proporção de canais a serem usados para gerar conteúdo.
+    - initial_id (int): ID inicial para o conteúdo.
+    - current_date (float): Timestamp (float) representando a data de criação do conteúdo.
+
+    Retorno:
+    - dict: Dicionário com os DataFrames gerados (conteúdo, tags, vídeos, lives, etc.) e métricas de tempo.
+    """
     timings = {}
     t0 = time.perf_counter()
     num_content = int(len(channels) * content_ratio)
@@ -43,7 +96,7 @@ def create_random_content(channels, categories, content_ratio, initial_id, curre
 
     # Títulos e data
     t1 = time.perf_counter()
-    content_title = np.char.add(channel_names, ' Content ' + current_date)
+    content_title = np.char.add(channel_names, ' Content ' + str(current_date))
     content_creation_date = np.full(num_content, current_date)
     timings['titles_and_data'] = time.perf_counter() - t1
 
@@ -111,7 +164,7 @@ def create_random_content(channels, categories, content_ratio, initial_id, curre
     t3 = time.perf_counter()
     t1 = time.perf_counter()
     # Tabela CONTENT
-    df_content_table = pd.DataFrame({
+    df_CONTENT = pd.DataFrame({
         'ContentID': content_id.astype(np.int32),
         'ContentURL': content_hashes_int,
         'CONTTitle': content_hashes_int,
@@ -128,7 +181,7 @@ def create_random_content(channels, categories, content_ratio, initial_id, curre
     
     t1 = time.perf_counter()
     # Estatísticas
-    df_CONTENT = pd.DataFrame(
+    df_content_table = pd.DataFrame(
         np.column_stack((content_id, content_view_count, content_like_count, content_dislike_count, content_comment_count)),
         columns=["ContentID", "Views", "Likes", "Dislikes", "Comments"]
     )

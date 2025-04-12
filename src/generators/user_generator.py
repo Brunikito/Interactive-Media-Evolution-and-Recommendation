@@ -1,3 +1,20 @@
+"""
+Module: user_generator
+----------------------
+
+Este módulo realiza a geração sintética de usuários, simulando perfis realistas com base em dados de países,
+ocupações, horários de sono e alimentação, fusos horários, além de comportamento de consumo de vídeo. Utiliza
+funções vetorizadas e aceleradas por Cython para otimizar o desempenho.
+
+A geração inclui atributos como idade, gênero, localização, idioma, ocupação, horários de sono e refeição, 
+educação, tempo de visualização de vídeo e muito mais. O resultado são dois DataFrames: um com as informações 
+comportamentais/demográficas (`df_new_users`) e outro com dados de conta (`df_new_USER`).
+
+Dependências principais:
+- Funções Cython: `get_sleep_time_vectorized`, `get_wake_up_time_vectorized`, `generate_user_languages`
+- Dados: `country_data_cleaned.parquet`, `work_behavior.parquet`, `sleep_hours_by_age_country.parquet`
+"""
+
 import pandas as pd
 import numpy as np
 import os
@@ -5,50 +22,45 @@ from src.generators.cython.cy_user_generator import (
     get_sleep_time_vectorized, get_wake_up_time_vectorized, init_data,
     generate_user_languages
 )
+import time
 
-# Get current directory (adjust if needed)
+# Caminho base para os dados
 actual_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-
-# Load data files
+# Inicializa dados internos (Cython)
 init_data()
 
-# Load CSV data
-channels = pd.read_csv(os.path.join(actual_dir, 'data/channels.csv'))
-comments = pd.read_csv(os.path.join(actual_dir, 'data/comments.csv'))
-content = pd.read_csv(os.path.join(actual_dir, 'data/content.csv'))
-users = pd.read_csv(os.path.join(actual_dir, 'data/users.csv'))
-country_data = pd.read_csv(os.path.join(actual_dir, 'data/behavior_generated/country_data_cleaned.csv'))
-sleep_data = pd.read_csv(os.path.join(actual_dir, 'data/behavior_generated/sleep_hours_by_age_country.csv'))
-work_data = pd.read_csv(os.path.join(actual_dir, 'data/behavior_generated/work_behavior.csv'))
+# Carrega datasets
+channels = pd.read_parquet(os.path.join(actual_dir, 'data/channels.parquet'))
+comments = pd.read_parquet(os.path.join(actual_dir, 'data/comments.parquet'))
+content = pd.read_parquet(os.path.join(actual_dir, 'data/content.parquet'))
+users = pd.read_parquet(os.path.join(actual_dir, 'data/users.parquet'))
+country_data = pd.read_parquet(os.path.join(actual_dir, 'data/behavior_generated/country_data_cleaned.parquet'))
+sleep_data = pd.read_parquet(os.path.join(actual_dir, 'data/behavior_generated/sleep_hours_by_age_country.parquet'))
+work_data = pd.read_parquet(os.path.join(actual_dir, 'data/behavior_generated/work_behavior.parquet'))
 
-# Pre-calculate population fractions for sampling
+# Frações populacionais por país
 total_population = country_data['Population'].sum()
 country_data['Population_Fraction'] = country_data['Population'] / total_population
 probabilities_country = country_data['Population_Fraction'].values
 
-# Filter out student occupations from work_data
+# Filtra apenas ocupações não estudantis
 work_data_jobs = work_data[~work_data['ocupation'].isin([
     'Estudante pré-escola', 'Estudante ensino fundamental I', 
     'Estudante ensino fundamental II', 'Estudante ensino médio', 
     'Estudante universitário'
 ])]
 
-
-##############################################################################
-# 2. Build dictionaries for occupation mappings and language lookups
-##############################################################################
-
-# Convert time strings into integer hours
+# Conversão de horários de string para inteiros
 work_data['work_time_hour'] = work_data['work_time'].str.split(':').str[0].astype(int)
 work_data['free_time_hour'] = work_data['free_from_work_time'].str.split(':').str[0].astype(int)
 
-# Build dictionaries for mapping occupations
+# Mapeamentos por ocupação
 occupation_to_work_time = work_data.set_index('ocupation')['work_time_hour'].to_dict()
 occupation_to_free_time = work_data.set_index('ocupation')['free_time_hour'].to_dict()
 occupation_to_days_work = work_data.set_index('ocupation')['days_work'].to_dict()
 
-# Build language dictionary from ISO3
+# Dicionários de idioma por ISO3
 iso3_to_languages = {
     row['ISO3']: row['Languages'].split(',') 
     for _, row in country_data.iterrows()
@@ -61,26 +73,69 @@ iso3_to_first_language = {
 
 all_languages = np.unique(
     [lang for langs in iso3_to_languages.values() for lang in langs]
-    )
+)
 
-# Suporte: arrays alinhados para ISO3 -> linguagem
+# Arrays para mapeamento vetorial de localização para idioma primário
 iso3_keys = np.array(sorted(iso3_to_first_language.keys()))
 iso3_firstlangs = np.array([iso3_to_first_language[k] for k in iso3_keys], dtype=object)
 
-def get_primary_languages(user_location, iso3_keys, iso3_firstlangs):
-    # Vetoriza o mapeamento de ISO3 -> idioma primário
+def get_primary_languages(
+    user_location: np.ndarray,
+    iso3_keys: np.ndarray,
+    iso3_firstlangs: np.ndarray
+) -> np.ndarray:
+    """
+    Realiza o mapeamento vetorizado da localização ISO3 do usuário para o idioma primário.
+
+    Parâmetros:
+    - user_location (np.ndarray): Códigos ISO3 de localização dos usuários.
+    - iso3_keys (np.ndarray): Lista ordenada de chaves ISO3.
+    - iso3_firstlangs (np.ndarray): Idiomas primários correspondentes aos ISO3.
+
+    Retorno:
+    - np.ndarray: Idiomas primários dos usuários.
+    """
     indices = np.searchsorted(iso3_keys, user_location)
     return iso3_firstlangs[indices]
 
-def choose_languages_fast(iso3, rng):
+def choose_languages_fast(iso3: str, rng: np.random.Generator) -> str:
+    """
+    Escolhe um conjunto de idiomas aleatórios baseado em um código ISO3.
+
+    Parâmetros:
+    - iso3 (str): Código ISO3 de país.
+    - rng (np.random.Generator): Gerador de números aleatórios.
+
+    Retorno:
+    - str: String com idiomas separados por vírgula.
+    """
     firstlang = iso3_to_first_language.get(iso3, ['en'])
     extra_langs = rng.choice(all_languages, 2, replace=True)
     return ','.join(set([firstlang] + extra_langs.tolist()))
 
-# Timezone dictionary
+# Fuso horário por ISO3
 iso3_to_timezone = dict(zip(country_data['ISO3'], country_data['Timezone']))
 
-def generate_eat_time_vectorized(mean, minimum, maximum, alpha=2, rng=None):
+def generate_eat_time_vectorized(
+    mean: np.ndarray,
+    minimum: np.ndarray,
+    maximum: np.ndarray,
+    alpha: float = 2,
+    rng: np.random.Generator = None
+) -> np.ndarray:
+    """
+    Gera vetorialmente horários de refeição com distribuição Beta.
+
+    Parâmetros:
+    - mean (np.ndarray): Médias esperadas.
+    - minimum (np.ndarray): Valores mínimos.
+    - maximum (np.ndarray): Valores máximos.
+    - alpha (float): Parâmetro alpha da distribuição Beta.
+    - rng (np.random.Generator, opcional): Gerador de números aleatórios.
+
+    Retorno:
+    - np.ndarray: Vetor de horários gerados.
+    """
     if rng is None:
         rng = np.random.default_rng()
     normalized_mean = (mean - minimum) / (maximum - minimum)
@@ -88,13 +143,22 @@ def generate_eat_time_vectorized(mean, minimum, maximum, alpha=2, rng=None):
     beta_values = rng.beta(alpha, beta_param)
     return minimum + (maximum - minimum) * beta_values
 
-##############################################################################
-# 4. Main user generation function
-##############################################################################
+def create_random_user(
+    number_of_users: int,
+    start_id: int
+) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """
+    Gera usuários sintéticos com dados demográficos, comportamentais e de perfil.
 
-import time
+    Parâmetros:
+    - number_of_users (int): Quantidade de usuários a serem gerados.
+    - start_id (int): ID inicial dos usuários.
 
-def create_random_user(number_of_users, start_id):
+    Retorno:
+    - tuple:
+        - df_new_users (pd.DataFrame): Dados comportamentais e demográficos.
+        - df_new_USER (pd.DataFrame): Dados básicos de conta.
+    """
     rng = np.random.default_rng()
     
     user_id = np.arange(start_id, start_id + number_of_users).astype(np.int32)

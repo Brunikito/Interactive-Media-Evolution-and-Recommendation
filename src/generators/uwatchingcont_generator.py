@@ -1,44 +1,73 @@
+"""
+Module: uwatchingcont_generator
+-------------------------------
+
+Este módulo é responsável pela geração de registros sintéticos de visualizações de conteúdo por usuários. 
+Baseia-se em um sistema de recomendação híbrido (via função `recommendate`) e em usuários que não ultrapassam 
+um limite de visualizações simultâneas.
+
+A função principal gera recomendações de conteúdo para os usuários selecionados ou escolhe conteúdos aleatórios,
+com base em uma taxa de utilização de recomendação. As durações assistidas são amostradas a partir de uma 
+distribuição Beta.
+
+Dependências:
+- Sistema de recomendação (`recommendate`)
+- Dados de usuários, conteúdos, interações e comentários (arquivos `.parquet` e `.csv`)
+"""
+
 from src.recommendation.recommendate import recommendate
 import pandas as pd
 import numpy as np
 import time
 
-'''recommendations = recommendate(
-    n, 
-    user_sampled, 
-    content, 
-    uwatchingcont, 
-    content_tags, 
-    userinteraction,
-    ucontint,
-    comment,
-    livecomment,
-    videocomment,
-    shortcomment)
-Vai retornar um ndarray com os ids dos usuarios na primeira coluna e as recomendacoes de conteudo para cada um deles.
-O ndarray tem os seguintes campos:
-    
-        - [0]: o id do usuario
-        - [1]: o id do conteudo recomendado para o usuario
-        - [2]: o rank da recomendacao (1 a n)
-'''
 def create_random_uwatching_cont(
-    num_watching_ratio,
-    users,
-    USERS,
-    content,
-    CONTENT,
-    uwatchingcont,
-    content_tags,
-    userinteraction,
-    ucontint,
-    comment,
-    livecomment,
-    videocomment,
-    shortcomment,
-    num_recommendations,
-    current_datetime
-):
+    num_watching_ratio: float,
+    users: pd.DataFrame,
+    USERS: pd.DataFrame,
+    content: pd.DataFrame,
+    CONTENT: pd.DataFrame,
+    uwatchingcont: pd.DataFrame,
+    content_tags: pd.DataFrame,
+    userinteraction: pd.DataFrame,
+    ucontint: pd.DataFrame,
+    comment: pd.DataFrame,
+    livecomment: pd.DataFrame,
+    videocomment: pd.DataFrame,
+    shortcomment: pd.DataFrame,
+    num_recommendations: int,
+    current_datetime: float
+) -> pd.DataFrame:
+    """
+    Gera novos registros sintéticos de visualização de conteúdo (UWATCHINGCONT) para usuários selecionados, 
+    baseando-se em recomendações e amostragem aleatória de conteúdo.
+
+    Parâmetros:
+    - num_watching_ratio (float): Proporção dos usuários válidos que devem receber recomendações.
+    - users (pd.DataFrame): Dados comportamentais dos usuários.
+    - USERS (pd.DataFrame): Dados adicionais dos usuários usados pelo sistema de recomendação.
+    - content (pd.DataFrame): Tabela de conteúdo com durações e IDs.
+    - CONTENT (pd.DataFrame): Tabela de conteúdo auxiliar usada pelo sistema de recomendação.
+    - uwatchingcont (pd.DataFrame): Tabela atual de visualizações de conteúdo.
+    - content_tags (pd.DataFrame): Tags dos conteúdos.
+    - userinteraction (pd.DataFrame): Interações entre usuários e conteúdos.
+    - ucontint (pd.DataFrame): Mapeamento entre interações e conteúdos.
+    - comment, livecomment, videocomment, shortcomment (pd.DataFrame): Comentários por tipo de conteúdo.
+    - num_recommendations (int): Número de recomendações a serem geradas por usuário.
+    - current_datetime (float): Timestamp atual da simulação.
+
+    Retorno:
+    - pd.DataFrame: Novo DataFrame com os registros gerados de visualização de conteúdo.
+    """
+    if content.shape[0] < 10:
+        return pd.DataFrame(columns=[
+        'UWatchDurationCONT',
+        'UWatchCONTDateTime',
+        'UIsWatchingCONTNow',
+        'UWATCHCONTID',
+        'UserID',
+        'ContentID' 
+    ])
+    
     rng = np.random.default_rng()
 
     total_start = time.time()  # Timer total da função

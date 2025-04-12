@@ -1,11 +1,59 @@
+"""
+Module: comment_generator
+-------------------------
+
+Este módulo gera comentários sintéticos com base em usuários que estão assistindo conteúdos no momento. 
+Distribui os comentários entre conteúdos do tipo Live, Vídeo e Short, e também cria respostas (replies) 
+para comentários existentes de maneira randômica, seguindo uma lógica proporcional (`comment_ratio`).
+
+O processo inclui:
+- Filtragem de usuários assistindo
+- Sorteio de conteúdo e comentários
+- Criação de novos comentários e respostas
+- Separação por tipo de conteúdo
+
+Dependências:
+- pandas, numpy
+- Arquivos de conteúdo (`LIVE.parquet`, `VIDEO.parquet`, `SHORT.parquet`)
+- Comentários existentes (`COMMENT.csv`, etc.)
+"""
+
 import pandas as pd
 import numpy as np
 import time
 
-def generate_random_comments(comment_ratio, uwatchingcont, comments,
-                             livecomments, videocomments, shortcomments, 
-                             current_datetime,
-                             lives, videos, shorts):
+def create_random_comments(
+    comment_ratio: float,
+    uwatchingcont: pd.DataFrame,
+    comments: pd.DataFrame,
+    livecomments: pd.DataFrame,
+    videocomments: pd.DataFrame,
+    shortcomments: pd.DataFrame,
+    current_datetime: float,
+    lives: pd.DataFrame,
+    videos: pd.DataFrame,
+    shorts: pd.DataFrame
+) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    """
+    Gera comentários sintéticos com base em usuários assistindo conteúdos, com possibilidade de
+    gerar comentários originais ou respostas a comentários existentes, distribuídos entre tipos de conteúdo.
+
+    Parâmetros:
+    - comment_ratio (float): Proporção de usuários assistindo que devem comentar.
+    - uwatchingcont (pd.DataFrame): DataFrame com usuários assistindo conteúdos no momento.
+    - comments (pd.DataFrame): Comentários já existentes (base principal).
+    - livecomments, videocomments, shortcomments (pd.DataFrame): Comentários já existentes por tipo de conteúdo.
+    - current_datetime (float): Timestamp atual da simulação.
+    - lives, videos, shorts (pd.DataFrame): Tabelas de conteúdo do tipo Live, Vídeo e Short.
+
+    Retorno:
+    - tuple de pd.DataFrames:
+        - new_comments: DataFrame com os novos comentários.
+        - new_replies: DataFrame com mapeamentos de respostas.
+        - new_live_comments: Comentários para conteúdos ao vivo.
+        - new_video_comments: Comentários para vídeos.
+        - new_short_comments: Comentários para shorts.
+    """
 
     t0 = time.time()
     rng = np.random.default_rng()
@@ -60,18 +108,20 @@ def generate_random_comments(comment_ratio, uwatchingcont, comments,
     reply_choices = watching_now_comments.iloc[positions].drop_duplicates(subset='ContentID', keep='first').reset_index(drop=True)
 
     t3 = time.time()
-
-    full_df = pd.merge(watching_now_with_types, reply_choices, on='ContentID', how='left')
+    
+    reply_choices['CommentID'] = reply_choices['CommentID'].fillna(np.int32(-1))
+    reply_choices = reply_choices.set_index('ContentID')
+    watching_now_with_types['CommentID'] = reply_choices.loc[watching_now_with_types['ContentID']].values
     
     t41 = time.time()
     
-    positions = rng.choice(full_df.shape[0], size=num_comments, replace=False)
-    chosen_lines = full_df.iloc[positions]
+    positions = rng.permutation(watching_now_with_types.shape[0])
+    chosen_lines = watching_now_with_types.iloc[positions[:num_comments]]
 
     t4 = time.time()
 
-    chosen_lines_mandatory_content = chosen_lines[chosen_lines['CommentID'].isna()][['UserID', 'ContentID', 'Type']].reset_index(drop=True)
-    chosen_lines_content_or_comentary = chosen_lines[~chosen_lines['CommentID'].isna()].reset_index(drop=True)
+    chosen_lines_mandatory_content = chosen_lines[chosen_lines['CommentID'] == -1][['UserID', 'ContentID', 'Type']].reset_index(drop=True)
+    chosen_lines_content_or_comentary = chosen_lines[chosen_lines['CommentID'] != -1].reset_index(drop=True)
 
     if chosen_lines_content_or_comentary.empty:
         total_chosen_content = chosen_lines_mandatory_content.copy()
@@ -132,8 +182,8 @@ def generate_random_comments(comment_ratio, uwatchingcont, comments,
     print(f"▶️  t32 - merge comentários       : {t32 - t31:.4f}")
     print(f"▶️  t33 - sorteando o array       : {t33 - t32:.4f}")
     print(f"▶️  t3 - agrupamento comentários  : {t3 - t33:.4f}")
-    print(f"▶️  t4 - merge final              : {t41 - t3:.4f}")
-    print(f"▶️  t4 - Amostra                  : {t4 - t41:.4f}")
+    print(f"▶️  t41 - merge final              : {t41 - t3:.4f}")
+    print(f"▶️  t42 - Amostra                  : {t4 - t41:.4f}")
     print(f"▶️  t5 - separação + splits       : {t5 - t4:.4f}")
     print(f"▶️  t6 - criação DataFrame final  : {t6 - t5:.4f}")
     print(f"▶️  t7 - splits por tipo          : {t7 - t6:.4f}")
@@ -171,6 +221,7 @@ if __name__ == '__main__':
     print(f'Elapsed Time: {time.time() - initial_time:.4f}s')
     
     print(new_comments.head(3))
+    print(new_comments.shape)
     print(new_replies.head(3))
     print(new_live_comments.head(3))
     print(new_video_comments.head(3))

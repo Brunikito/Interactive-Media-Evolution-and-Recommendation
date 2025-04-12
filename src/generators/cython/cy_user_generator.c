@@ -3464,7 +3464,6 @@ static const char __pyx_k_itemsize[] = "itemsize";
 static const char __pyx_k_iterrows[] = "iterrows";
 static const char __pyx_k_mean_dif[] = "mean_dif";
 static const char __pyx_k_pyx_type[] = "__pyx_type";
-static const char __pyx_k_read_csv[] = "read_csv";
 static const char __pyx_k_register[] = "register";
 static const char __pyx_k_setstate[] = "__setstate__";
 static const char __pyx_k_DATA_PATH[] = "DATA_PATH";
@@ -3498,6 +3497,7 @@ static const char __pyx_k_sleep_hours[] = "sleep_hours";
 static const char __pyx_k_initializing[] = "_initializing";
 static const char __pyx_k_is_coroutine[] = "_is_coroutine";
 static const char __pyx_k_pyx_checksum[] = "__pyx_checksum";
+static const char __pyx_k_read_parquet[] = "read_parquet";
 static const char __pyx_k_stringsource[] = "<stringsource>";
 static const char __pyx_k_version_info[] = "version_info";
 static const char __pyx_k_class_getitem[] = "__class_getitem__";
@@ -3543,7 +3543,7 @@ static const char __pyx_k_unable_to_allocate_array_data[] = "unable to allocate 
 static const char __pyx_k_Estudante_ensino_fundamental_I[] = "Estudante ensino fundamental I";
 static const char __pyx_k_strided_and_direct_or_indirect[] = "<strided and direct or indirect>";
 static const char __pyx_k_Estudante_ensino_fundamental_II[] = "Estudante ensino fundamental II";
-static const char __pyx_k_behavior_generated_country_data[] = "behavior_generated/country_data_cleaned.csv";
+static const char __pyx_k_behavior_generated_country_data[] = "behavior_generated/country_data_cleaned.parquet";
 static const char __pyx_k_numpy_core_multiarray_failed_to[] = "numpy.core.multiarray failed to import";
 static const char __pyx_k_All_dimensions_preceding_dimensi[] = "All dimensions preceding dimension %d must be indexed and not sliced";
 static const char __pyx_k_Buffer_view_does_not_expose_stri[] = "Buffer view does not expose strides";
@@ -3557,8 +3557,8 @@ static const char __pyx_k_Indirect_dimensions_not_supporte[] = "Indirect dimensi
 static const char __pyx_k_Invalid_mode_expected_c_or_fortr[] = "Invalid mode, expected 'c' or 'fortran', got ";
 static const char __pyx_k_Out_of_bounds_on_buffer_access_a[] = "Out of bounds on buffer access (axis ";
 static const char __pyx_k_Unable_to_convert_item_to_object[] = "Unable to convert item to object";
-static const char __pyx_k_behavior_generated_sleep_hours_b[] = "behavior_generated/sleep_hours_by_age_country.csv";
-static const char __pyx_k_behavior_generated_work_behavior[] = "behavior_generated/work_behavior.csv";
+static const char __pyx_k_behavior_generated_sleep_hours_b[] = "behavior_generated/sleep_hours_by_age_country.parquet";
+static const char __pyx_k_behavior_generated_work_behavior[] = "behavior_generated/work_behavior.parquet";
 static const char __pyx_k_got_differing_extents_in_dimensi[] = "got differing extents in dimension ";
 static const char __pyx_k_no_default___reduce___due_to_non[] = "no default __reduce__ due to non-trivial __cinit__";
 static const char __pyx_k_numpy_core_umath_failed_to_impor[] = "numpy.core.umath failed to import";
@@ -3839,7 +3839,7 @@ typedef struct {
   PyObject *__pyx_n_s_random;
   PyObject *__pyx_n_s_random_username_generate;
   PyObject *__pyx_n_s_range;
-  PyObject *__pyx_n_s_read_csv;
+  PyObject *__pyx_n_s_read_parquet;
   PyObject *__pyx_n_s_reduce;
   PyObject *__pyx_n_s_reduce_cython;
   PyObject *__pyx_n_s_reduce_ex;
@@ -4137,7 +4137,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_random);
   Py_CLEAR(clear_module_state->__pyx_n_s_random_username_generate);
   Py_CLEAR(clear_module_state->__pyx_n_s_range);
-  Py_CLEAR(clear_module_state->__pyx_n_s_read_csv);
+  Py_CLEAR(clear_module_state->__pyx_n_s_read_parquet);
   Py_CLEAR(clear_module_state->__pyx_n_s_reduce);
   Py_CLEAR(clear_module_state->__pyx_n_s_reduce_cython);
   Py_CLEAR(clear_module_state->__pyx_n_s_reduce_ex);
@@ -4413,7 +4413,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_random);
   Py_VISIT(traverse_module_state->__pyx_n_s_random_username_generate);
   Py_VISIT(traverse_module_state->__pyx_n_s_range);
-  Py_VISIT(traverse_module_state->__pyx_n_s_read_csv);
+  Py_VISIT(traverse_module_state->__pyx_n_s_read_parquet);
   Py_VISIT(traverse_module_state->__pyx_n_s_reduce);
   Py_VISIT(traverse_module_state->__pyx_n_s_reduce_cython);
   Py_VISIT(traverse_module_state->__pyx_n_s_reduce_ex);
@@ -4721,7 +4721,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_random __pyx_mstate_global->__pyx_n_s_random
 #define __pyx_n_s_random_username_generate __pyx_mstate_global->__pyx_n_s_random_username_generate
 #define __pyx_n_s_range __pyx_mstate_global->__pyx_n_s_range
-#define __pyx_n_s_read_csv __pyx_mstate_global->__pyx_n_s_read_csv
+#define __pyx_n_s_read_parquet __pyx_mstate_global->__pyx_n_s_read_parquet
 #define __pyx_n_s_reduce __pyx_mstate_global->__pyx_n_s_reduce
 #define __pyx_n_s_reduce_cython __pyx_mstate_global->__pyx_n_s_reduce_cython
 #define __pyx_n_s_reduce_ex __pyx_mstate_global->__pyx_n_s_reduce_ex
@@ -19746,13 +19746,13 @@ static PyObject *__pyx_pf_17cy_user_generator_init_data(CYTHON_UNUSED PyObject *
   /* "cy_user_generator.pyx":40
  *     global iso3_to_languages, iso3_to_timezone, probabilities_country, work_data_jobs
  *     global DATA_PATH
- *     country_data = pd.read_csv(os.path.join(DATA_PATH, 'behavior_generated/country_data_cleaned.csv'))             # <<<<<<<<<<<<<<
- *     sleep_data = pd.read_csv(os.path.join(DATA_PATH, 'behavior_generated/sleep_hours_by_age_country.csv'))
- *     work_data = pd.read_csv(os.path.join(DATA_PATH, 'behavior_generated/work_behavior.csv'))
+ *     country_data = pd.read_parquet(os.path.join(DATA_PATH, 'behavior_generated/country_data_cleaned.parquet'))             # <<<<<<<<<<<<<<
+ *     sleep_data = pd.read_parquet(os.path.join(DATA_PATH, 'behavior_generated/sleep_hours_by_age_country.parquet'))
+ *     work_data = pd.read_parquet(os.path.join(DATA_PATH, 'behavior_generated/work_behavior.parquet'))
  */
   __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_pd); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_read_csv); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 40, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_read_parquet); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 40, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_os); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 40, __pyx_L1_error)
@@ -19818,14 +19818,14 @@ static PyObject *__pyx_pf_17cy_user_generator_init_data(CYTHON_UNUSED PyObject *
 
   /* "cy_user_generator.pyx":41
  *     global DATA_PATH
- *     country_data = pd.read_csv(os.path.join(DATA_PATH, 'behavior_generated/country_data_cleaned.csv'))
- *     sleep_data = pd.read_csv(os.path.join(DATA_PATH, 'behavior_generated/sleep_hours_by_age_country.csv'))             # <<<<<<<<<<<<<<
- *     work_data = pd.read_csv(os.path.join(DATA_PATH, 'behavior_generated/work_behavior.csv'))
+ *     country_data = pd.read_parquet(os.path.join(DATA_PATH, 'behavior_generated/country_data_cleaned.parquet'))
+ *     sleep_data = pd.read_parquet(os.path.join(DATA_PATH, 'behavior_generated/sleep_hours_by_age_country.parquet'))             # <<<<<<<<<<<<<<
+ *     work_data = pd.read_parquet(os.path.join(DATA_PATH, 'behavior_generated/work_behavior.parquet'))
  * 
  */
   __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_pd); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_read_csv); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_read_parquet); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 41, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_os); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 41, __pyx_L1_error)
@@ -19888,15 +19888,15 @@ static PyObject *__pyx_pf_17cy_user_generator_init_data(CYTHON_UNUSED PyObject *
   __pyx_t_1 = 0;
 
   /* "cy_user_generator.pyx":42
- *     country_data = pd.read_csv(os.path.join(DATA_PATH, 'behavior_generated/country_data_cleaned.csv'))
- *     sleep_data = pd.read_csv(os.path.join(DATA_PATH, 'behavior_generated/sleep_hours_by_age_country.csv'))
- *     work_data = pd.read_csv(os.path.join(DATA_PATH, 'behavior_generated/work_behavior.csv'))             # <<<<<<<<<<<<<<
+ *     country_data = pd.read_parquet(os.path.join(DATA_PATH, 'behavior_generated/country_data_cleaned.parquet'))
+ *     sleep_data = pd.read_parquet(os.path.join(DATA_PATH, 'behavior_generated/sleep_hours_by_age_country.parquet'))
+ *     work_data = pd.read_parquet(os.path.join(DATA_PATH, 'behavior_generated/work_behavior.parquet'))             # <<<<<<<<<<<<<<
  * 
  *     # Probabilidades de pas
  */
   __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_pd); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 42, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_read_csv); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 42, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_read_parquet); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 42, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_n_s_os); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 42, __pyx_L1_error)
@@ -23558,7 +23558,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_random, __pyx_k_random, sizeof(__pyx_k_random), 0, 0, 1, 1},
     {&__pyx_n_s_random_username_generate, __pyx_k_random_username_generate, sizeof(__pyx_k_random_username_generate), 0, 0, 1, 1},
     {&__pyx_n_s_range, __pyx_k_range, sizeof(__pyx_k_range), 0, 0, 1, 1},
-    {&__pyx_n_s_read_csv, __pyx_k_read_csv, sizeof(__pyx_k_read_csv), 0, 0, 1, 1},
+    {&__pyx_n_s_read_parquet, __pyx_k_read_parquet, sizeof(__pyx_k_read_parquet), 0, 0, 1, 1},
     {&__pyx_n_s_reduce, __pyx_k_reduce, sizeof(__pyx_k_reduce), 0, 0, 1, 1},
     {&__pyx_n_s_reduce_cython, __pyx_k_reduce_cython, sizeof(__pyx_k_reduce_cython), 0, 0, 1, 1},
     {&__pyx_n_s_reduce_ex, __pyx_k_reduce_ex, sizeof(__pyx_k_reduce_ex), 0, 0, 1, 1},

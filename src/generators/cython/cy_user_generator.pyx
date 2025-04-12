@@ -37,9 +37,9 @@ def init_data():
     global occupation_to_work_time, occupation_to_free_time, occupation_to_days_work
     global iso3_to_languages, iso3_to_timezone, probabilities_country, work_data_jobs
     global DATA_PATH
-    country_data = pd.read_csv(os.path.join(DATA_PATH, 'behavior_generated/country_data_cleaned.csv'))
-    sleep_data = pd.read_csv(os.path.join(DATA_PATH, 'behavior_generated/sleep_hours_by_age_country.csv'))
-    work_data = pd.read_csv(os.path.join(DATA_PATH, 'behavior_generated/work_behavior.csv'))
+    country_data = pd.read_parquet(os.path.join(DATA_PATH, 'behavior_generated/country_data_cleaned.parquet'))
+    sleep_data = pd.read_parquet(os.path.join(DATA_PATH, 'behavior_generated/sleep_hours_by_age_country.parquet'))
+    work_data = pd.read_parquet(os.path.join(DATA_PATH, 'behavior_generated/work_behavior.parquet'))
 
     # Probabilidades de país
     probabilities_country = np.asarray(country_data['Population_Fraction'].values, dtype=np.float64)
