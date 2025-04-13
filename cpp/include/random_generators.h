@@ -43,6 +43,9 @@ class IdBatchManager {
          * @return The first ID of the reserved sequence.
          */
         int getAndAdvanceUserId(int amount = 1) {
+            if (amount < 0) {
+                throw std::invalid_argument("Amount must be non-negative");
+            }
             int start = nextUserId;
             nextUserId += amount;
             return start;
@@ -54,6 +57,9 @@ class IdBatchManager {
          * @return The first ID of the reserved sequence.
          */
         int getAndAdvanceChannelId(int amount = 1) {
+            if (amount < 0) {
+                throw std::invalid_argument("Amount must be non-negative");
+            }
             int start = nextChannelId;
             nextChannelId += amount;
             return start;
@@ -65,6 +71,9 @@ class IdBatchManager {
          * @return The first ID of the reserved sequence.
          */
         int getAndAdvanceContentId(int amount = 1) {
+            if (amount < 0) {
+                throw std::invalid_argument("Amount must be non-negative");
+            }
             int start = nextContentId;
             nextContentId += amount;
             return start;
@@ -76,6 +85,9 @@ class IdBatchManager {
          * @return The first ID of the reserved sequence.
          */
         int getAndAdvanceWatchId(int amount = 1) {
+            if (amount < 0) {
+                throw std::invalid_argument("Amount must be non-negative");
+            }
             int start = nextWatchId;
             nextWatchId += amount;
             return start;
@@ -87,6 +99,9 @@ class IdBatchManager {
          * @return The first ID of the reserved sequence.
          */
         int getAndAdvanceCommentId(int amount = 1) {
+            if (amount < 0) {
+                throw std::invalid_argument("Amount must be non-negative");
+            }
             int start = nextCommentId;
             nextCommentId += amount;
             return start;
@@ -98,6 +113,9 @@ class IdBatchManager {
          * @return The first ID of the reserved sequence.
          */
         int getAndAdvanceInteractionId(int amount = 1) {
+            if (amount < 0) {
+                throw std::invalid_argument("Amount must be non-negative");
+            }
             int start = nextInteractionId;
             nextInteractionId += amount;
             return start;

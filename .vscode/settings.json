@@ -55,6 +55,19 @@
         "list": "cpp",
         "unordered_map": "cpp",
         "xhash": "cpp",
-        "randomrelations": "cpp"
+        "randomrelations": "cpp",
+        "any": "cpp",
+        "condition_variable": "cpp",
+        "functional": "cpp",
+        "map": "cpp",
+        "mutex": "cpp",
+        "optional": "cpp",
+        "ratio": "cpp",
+        "set": "cpp",
+        "span": "cpp",
+        "stop_token": "cpp",
+        "thread": "cpp",
+        "variant": "cpp",
+        "xtree": "cpp"
     }
 }
