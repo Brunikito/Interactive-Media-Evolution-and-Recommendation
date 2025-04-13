@@ -5,13 +5,13 @@ from datetime import time, datetime, timedelta
 from src import DATA_PATH
 
 desired_countries = [
-    'LVA', 'LUX', 'ISR', 'FRA', 'CHN', 'SAU', 'COL', 'LTU', 'THA', 'CYP', 
-    'HKG', 'AUS', 'GRC', 'ECU', 'CRI', 'CHL', 'MAR', 'NLD', 'PRT', 'RUS', 
-    'HUN', 'TUR', 'MEX', 'EGY', 'BEL', 'ROU', 'DNK', 'KOR', 'SWE', 'FIN', 
-    'UKR', 'ARG', 'VNM', 'DEU', 'BRA', 'BGR', 'MYS', 'PHL', 'GBR', 'CHE', 
-    'ITA', 'AUT', 'SVK', 'CAN', 'ARE', 'TWN', 'PER', 'NZL', 'HRV', 'IRL', 
-    'ZAF', 'SGP', 'USA', 'ESP', 'CZE', 'EST', 'IDN', 'POL', 'NOR', 'JPN', 
-    'IND'
+    'CRI', 'MEX', 'CAN', 'COL', 'ECU', 'PER', 'USA', 'CHL', 'ARG', 
+    'BRA', 'GBR', 'IRL', 'PRT', 'AUT', 'BEL', 'CHE', 'CZE', 'DEU', 
+    'DNK', 'ESP', 'FRA', 'HRV', 'HUN', 'ITA', 'LUX', 'MAR', 'NLD', 
+    'NOR', 'POL', 'SWE', 'SVK', 'BGR', 'CYP', 'EST', 'EGY', 'FIN', 
+    'GRC', 'ISR', 'LTU', 'LVA', 'ROU', 'UKR', 'ZAF', 'RUS', 'SAU', 
+    'TUR', 'ARE', 'IND', 'IDN', 'THA', 'VNM', 'CHN', 'HKG', 'MYS', 
+    'PHL', 'SGP', 'TWN', 'JPN', 'KOR', 'AUS', 'NZL'
     ]
 
 country_to_iso3 = {
@@ -30,19 +30,27 @@ country_to_iso3 = {
     'in': 'IND'
     }
 
-timezone_map = {
-    "ARE": "UTC +4", "ARG": "UTC -3", "AUT": "UTC +1", "AUS": "UTC +10", "BEL": "UTC +1", "BGR": "UTC +2", 
-    "BRA": "UTC -3", "CAN": "UTC -5", "CHE": "UTC +1", "CHL": "UTC -4", "CHN": "UTC +8", "COL": "UTC -5", 
-    "CRI": "UTC -6", "CYP": "UTC +2", "CZE": "UTC +1", "DEU": "UTC +1", "DNK": "UTC +1", "ECU": "UTC -5", 
-    "EST": "UTC +2", "EGY": "UTC +2", "ESP": "UTC +1", "FIN": "UTC +2", "FRA": "UTC +1", "GBR": "UTC +0", 
-    "GRC": "UTC +2", "HKG": "UTC +8", "HRV": "UTC +1", "HUN": "UTC +1", "IDN": "UTC +7", "IRL": "UTC +0", 
-    "ISR": "UTC +2", "IND": "UTC +5:30", "ITA": "UTC +1", "JPN": "UTC +9", "KOR": "UTC +9", "LTU": "UTC +2", 
-    "LUX": "UTC +1", "LVA": "UTC +2", "MAR": "UTC +1", "MEX": "UTC -6", "MYS": "UTC +8", "NLD": "UTC +1", 
-    "NOR": "UTC +1", "NZL": "UTC +12", "PER": "UTC -5", "PHL": "UTC +8", "POL": "UTC +1", "PRT": "UTC +0", 
-    "ROU": "UTC +2", "RUS": "UTC +3", "SAU": "UTC +3", "SWE": "UTC +1", "SGP": "UTC +8", "SVK": "UTC +1", 
-    "THA": "UTC +7", "TUR": "UTC +3", "TWN": "UTC +8", "UKR": "UTC +2", "USA": "UTC -5", "VNM": "UTC +7", 
-    "ZAF": "UTC +2"
-    }
+timezone_map = {'CRI': 'UTC -6', 'MEX': 'UTC -6', 'CAN': 'UTC -5', 
+                'COL': 'UTC -5', 'ECU': 'UTC -5', 'PER': 'UTC -5', 
+                'USA': 'UTC -5', 'CHL': 'UTC -4', 'ARG': 'UTC -3', 
+                'BRA': 'UTC -3', 'GBR': 'UTC +0', 'IRL': 'UTC +0', 
+                'PRT': 'UTC +0', 'AUT': 'UTC +1', 'BEL': 'UTC +1', 
+                'CHE': 'UTC +1', 'CZE': 'UTC +1', 'DEU': 'UTC +1', 
+                'DNK': 'UTC +1', 'ESP': 'UTC +1', 'FRA': 'UTC +1', 
+                'HRV': 'UTC +1', 'HUN': 'UTC +1', 'ITA': 'UTC +1', 
+                'LUX': 'UTC +1', 'MAR': 'UTC +1', 'NLD': 'UTC +1', 
+                'NOR': 'UTC +1', 'POL': 'UTC +1', 'SWE': 'UTC +1', 
+                'SVK': 'UTC +1', 'BGR': 'UTC +2', 'CYP': 'UTC +2', 
+                'EST': 'UTC +2', 'EGY': 'UTC +2', 'FIN': 'UTC +2', 
+                'GRC': 'UTC +2', 'ISR': 'UTC +2', 'LTU': 'UTC +2', 
+                'LVA': 'UTC +2', 'ROU': 'UTC +2', 'UKR': 'UTC +2', 
+                'ZAF': 'UTC +2', 'RUS': 'UTC +3', 'SAU': 'UTC +3', 
+                'TUR': 'UTC +3', 'ARE': 'UTC +4', 'IND': 'UTC +5:30', 
+                'IDN': 'UTC +7', 'THA': 'UTC +7', 'VNM': 'UTC +7', 
+                'CHN': 'UTC +8', 'HKG': 'UTC +8', 'MYS': 'UTC +8', 
+                'PHL': 'UTC +8', 'SGP': 'UTC +8', 'TWN': 'UTC +8', 
+                'JPN': 'UTC +9', 'KOR': 'UTC +9', 'AUS': 'UTC +10',
+                'NZL': 'UTC +12'}
 
 hipercategories_examples = {
     'Tecnologia': [
@@ -711,7 +719,7 @@ def generate_country_behavior():
     df['Population_Fraction'] = df['Population'] / total_population
     
     df.to_parquet(os.path.join(DATA_PATH, 'behavior_generated', 'country_data_cleaned.parquet'), index=False)
-    return
+    return df
 
 def generate_sleep_behavior():
     sleep_by_country = pd.read_json(os.path.join(DATA_PATH, 'behavior_imported', 'sleep_by_country.json'))
@@ -794,9 +802,30 @@ def generate_work_behavior():
     
     return df
 
+languages = ['abx', 'ady', 'af', 'akl', 'ar', 'as', 'av', 'ay', 'az', 'ba', 'bcl', 
+             'ber', 'bg', 'bh', 'bik', 'bn', 'br', 'bua', 'ca', 'cau', 'cbk', 'ce', 
+             'ceb', 'chm', 'cmn', 'co', 'cs', 'cv', 'cy', 'da', 'de', 'diq', 'doi', 
+             'dta', 'el', 'en', 'es', 'et', 'eu', 'fa', 'fi', 'fil', 'fo', 'fr', 'frp', 
+             'fy', 'ga', 'gd', 'gl', 'gn', 'gu', 'hak', 'haw', 'he', 'hi', 'hil', 'hr', 
+             'hu', 'ibg', 'id', 'ilo', 'inc', 'inh', 'it', 'iu', 'ja', 'jv', 'kbd', 
+             'km', 'kn', 'ko', 'kok', 'krc', 'krj', 'ks', 'ku', 'kv', 'lb', 'lt', 'lus', 
+             'lv', 'mdf', 'mdh', 'mi', 'ml', 'mni', 'mns', 'mr', 'mrw', 'ms', 'msb', 
+             'mta', 'mwl', 'myv', 'nan', 'nb', 'ne', 'nl', 'nn', 'no', 'nog', 'nr', 
+             'nso', 'oc', 'or', 'pa', 'pag', 'pam', 'pl', 'pt', 'qu', 'rm', 'ro', 'rom', 
+             'ru', 'sa', 'sah', 'sat', 'sc', 'sd', 'se', 'sgd', 'sit', 'sk', 'sl', 'sma', 
+             'smn', 'sr', 'ss', 'st', 'sv', 'ta', 'te', 'th', 'tl', 'tn', 'tr', 'ts', 
+             'tsg', 'tt', 'tut', 'tyv', 'udm', 'ug', 'uk', 'ur', 've', 'vi', 'war', 'wuu', 
+             'xal', 'xh', 'yka', 'yue', 'za', 'zh', 'zu']
+
 if __name__ == "__main__":
-    generate_country_behavior()
-    generate_sleep_behavior()
-    generate_work_behavior()
-    print("Behavior data generated successfully.")
-    
+    df = generate_country_behavior()
+    #generate_sleep_behavior()
+    #generate_work_behavior()
+    #print("Behavior data generated successfully.")
+
+    des = np.array(desired_countries)
+    array = df.set_index('ISO3').loc[des]['Languages'].values
+    array_upper = [f'{{{entry.upper()}}}' for entry in array]
+    #print(array_upper)
+    a = "'{ES,EN}', '{ES}', '{EN,FR,IU}', '{ES}', '{ES}', '{ES,QU,AY}', '{EN,ES,HAW,FR}', '{ES}', '{ES,EN,IT,DE,FR,GN}', '{PT,ES,EN,FR}', '{EN,CY,GD}', '{EN,GA}', '{PT,MWL}', '{DE,HR,HU,SL}', '{NL,FR,DE}', '{DE,FR,IT,RM}', '{CS,SK}', '{DE}', '{DA,EN,FO,DE}', '{ES,CA,GL,EU,OC}', '{FR,FRP,BR,CO,CA,EU,OC}', '{HR,SR}', '{HU}', '{IT,DE,FR,SC,CA,CO,SL}', '{LB,DE,FR}', '{AR,BER,FR}', '{NL,FY}', '{NO,NB,NN,SE,FI}', '{PL}', '{SV,SE,SMA,FI}', '{SK,HU}', '{BG,TR,ROM}', '{EL,TR,EN}', '{ET,RU}', '{AR,EN,FR}', '{FI,SV,SMN}', '{EL,EN,FR}', '{HE,AR,EN,}', '{LT,RU,PL}', '{LV,RU,LT}', '{RO,HU,ROM}', '{UK,RU,ROM,PL,HU}', '{ZU,XH,AF,NSO,EN,TN,ST,TS,SS,VE,NR}', '{RU,TT,XAL,CAU,ADY,KV,CE,TYV,CV,UDM,TUT,MNS,BUA,MYV,MDF,CHM,BA,INH,KBD,KRC,AV,SAH,NOG}', '{AR}', '{TR,KU,DIQ,AZ,AV}', '{AR,FA,EN,HI,UR}', '{EN,HI,BN,TE,MR,TA,UR,GU,KN,ML,OR,PA,AS,BH,SAT,KS,NE,SD,KOK,DOI,MNI,SIT,SA,FR,LUS,INC}', '{ID,EN,NL,JV}', '{TH,EN}', '{VI,EN,FR,ZH,KM}', '{ZH,YUE,WUU,DTA,UG,ZA}', '{ZH,YUE,ZH,EN}', '{MS,EN,ZH,TA,TE,ML,PA,TH}', '{TL,EN,FIL,CEB,ILO,HIL,WAR,PAM,BIK,BCL,PAG,MRW,TSG,MDH,CBK,KRJ,SGD,MSB,AKL,IBG,YKA,MTA,ABX}', '{CMN,EN,MS,TA,ZH}', '{ZH,ZH,NAN,HAK}', '{JA}', '{KO,EN}', '{EN}', '{EN,MI}'"
+    print(a.replace("'", ''))

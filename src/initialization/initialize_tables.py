@@ -23,10 +23,7 @@ def initialize_tables():
         'user_language',
         'user_ocupation',
         'user_education',
-        'user_video_watching_time',
-        'user_video_retention_time',
         'user_channel_id',
-        'user_admin_channel_id',
     ])
     users.to_parquet(os.path.join(DATA_PATH, 'users.parquet'), index=False)
 
