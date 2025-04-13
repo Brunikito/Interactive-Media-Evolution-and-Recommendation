@@ -7,7 +7,15 @@
 #define RELATIONS_H
 
 #include <vector>
+#include <array>
 #include <cstdint>
+#include <memory>
+#include <cstddef>
+#include <cstdlib>
+#include <stdexcept>
+#include "aligned_alocator.h"
+
+#define ALIGN_VEC(type) std::vector<type, AlignedAllocator<type, 32>>
 
 namespace Relations {
 
@@ -15,7 +23,7 @@ namespace Relations {
  * @typedef id
  * @brief Integer identifier used for entities like users, channels, content, etc.
  */
-using id = int;
+using id = int64_t;
 
 /**
  * @typedef datetime
@@ -43,9 +51,9 @@ enum class ContentType: uint8_t {
  * @enum GenderType
  * @brief Binary gender type.
  */
-enum class GenderType: bool {
-    MALE = true,    ///< Male
-    FEMALE = false  ///< Female
+enum class GenderType: unsigned char {
+    MALE = 0,    ///< Male
+    FEMALE = 1  ///< Female
 };
 
 /**
@@ -85,109 +93,172 @@ struct Schedule {
     unsigned char workDays;     ///< Bitmask for active workdays
 };
 
-/**
- * @struct User
- * @brief Stores all attributes related to a platform user.
- */
-struct User {
-    id userId;                                  ///< Unique user identifier
-    id userChannelId;                           ///< ID of the channel owned by the user
-    std::vector<unsigned char> userLanguages;   ///< Preferred or spoken languages
-    Schedule userSchedule;                      ///< Daily routine schedule
-    unsigned char userAge;                      ///< User's age
-    GenderType userGender;                      ///< Gender type
-    unsigned char userLocation[2];              ///< Encoded country/location info
-    unsigned char userOccupation;               ///< Occupation code
-    unsigned char userEducation;                ///< Education level code
+using UnsignedChar4_t = std::array<unsigned char, 4>;
+
+using ScheduleId_t = unsigned char;
+
+struct UserArray {
+    ALIGN_VEC(id) userIds;
+    ALIGN_VEC(id) userChannelIds;
+    ALIGN_VEC(UnsignedChar4_t) userLanguages;
+    ALIGN_VEC(ScheduleId_t) userSchedules;
+    ALIGN_VEC(GenderType) userGenders;
+    ALIGN_VEC(unsigned char) userAges;
+    ALIGN_VEC(unsigned char) userLocations;
+    ALIGN_VEC(unsigned char) userOccupations;
+    ALIGN_VEC(unsigned char) userEducations;
+
+    void resize(size_t new_size) {
+        userIds.resize(new_size);
+        userChannelIds.resize(new_size);
+        userLanguages.resize(new_size);
+        userSchedules.resize(new_size);
+        userAges.resize(new_size);
+        userGenders.resize(new_size);
+        userLocations.resize(new_size);
+        userOccupations.resize(new_size);
+        userEducations.resize(new_size);
+    }
+
+    size_t size() const {
+        return userIds.size(); // ou qualquer um dos vetores
+    }
 };
 
-/**
- * @struct Channel
- * @brief Represents a content-producing entity owned by a user.
- */
-struct Channel {
-    id channelOwnerId;                  ///< Owner's user ID
-    id channelId;                       ///< Unique channel ID
-    unsigned int channelCreationDate;   ///< Channel creation date (timestamp)
-    unsigned char channelLanguage;      ///< Main language of the channel
-    unsigned char channelLocation[2];   ///< Location (country/region code)
-    unsigned char channelCategory;      ///< Category/type of content
+struct ChannelArray {
+    ALIGN_VEC(id) channelOwnerIds;
+    ALIGN_VEC(id) channelIds;
+    ALIGN_VEC(unsigned int) channelCreationDates;
+    ALIGN_VEC(unsigned char) channelLanguages;
+    ALIGN_VEC(unsigned char) channelLocations;
+    ALIGN_VEC(unsigned char) channelCategories;
+
+    void resize(size_t new_size) {
+        channelOwnerIds.resize(new_size);
+        channelIds.resize(new_size);
+        channelCreationDates.resize(new_size);
+        channelLanguages.resize(new_size);
+        channelLocations.resize(new_size);
+        channelCategories.resize(new_size);
+    }
+
+    size_t size() const { return channelIds.size(); }
 };
 
-/**
- * @struct UserSubChannel
- * @brief Represents a user subscription to a channel.
- */
-struct UserSubChannel {
-    id subscriberId;            ///< Subscribing user's ID
-    id subscribedChannelId;     ///< Subscribed channel ID
+struct UserSubChannelArray {
+    ALIGN_VEC(id) subscriberIds;
+    ALIGN_VEC(id) subscribedChannelIds;
+
+    void resize(size_t new_size) {
+        subscriberIds.resize(new_size);
+        subscribedChannelIds.resize(new_size);
+    }
+
+    size_t size() const { return subscriberIds.size(); }
 };
 
-/**
- * @struct Content
- * @brief Metadata for content uploaded by a channel.
- */
-struct Content {
-    id contentChannelId;                    ///< ID of the uploading channel
-    ContentType contentType;                ///< Type of content
-    id contentId;                           ///< Unique content ID
-    datetime contentPubDateTime;            ///< Publication date
-    ContentStatus contentStatus;            ///< Content visibility status
-    unsigned char contentCategory;          ///< Content category
-    unsigned char contentLanguage;          ///< Language of the content
-    unsigned char contentIndRating;         ///< Content rating (e.g., PG, 18+)
-    std::vector<unsigned char> contentTags; ///< List of tag identifiers
-    deltatime contentDuration;              ///< Duration in seconds
-    int contentViewCount;                   ///< Number of views
-    int contentLikeCount;                   ///< Number of likes
-    int contentDislikeCount;                ///< Number of dislikes
-    int contentCommentCount;                ///< Number of comments
-    bool isLiveNow;                         ///< Whether the content is currently live
-    id fullvideoId;                         ///< Full video ID if part of a segment
+struct ContentArray {
+    ALIGN_VEC(id) contentChannelIds;
+    ALIGN_VEC(ContentType) contentTypes;
+    ALIGN_VEC(id) contentIds;
+    ALIGN_VEC(datetime) contentPubDateTimes;
+    ALIGN_VEC(ContentStatus) contentStatuses;
+    ALIGN_VEC(unsigned char) contentCategories;
+    ALIGN_VEC(unsigned char) contentLanguages;
+    ALIGN_VEC(unsigned char) contentIndRatings;
+    ALIGN_VEC(UnsignedChar4_t) contentTags;
+    ALIGN_VEC(deltatime) contentDurations;
+    ALIGN_VEC(int) contentViewCounts;
+    ALIGN_VEC(int) contentLikeCounts;
+    ALIGN_VEC(int) contentDislikeCounts;
+    ALIGN_VEC(int) contentCommentCounts;
+    ALIGN_VEC(bool) isLiveNows;
+    ALIGN_VEC(id) fullvideoIds;
+
+    void resize(size_t new_size) {
+        contentChannelIds.resize(new_size);
+        contentTypes.resize(new_size);
+        contentIds.resize(new_size);
+        contentPubDateTimes.resize(new_size);
+        contentStatuses.resize(new_size);
+        contentCategories.resize(new_size);
+        contentLanguages.resize(new_size);
+        contentIndRatings.resize(new_size);
+        contentTags.resize(new_size);
+        contentDurations.resize(new_size);
+        contentViewCounts.resize(new_size);
+        contentLikeCounts.resize(new_size);
+        contentDislikeCounts.resize(new_size);
+        contentCommentCounts.resize(new_size);
+        isLiveNows.resize(new_size);
+        fullvideoIds.resize(new_size);
+    }
+
+    size_t size() const { return contentIds.size(); }
 };
 
-/**
- * @struct UserWatchCont
- * @brief Represents a user's viewing session of a content.
- */
-struct UserWatchCont {
-    id userWatcherId;           ///< ID of the user watching
-    id contentWatchedId;        ///< ID of the content being watched
-    id watchId;                 ///< Unique ID for the watch session
-    datetime watchDateTime;     ///< When the watching began
-    deltatime watchDuration;    ///< Duration of the watching session
-    bool isHappening;           ///< Indicates if the watching is still ongoing
+struct UserWatchContArray {
+    ALIGN_VEC(id) userWatcherIds;
+    ALIGN_VEC(id) contentWatchedIds;
+    ALIGN_VEC(id) watchIds;
+    ALIGN_VEC(datetime) watchDateTimes;
+    ALIGN_VEC(deltatime) watchDurations;
+    ALIGN_VEC(bool) isHappenings;
+
+    void resize(size_t new_size) {
+        userWatcherIds.resize(new_size);
+        contentWatchedIds.resize(new_size);
+        watchIds.resize(new_size);
+        watchDateTimes.resize(new_size);
+        watchDurations.resize(new_size);
+        isHappenings.resize(new_size);
+    }
+
+    size_t size() const { return watchIds.size(); }
 };
 
-/**
- * @struct Comment
- * @brief Represents a comment made on a piece of content.
- */
-struct Comment {
-    id commentAuthorId;         ///< ID of the commenting user
-    id commentContentId;        ///< ID of the content being commented on
-    id commentId;               ///< Unique comment ID
-    datetime commentDateTime;   ///< Time when the comment was made
+struct CommentArray {
+    ALIGN_VEC(id) commentAuthorIds;
+    ALIGN_VEC(id) commentContentIds;
+    ALIGN_VEC(id) commentIds;
+    ALIGN_VEC(datetime) commentDateTimes;
+
+    void resize(size_t new_size) {
+        commentAuthorIds.resize(new_size);
+        commentContentIds.resize(new_size);
+        commentIds.resize(new_size);
+        commentDateTimes.resize(new_size);
+    }
+
+    size_t size() const { return commentIds.size(); }
 };
 
-/**
- * @struct Reply
- * @brief Represents a reply to a comment.
- */
-struct Reply {
-    id originalCommentId;   ///< ID of the comment being replied to
-    id commentReplyId;      ///< ID of the reply (comment)
+struct ReplyArray {
+    ALIGN_VEC(id) originalCommentIds;
+    ALIGN_VEC(id) commentReplyIds;
+
+    void resize(size_t new_size) {
+        originalCommentIds.resize(new_size);
+        commentReplyIds.resize(new_size);
+    }
+
+    size_t size() const { return commentReplyIds.size(); }
 };
 
-/**
- * @struct UserContInteraction
- * @brief Represents an interaction between a user and a content item.
- */
-struct UserContInteraction {
-    id userInteractId;                  ///< ID of the user interacting
-    id contentInteractedId;             ///< ID of the content interacted with
-    id interactionId;                   ///< Unique ID for the interaction
-    InteractionType interactionType;    ///< Type of interaction (like, dislike, share, etc.)
+struct UserContInteractionArray {
+    ALIGN_VEC(id) userInteractIds;
+    ALIGN_VEC(id) contentInteractedIds;
+    ALIGN_VEC(id) interactionIds;
+    ALIGN_VEC(InteractionType) interactionTypes;
+
+    void resize(size_t new_size) {
+        userInteractIds.resize(new_size);
+        contentInteractedIds.resize(new_size);
+        interactionIds.resize(new_size);
+        interactionTypes.resize(new_size);
+    }
+
+    size_t size() const { return interactionIds.size(); }
 };
 
 }

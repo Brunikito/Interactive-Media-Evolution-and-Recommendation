@@ -7,7 +7,8 @@
 #define RANDOM_GENERATORS_H
 
 #include <relations.h>
-#include <unordered_map>
+#include <vector>
+#include <stdexcept>
 
 /**
  * @namespace RandomRelations
@@ -23,183 +24,138 @@ namespace RandomRelations {
  * for users, channels, content, views, comments, and interactions.
  */
 class IdBatchManager {
+    protected:
+    int64_t _nextUserId = 0;            /// Next available user ID.
+    int64_t _nextChannelId = 0;         /// Next available channel ID.
+    int64_t _nextContentId = 0;         /// Next available content ID.
+    int64_t _nextWatchId = 0;           /// Next available view ID.
+    int64_t _nextCommentId = 0;         /// Next available comment ID.
+    int64_t _nextInteractionId = 0;     /// Next available interaction ID.
+    
     public:
-        /// Next available user ID.
-        int nextUserId = 0;
-        /// Next available channel ID.
-        int nextChannelId = 0;
-        /// Next available content ID.
-        int nextContentId = 0;
-        /// Next available view ID.
-        int nextWatchId = 0;
-        /// Next available comment ID.
-        int nextCommentId = 0;
-        /// Next available interaction ID.
-        int nextInteractionId = 0;
+    IdBatchManager();
+    inline int64_t getNextUserId() { return _nextUserId; }                  /// Return next available user ID.
+    inline int64_t getNextChannelId() { return _nextChannelId; }            /// Return next available channel ID.
+    inline int64_t getNextContentId() { return _nextContentId; }            /// Return next available content ID.
+    inline int64_t getNextWatchId() { return _nextWatchId; }                /// Return next available view ID.
+    inline int64_t getNextCommentId() { return _nextCommentId; }            /// Return next available comment ID.
+    inline int64_t getNextInteractionId() { return _nextInteractionId; }    /// Return next available interaction ID.
 
-        /**
-         * @brief Returns the next available user ID and advances.
-         * @param amount Number of IDs to reserve (default = 1).
-         * @return The first ID of the reserved sequence.
-         */
-        int getAndAdvanceUserId(int amount = 1) {
-            if (amount < 0) {
-                throw std::invalid_argument("Amount must be non-negative");
-            }
-            int start = nextUserId;
-            nextUserId += amount;
-            return start;
+    /**
+     * @brief Returns the next available user ID and advances.
+     * @param amount Number of IDs to reserve (default = 1).
+     * @return The first ID of the reserved sequence.
+     */
+    int64_t getAndAdvanceUserId(int64_t amount = 1) {
+        if (amount < 0) {
+            throw std::invalid_argument("Amount must be non-negative");
         }
+        int64_t start =  _nextUserId;
+        _nextUserId += amount;
+        return start;
+    }
 
-        /**
-         * @brief Returns the next available channel ID and advances.
-         * @param amount Number of IDs to reserve (default = 1).
-         * @return The first ID of the reserved sequence.
-         */
-        int getAndAdvanceChannelId(int amount = 1) {
-            if (amount < 0) {
-                throw std::invalid_argument("Amount must be non-negative");
-            }
-            int start = nextChannelId;
-            nextChannelId += amount;
-            return start;
+    /**
+     * @brief Returns the next available channel ID and advances.
+     * @param amount Number of IDs to reserve (default = 1).
+     * @return The first ID of the reserved sequence.
+     */
+    int64_t getAndAdvanceChannelId(int64_t amount = 1) {
+        if (amount < 0) {
+            throw std::invalid_argument("Amount must be non-negative");
         }
+        int64_t start =  _nextChannelId;
+        _nextChannelId += amount;
+        return start;
+    }
 
-        /**
-         * @brief Returns the next available content ID and advances.
-         * @param amount Number of IDs to reserve (default = 1).
-         * @return The first ID of the reserved sequence.
-         */
-        int getAndAdvanceContentId(int amount = 1) {
-            if (amount < 0) {
-                throw std::invalid_argument("Amount must be non-negative");
-            }
-            int start = nextContentId;
-            nextContentId += amount;
-            return start;
+    /**
+     * @brief Returns the next available content ID and advances.
+     * @param amount Number of IDs to reserve (default = 1).
+     * @return The first ID of the reserved sequence.
+     */
+    int64_t getAndAdvanceContentId(int64_t amount = 1) {
+        if (amount < 0) {
+            throw std::invalid_argument("Amount must be non-negative");
         }
+        int64_t start =  _nextContentId;
+        _nextContentId += amount;
+        return start;
+    }
 
-        /**
-         * @brief Returns the next available view ID and advances.
-         * @param amount Number of IDs to reserve (default = 1).
-         * @return The first ID of the reserved sequence.
-         */
-        int getAndAdvanceWatchId(int amount = 1) {
-            if (amount < 0) {
-                throw std::invalid_argument("Amount must be non-negative");
-            }
-            int start = nextWatchId;
-            nextWatchId += amount;
-            return start;
+    /**
+     * @brief Returns the next available view ID and advances.
+     * @param amount Number of IDs to reserve (default = 1).
+     * @return The first ID of the reserved sequence.
+     */
+    int64_t getAndAdvanceWatchId(int64_t amount = 1) {
+        if (amount < 0) {
+            throw std::invalid_argument("Amount must be non-negative");
         }
+        int64_t start =  _nextWatchId;
+        _nextWatchId += amount;
+        return start;
+    }
 
-        /**
-         * @brief Returns the next available comment ID and advances.
-         * @param amount Number of IDs to reserve (default = 1).
-         * @return The first ID of the reserved sequence.
-         */
-        int getAndAdvanceCommentId(int amount = 1) {
-            if (amount < 0) {
-                throw std::invalid_argument("Amount must be non-negative");
-            }
-            int start = nextCommentId;
-            nextCommentId += amount;
-            return start;
+    /**
+     * @brief Returns the next available comment ID and advances.
+     * @param amount Number of IDs to reserve (default = 1).
+     * @return The first ID of the reserved sequence.
+     */
+    int64_t getAndAdvanceCommentId(int64_t amount = 1) {
+        if (amount < 0) {
+            throw std::invalid_argument("Amount must be non-negative");
         }
+        int64_t start =  _nextCommentId;
+        _nextCommentId += amount;
+        return start;
+    }
 
-        /**
-         * @brief Returns the next available interaction ID and advances.
-         * @param amount Number of IDs to reserve (default = 1).
-         * @return The first ID of the reserved sequence.
-         */
-        int getAndAdvanceInteractionId(int amount = 1) {
-            if (amount < 0) {
-                throw std::invalid_argument("Amount must be non-negative");
-            }
-            int start = nextInteractionId;
-            nextInteractionId += amount;
-            return start;
+    /**
+     * @brief Returns the next available interaction ID and advances.
+     * @param amount Number of IDs to reserve (default = 1).
+     * @return The first ID of the reserved sequence.
+     */
+    int64_t getAndAdvanceInteractionId(int64_t amount = 1) {
+        if (amount < 0) {
+            throw std::invalid_argument("Amount must be non-negative");
         }
+        int64_t start =  _nextInteractionId;
+        _nextInteractionId += amount;
+        return start;
+    }
+
+    void reset() {
+        _nextUserId = 0;
+        _nextChannelId = 0;
+        _nextContentId = 0;
+        _nextWatchId = 0;
+        _nextCommentId = 0;
+        _nextInteractionId = 0;
+    }
 };
 
 /**
  * @brief A constant representing an invalid ID (-1).
  */
-constexpr int invalidId = -1;
+constexpr int64_t invalidId = -1;
 
-/**
- * @brief Adds randomly generated users to the provided user map.
- * 
- * @param userInput The map to populate with new users.
- * @param numberOfUsers Number of users to generate.
- */
-void addRandomUser(std::unordered_map<int, Relations::User>& userInput, int numberOfUsers, IdBatchManager& ids);
+class RandomGenerator {
+    public:
+    explicit RandomGenerator(IdBatchManager& idManager) : ids(idManager) {}
 
-/**
- * @brief Adds randomly generated channels based on a ratio of the number of users.
- * 
- * @param channelInput The map to populate with new channels.
- * @param userInput The existing map of users for channel ownership.
- * @param creationRatio Ratio of channels to users.
- */
-void addRandomChannel(std::unordered_map<int, Relations::Channel>& channelInput, std::unordered_map<int, Relations::User>& userInput, float creationRatio, IdBatchManager& ids);
+    void addRandomUser(Relations::UserArray& userInput, int numberOfUsers);
+    void addRandomChannel(Relations::ChannelArray& channelInput, const Relations::UserArray& userInput, float creationRatio);
+    void addRandomSubs(Relations::UserSubChannelArray& subsInput, const Relations::ChannelArray& channelInput, const Relations::UserArray& userInput);
+    void addRandomContent(Relations::ContentArray& contentInput, const Relations::ChannelArray& channelInput, float creationRatio);
+    void addRandomWatch(Relations::UserWatchContArray& watchInput, const Relations::UserArray& userInput, const Relations::ContentArray& contentInput, int maxWatchSameTime, float userWatchRatio);
+    void addRandomComment(Relations::CommentArray& commentsInput, const Relations::UserWatchContArray& watchInput, float commentRatio);
+    void addRandomReplies(Relations::ReplyArray& repliesInput, const Relations::CommentArray& commentsInput, const Relations::UserWatchContArray& watchInput, float replyRatio);
+    void addRandomInteractions(Relations::UserContInteractionArray& interactionInput, const Relations::UserWatchContArray& watchInput, float interactRatio);
 
-/**
- * @brief Adds random user subscriptions to channels.
- * 
- * @param subsInput The map to populate with user-channel subscriptions.
- * @param channelInput The existing channels available for subscription.
- * @param userInput The existing users subscribing to channels.
- */
-void addRandomSubs(std::unordered_map<int, Relations::UserSubChannel>& subsInput, const std::unordered_map<int, Relations::Channel>& channelInput, const std::unordered_map<int, Relations::User>& userInput, IdBatchManager& ids);
-
-/**
- * @brief Adds random content entries to the content map.
- * 
- * @param contentInput The map to populate with content.
- * @param creationRatio Ratio of content per user/channel.
- */
-void addRandomContent(std::unordered_map<int, Relations::Content>& contentInput, float creationRatio, IdBatchManager& ids);
-
-/**
- * @brief Adds random user-content watch interactions.
- * 
- * @param watchInput The map to populate with watch events.
- * @param userInput The users watching content.
- * @param contentInput The content being watched.
- * @param maxWatchSameTime Maximum concurrent watch interactions allowed.
- * @param userWatchRatio Ratio of how much users engage in watching content.
- */
-void addRandomWatch(std::unordered_map<int, Relations::UserWatchCont>& watchInput, const std::unordered_map<int, Relations::User>& userInput, const std::unordered_map<int, Relations::Content>& contentInput, int maxWatchSameTime, float userWatchRatio, IdBatchManager& ids);
-
-/**
- * @brief Adds random comments from users on watched content.
- * 
- * @param commentsInput The map to populate with comments.
- * @param watchInput The user watch history to determine comment context.
- * @param commentRatio Ratio of watch events that result in a comment.
- */
-void addRandomComment(std::unordered_map<int, Relations::Comment>& commentsInput, const std::unordered_map<int, Relations::UserWatchCont>& watchInput, float commentRatio, IdBatchManager& ids);
-
-/**
- * @brief Adds random replies to existing comments.
- * 
- * @param repliesInput The map to populate with replies.
- * @param commentsInput Existing comments to reply to.
- * @param watchInput User watch data to guide reply authorship.
- * @param replyRatio Ratio of comments that receive replies.
- */
-void addRandomReplies(std::unordered_map<int, Relations::Reply>& repliesInput, std::unordered_map<int, Relations::Comment>& commentsInput, const std::unordered_map<int, Relations::UserWatchCont>& watchInput, float replyRatio, IdBatchManager& ids);
-
-/**
- * @brief Adds random user interactions (likes, dislikes, etc.) with content.
- * 
- * @param interactionInput The map to populate with interaction data.
- * @param watchInput The watch context from which interactions may originate.
- * @param interactRatio Ratio of watches that result in an interaction.
- */
-void addRandomInteractions(std::unordered_map<int, Relations::UserContInteraction>& interactionInput, const std::unordered_map<int, Relations::UserWatchCont>& watchInput, float interactRatio, IdBatchManager& ids);
+    private:
+    IdBatchManager& ids;
+};
 
 }
-
 #endif

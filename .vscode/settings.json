@@ -68,6 +68,15 @@
         "stop_token": "cpp",
         "thread": "cpp",
         "variant": "cpp",
-        "xtree": "cpp"
+        "xtree": "cpp",
+        "future": "cpp",
+        "algorithm": "cpp",
+        "coroutine": "cpp",
+        "resumable": "cpp",
+        "array": "cpp",
+        "chrono": "cpp",
+        "forward_list": "cpp",
+        "iomanip": "cpp",
+        "random": "cpp"
     }
 }

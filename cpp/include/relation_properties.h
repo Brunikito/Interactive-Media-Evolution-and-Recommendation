@@ -84,23 +84,19 @@ enum TimeZone {
  * 
  * @note Countries with fewer languages use zero-padding or redundant values.
  */
-constexpr LanguageCode countryLanguages[61][MAX_LANGS_PER_COUNTRY] = {
-    {ES,EN}, {ES}, {EN,FR,IU}, {ES}, {ES}, {ES,QU,AY}, {EN,ES,HAW,FR}, 
-    {ES}, {ES,EN,IT,DE,FR,GN}, {PT,ES,EN,FR}, {EN,CY,GD}, {EN,GA}, 
-    {PT,MWL}, {DE,HR,HU,SL}, {NL,FR,DE}, {DE,FR,IT,RM}, {CS,SK}, {DE}, 
-    {DA,EN,FO,DE}, {ES,CA,GL,EU,OC}, {FR,FRP,BR,CO,CA,EU,OC}, {HR,SR}, 
-    {HU}, {IT,DE,FR,SC,CA,CO,SL}, {LB,DE,FR}, {AR,BER,FR}, {NL,FY}, 
-    {NO,NB,NN,SE,FI}, {PL}, {SV,SE,SMA,FI}, {SK,HU}, {BG,TR,ROM}, 
-    {EL,TR,EN}, {ET,RU}, {AR,EN,FR}, {FI,SV,SMN}, {EL,EN,FR}, {HE,AR,EN,}, 
-    {LT,RU,PL}, {LV,RU,LT}, {RO,HU,ROM}, {UK,RU,ROM,PL,HU}, 
-    {ZU,XH,AF,NSO,EN,TN,ST,TS,SS,VE,NR}, 
-    {RU,TT,XAL,CAU,ADY,KV,CE,TYV,CV,UDM,TUT,MNS,BUA,MYV,MDF,CHM,BA,INH,KBD,KRC,AV,SAH,NOG}, 
-    {AR}, {TR,KU,DIQ,AZ,AV}, {AR,FA,EN,HI,UR}, 
-    {EN,HI,BN,TE,MR,TA,UR,GU,KN,ML,OR,PA,AS,BH,SAT,KS,NE,SD,KOK,DOI,MNI,SIT,SA,FR,LUS,INC}, 
-    {ID,EN,NL,JV}, {TH,EN}, {VI,EN,FR,ZH,KM}, {ZH,YUE,WUU,DTA,UG,ZA}, {ZH,YUE,ZH,EN}, 
-    {MS,EN,ZH,TA,TE,ML,PA,TH}, 
-    {TL,EN,FIL,CEB,ILO,HIL,WAR,PAM,BIK,BCL,PAG,MRW,TSG,MDH,CBK,KRJ,SGD,MSB,AKL,IBG,YKA,MTA,ABX}, 
-    {CMN,EN,MS,TA,ZH}, {ZH,ZH,NAN,HAK}, {JA}, {KO,EN}, {EN}, {EN,MI}
+constexpr LanguageCode countryLanguages[61] = {
+    ES, ES, EN, ES, ES, ES, EN, 
+    ES, ES, PT, EN, EN, 
+    PT, DE, NL, DE, CS, DE, 
+    DA, ES, FR, HR, 
+    HU, IT, LB, AR, NL, 
+    NO, PL, SV, SK, BG, 
+    EL, ET, AR, FI, EL, HE, 
+    LT, LV, RO, UK, 
+    ZU, RU, AR, TR, AR, 
+    EN, ID, TH, VI, ZH, 
+    ZH, MS, TL, CMN, ZH, 
+    JA, KO, EN, EN
 };
 
 /**
@@ -128,6 +124,32 @@ constexpr TimeZone countryTimeZones[61] = {
     UTC_10,   ///< 1 país no UTC +10
     UTC_12    ///< 1 país no UTC +12
 };
-}
 
+
+/**
+ * @brief Horários fixos para o primeiro turno (7h–15h).
+ */
+constexpr Relations::Schedule FIRST_SHIFT_SCHEDULE = {
+    22,  // bedTime
+    6,   // wakeTime
+    12,  // lunchTime
+    21,  // dinnerTime
+    7,   // workTime
+    15,  // freeFromWorkTime
+    0b0111110 // workDays: segunda a sexta (bitmask)
+};
+
+/**
+ * @brief Horários fixos para o segundo turno (14h–22h).
+ */
+constexpr Relations::Schedule SECOND_SHIFT_SCHEDULE = {
+    0,   // bedTime
+    8,   // wakeTime
+    12,  // lunchTime
+    23,  // dinnerTime
+    14,  // workTime
+    22,  // freeFromWorkTime
+    0b0111110 // workDays: segunda a sexta
+};
+};
 #endif
