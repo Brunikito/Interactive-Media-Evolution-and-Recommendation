@@ -142,10 +142,10 @@ constexpr int64_t invalidId = -1;
 
 class RandomGenerator {
     public:
-    explicit RandomGenerator(IdBatchManager& idManager) : ids(idManager) {}
+    explicit RandomGenerator(IdBatchManager& idManager, bool debugMode = false) : ids(idManager), debugMode(debugMode) {}
 
     void addRandomUser(Relations::UserArray& userInput, int numberOfUsers);
-    void addRandomChannel(Relations::ChannelArray& channelInput, const Relations::UserArray& userInput, float creationRatio);
+    void addRandomChannel(Relations::ChannelArray& channelInput, Relations::UserArray& userInput, float creationRatio, int creationDate);
     void addRandomSubs(Relations::UserSubChannelArray& subsInput, const Relations::ChannelArray& channelInput, const Relations::UserArray& userInput);
     void addRandomContent(Relations::ContentArray& contentInput, const Relations::ChannelArray& channelInput, float creationRatio);
     void addRandomWatch(Relations::UserWatchContArray& watchInput, const Relations::UserArray& userInput, const Relations::ContentArray& contentInput, int maxWatchSameTime, float userWatchRatio);
@@ -155,6 +155,7 @@ class RandomGenerator {
 
     private:
     IdBatchManager& ids;
+    bool debugMode;
 };
 
 }
