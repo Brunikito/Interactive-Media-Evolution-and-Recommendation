@@ -146,15 +146,19 @@ struct ChannelArray {
 };
 
 struct UserSubChannelArray {
-    ALIGN_VEC(id) subscriberIds;
-    ALIGN_VEC(id) subscribedChannelIds;
+    ALIGN_VEC(ALIGN_VEC(id)) userIdSubscriptions;
+    ALIGN_VEC(ALIGN_VEC(id)) channelIdSubscribers;
 
-    void resize(size_t new_size) {
-        subscriberIds.resize(new_size);
-        subscribedChannelIds.resize(new_size);
+    void resizeUsers(size_t new_size) {
+        userIdSubscriptions.resize(new_size);
     }
 
-    size_t size() const { return subscriberIds.size(); }
+    void resizeChannels(size_t new_size) {
+        channelIdSubscribers.resize(new_size);
+    }
+
+    size_t sizeUsers() const { return userIdSubscriptions.size(); }
+    size_t sizeChannels() const { return channelIdSubscribers.size(); }
 };
 
 struct ContentArray {

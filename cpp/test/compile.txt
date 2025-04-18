@@ -1,1 +1,1 @@
-g++ -mavx -fopenmp test_random_generators.cpp ../src/random_generators.cpp -I ../include -I C:/Dev/googletest/googletest/include -L C:/Dev/googletest/build/lib -lgtest -lgtest_main -pthread -o test_runner.exe
+g++ test_random_generators.cpp ../src/random_generators.cpp -I ../include -I C:/Dev/googletest/googletest/include -L C:/Dev/googletest/build/lib -lgtest -lgtest_main -pthread -o test_runner.exe

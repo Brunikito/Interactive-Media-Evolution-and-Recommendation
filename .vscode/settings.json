@@ -77,6 +77,13 @@
         "chrono": "cpp",
         "forward_list": "cpp",
         "iomanip": "cpp",
-        "random": "cpp"
+        "random": "cpp",
+        "bitset": "cpp",
+        "cinttypes": "cpp",
+        "deque": "cpp",
+        "execution": "cpp",
+        "numeric": "cpp",
+        "queue": "cpp",
+        "unordered_set": "cpp"
     }
 }
