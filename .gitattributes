@@ -6,3 +6,4 @@
 *.txt linguist-detectable=false
 *.csv linguist-detectable=false
 *.parquet linguist-detectable=false
+*.json linguist-detectable=false
