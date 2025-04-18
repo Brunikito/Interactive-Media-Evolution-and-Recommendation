@@ -44,7 +44,7 @@ using deltatime = unsigned int;
  * @enum ContentType
  * @brief Represents the type of content.
  */
-enum class ContentType: uint8_t {
+enum ContentType: uint8_t {
     VIDEO,  ///< Regular video
     SHORT,  ///< Short-form content
     LIVE    ///< Live broadcast
@@ -54,7 +54,7 @@ enum class ContentType: uint8_t {
  * @enum GenderType
  * @brief Binary gender type.
  */
-enum class GenderType: unsigned char {
+enum GenderType: unsigned char {
     MALE = 0,    ///< Male
     FEMALE = 1  ///< Female
 };
@@ -63,7 +63,7 @@ enum class GenderType: unsigned char {
  * @enum ContentStatus
  * @brief Visibility or accessibility status of content.
  */
-enum class ContentStatus: uint8_t {
+enum ContentStatus: uint8_t {
     PUBLIC,     ///< Publicly available
     PRIVATE,    ///< Only accessible to owner
     NONLISTED,  ///< Hidden but accessible via direct link
@@ -74,7 +74,7 @@ enum class ContentStatus: uint8_t {
  * @enum InteractionType
  * @brief Represents types of user interactions with content.
  */
-enum class InteractionType: uint8_t {
+enum InteractionType: uint8_t {
     LIKE,    ///< User liked the content
     DISLIKE, ///< User disliked the content
     REPORT,  ///< User reported the content

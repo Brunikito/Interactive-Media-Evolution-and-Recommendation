@@ -2,6 +2,7 @@
 #include "../include/aligned_alocator.h"
 #include <immintrin.h>
 #include <type_traits>
+#include "pcg_random.hpp"
 
 namespace RandomUtils {
     inline __m256i splitmix64_avx2(__m256i idx);
@@ -22,4 +23,5 @@ namespace RandomUtils {
     int64_t computeCoprime(int64_t number);
     void shuffleLinspace(std::vector<int64_t, AlignedAllocator<int64_t, 32>>& linspace, int64_t numberOfElements);
 
+    float sampleBeta (float alpha, float beta, pcg64_fast& rng);
 }

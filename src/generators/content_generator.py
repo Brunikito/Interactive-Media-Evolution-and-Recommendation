@@ -140,7 +140,7 @@ def create_random_content(
     t1 = time.perf_counter()
     content_type = rng.choice(['Video', 'Short', 'Live'], size=num_content, p=[0.6, 0.3, 0.1])
     content_duration = np.empty(num_content, dtype=np.float32)
-    content_duration[content_type == 'Video'] = rng.beta(2, 4, (content_type == 'Video').sum()) * 60
+    content_duration[content_type == 'Video'] = rng.beta(2, 4, (content_type == 'Video').sum()) * 3600
     content_duration[content_type == 'Short'] = rng.beta(4, 2, (content_type == 'Short').sum()) * 60
     content_duration[content_type == 'Live'] = rng.beta(2, 3, (content_type == 'Live').sum()) * 18000
     timings['duration'] = time.perf_counter() - t1

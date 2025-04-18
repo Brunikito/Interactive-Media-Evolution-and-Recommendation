@@ -147,7 +147,7 @@ class RandomGenerator {
     void addRandomUser(Relations::UserArray& userInput, int numberOfUsers);
     void addRandomChannel(Relations::ChannelArray& channelInput, Relations::UserArray& userInput, float creationRatio, int date);
     void addRandomSubs(Relations::UserSubChannelArray& subsInput, const Relations::ChannelArray& channelInput, const Relations::UserArray& userInput, float maxUserRatio);
-    void addRandomContent(Relations::ContentArray& contentInput, const Relations::ChannelArray& channelInput, float creationRatio);
+    void addRandomContent(Relations::ContentArray& contentInput, const Relations::ChannelArray& channelInput, float creationRatio, int creationDate);
     void addRandomWatch(Relations::UserWatchContArray& watchInput, const Relations::UserArray& userInput, const Relations::ContentArray& contentInput, int maxWatchSameTime, float userWatchRatio);
     void addRandomComment(Relations::CommentArray& commentsInput, const Relations::UserWatchContArray& watchInput, float commentRatio);
     void addRandomReplies(Relations::ReplyArray& repliesInput, const Relations::CommentArray& commentsInput, const Relations::UserWatchContArray& watchInput, float replyRatio);
