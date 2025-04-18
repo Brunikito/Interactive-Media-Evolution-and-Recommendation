@@ -14,8 +14,11 @@
 #include <cstdlib>
 #include <stdexcept>
 #include "aligned_alocator.h"
+#include "unordered_linked_list.h"
 
 #define ALIGN_VEC(type) std::vector<type, AlignedAllocator<type, 32>>
+using ULL = UnorderedLinkedList::UnorderedLinkedList;
+using AlignedULLVec = std::vector<ULL*, AlignedAllocator<ULL*, 32>>;
 
 namespace Relations {
 
@@ -146,8 +149,8 @@ struct ChannelArray {
 };
 
 struct UserSubChannelArray {
-    ALIGN_VEC(ALIGN_VEC(id)) userIdSubscriptions;
-    ALIGN_VEC(ALIGN_VEC(id)) channelIdSubscribers;
+    AlignedULLVec userIdSubscriptions;
+    AlignedULLVec channelIdSubscribers;
 
     void resizeUsers(size_t new_size) {
         userIdSubscriptions.resize(new_size);
