@@ -1,4 +1,3 @@
-#pragma once
 #include "../include/aligned_alocator.h"
 #include "../include/random_utils.h"
 #include <unordered_set>

@@ -1,8 +1,13 @@
+#ifndef RANDOM_UTILS_H
+#define RANDOM_UTILS_H
+
 #pragma once
 #include "../include/aligned_alocator.h"
 #include <immintrin.h>
 #include <type_traits>
 #include "pcg_random.hpp"
+#include <vector>
+#include <cstdint>
 
 namespace RandomUtils {
     inline __m256i splitmix64_avx2(__m256i idx);
@@ -25,3 +30,5 @@ namespace RandomUtils {
 
     float sampleBeta (float alpha, float beta, pcg64_fast& rng);
 }
+
+#endif

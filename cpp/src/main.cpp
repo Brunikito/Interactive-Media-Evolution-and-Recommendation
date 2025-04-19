@@ -2,7 +2,7 @@
 #include <chrono>
 #include "../include/relations.h"
 #include "../include/random_generators.h"
-#include "../utils/random_utils.cpp"
+#include "../include/random_utils.h"
 #include <unordered_set>
 #include <numeric>
 

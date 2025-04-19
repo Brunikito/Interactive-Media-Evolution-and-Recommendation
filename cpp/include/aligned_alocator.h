@@ -1,3 +1,6 @@
+#ifndef ALIGNED_ALOCATOR_H
+#define ALIGNED_ALOCATOR_H
+
 #pragma once
 #include <malloc.h>     // para _aligned_malloc e _aligned_free no Windows
 #include <new>
@@ -39,3 +42,5 @@ template <typename T1, std::size_t A1, typename T2, std::size_t A2>
 bool operator!=(const AlignedAllocator<T1, A1>&, const AlignedAllocator<T2, A2>&) noexcept {
     return A1 != A2;
 }
+
+#endif

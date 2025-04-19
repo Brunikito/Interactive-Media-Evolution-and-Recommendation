@@ -1,9 +1,9 @@
-#pragma once
 #include "../include/aligned_alocator.h"
 #include <vector>
 #include <omp.h>
 #include <immintrin.h>
 #include <type_traits>
+#include <cstdint>
 
 namespace FastCopy {
 
