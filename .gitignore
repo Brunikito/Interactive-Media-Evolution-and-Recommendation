@@ -1,9 +1,3 @@
-# Compilados Cython
-*.c
-*.cpp
-*.so
-*.pyd
-
 # Bytecode Python
 __pycache__/
 
