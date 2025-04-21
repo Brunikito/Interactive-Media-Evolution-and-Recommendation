@@ -11,9 +11,9 @@ struct Node
 {
     int64_t value;
     Node* nextNode;
-
-    Node() : value(0), nextNode(nullptr) {}
+    
     Node(int64_t val) : value(val), nextNode(nullptr) {}
+
 };
 
 
@@ -51,42 +51,15 @@ class UnorderedLinkedList {
             }
             return current->value;
         }
-};
-
-struct ThreadLocalNodePool {
-    std::vector<Node> nodes;
-    size_t nextIndex = 0;
-
-    void init(size_t capacity) {
-        nodes.resize(capacity);  // Aloca tudo de uma vez
-        nextIndex = 0;
-    }
-
-    Node* getNode(int64_t value) {
-        Node* node = &nodes[nextIndex++];
-        node->value = value;
-        return node;
-    }
-};
-
-struct ThreadLocalListPool {
-    std::vector<UnorderedLinkedList> lists;
-    size_t nextIndex = 0;
-
-    void init(size_t capacity) {
-        lists.resize(capacity);  // Aloca todas as listas de uma vez
-        nextIndex = 0;
-    }
-
-    UnorderedLinkedList* getList() {
-        if (nextIndex < lists.size()) {
-            return &lists[nextIndex++];
-        } else {
-            // Em caso de exaustão do pool, podemos adicionar uma nova lista ou retornar nullptr
-            // Se necessário, você pode gerenciar um fallback de alocação
-            return new UnorderedLinkedList();  // Ou algum outro comportamento desejado
+    
+        ~UnorderedLinkedList() {
+            Node* current = head;
+            while (current != nullptr) {
+                Node* next = current->nextNode;
+                delete current;
+                current = next;
+            }
         }
-    }
 };
 
 }

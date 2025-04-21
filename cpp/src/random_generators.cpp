@@ -112,8 +112,8 @@ void RandomGenerator::addRandomUser(Relations::UserArray &userInput, int numberO
                 int64_t langBase = baseId + j;
                 for(int k = 0; k < 8; k++) {
                     languages[k][0] = RelationProperties::countryLanguages[locs[k]];
-                    languages[k][1] = languages[k][0] + languageDist(rng);
-                    languages[k][2] = languages[k][0] + languageDist(rng);
+                    languages[k][1] = (languages[k][0] + languageDist(rng)) % 156;
+                    languages[k][2] = (languages[k][0] + languageDist(rng)) % 156;
                     languages[k][3] = 1;
                     if(languages[k][0] != languages[k][1]) {
                         languages[k][3]++;
@@ -156,8 +156,8 @@ void RandomGenerator::addRandomUser(Relations::UserArray &userInput, int numberO
         userInput.userEducations[uid] = (age < 23) ? (age - 6) : eduDist(rng);
 
         languages[0] = RelationProperties::countryLanguages[loc];
-        languages[1] = languages[0] + languageDist(rng);
-        languages[2] = languages[1] + languageDist(rng);
+        languages[1] = (languages[0] + languageDist(rng)) % 156;
+        languages[2] = (languages[1] + languageDist(rng)) % 156;
         if(languages[0] == languages[1]) {
             languages[3] = 1;
         } else if(languages[1] == languages[2] || languages[0] == languages[2]) {
@@ -279,7 +279,7 @@ void RandomGenerator::addRandomChannel(Relations::ChannelArray &channelInput, Re
     {
         pcg64_fast rng(rd() + omp_get_thread_num());
 
-        std::uniform_int_distribution<uint8_t> langDist(1, 3);
+        std::uniform_int_distribution<uint8_t> langDist(0, 2);
         std::uniform_int_distribution<uint8_t> tagDist(0, 14);
 
         alignas(32) uint8_t langs[simdWidth];
@@ -296,13 +296,13 @@ void RandomGenerator::addRandomChannel(Relations::ChannelArray &channelInput, Re
 
             // Gerar valores aleatórios
             for(int j = 0; j < simdWidth; j++) {
-                int vectorid = baseId + j;
-                langs[j] = langDist(rng);
-                if(langs[j] > userInput.userLanguages[userWithoutChannelIds[vectorid]][3]) {
-                    langs[j] = userInput.userLanguages[userWithoutChannelIds[vectorid]][3];
-                }
+                int userIdx = i + j;
+                int userId = userWithoutChannelIds[userIdx];
+                int langCount = userInput.userLanguages[userId][3];
+                int randIndex = langDist(rng);
+                langs[j] = userInput.userLanguages[userId][randIndex];
                 tags[j] = tagDist(rng);
-                locations[j] = userInput.userLocations[userWithoutChannelIds[vectorid]];
+                locations[j] = userInput.userLocations[userId];
             }
 
             // Carregar vetores AVX
@@ -313,12 +313,12 @@ void RandomGenerator::addRandomChannel(Relations::ChannelArray &channelInput, Re
             for(int j = 0; j < simdWidth; j += 4) {
                 int64_t baseIdIdsLoop = baseId + j;
                 __m256i channelIdsM256 = _mm256_set_epi64x(
-                                             baseIdIdsLoop, baseIdIdsLoop + 1,
-                                             baseIdIdsLoop + 2, baseIdIdsLoop + 3);
+                                             baseIdIdsLoop + 3, baseIdIdsLoop + 2,
+                                             baseIdIdsLoop + 1, baseIdIdsLoop);
 
                 __m256i channelOwnerIdsM256 = _mm256_set_epi64x(
-                                                  userWithoutChannelIds[i + j], userWithoutChannelIds[i + j + 1],
-                                                  userWithoutChannelIds[i + j + 2], userWithoutChannelIds[i + j + 3]);
+                                                  userWithoutChannelIds[i + j + 3], userWithoutChannelIds[i + j + 2],
+                                                  userWithoutChannelIds[i + j + 1], userWithoutChannelIds[i + j]);
 
                 _mm256_store_si256((__m256i *)&channelInput.channelIds[baseIdIdsLoop], channelIdsM256);
                 _mm256_store_si256((__m256i *)&channelInput.channelOwnerIds[baseIdIdsLoop], channelOwnerIdsM256);
@@ -330,21 +330,23 @@ void RandomGenerator::addRandomChannel(Relations::ChannelArray &channelInput, Re
             }
 
             for(int j = 0; j < simdWidth; j++) {
-                int64_t userBase = baseId + j;
+                int64_t userBase = i + j;
                 userInput.userChannelIds[userWithoutChannelIds[userBase]] = userBase;
             }
+
         }
 
         #pragma omp parallel for schedule(static) proc_bind(close)
         for(int i = adjustedNumberOfChannels; i < numberOfChannels; i++) {
             int64_t channelId = initialId + i;
             pcg64_fast rng(channelId); // seed estável pra debug
-            std::uniform_int_distribution<uint8_t> langDist(1, 3);
+            std::uniform_int_distribution<uint8_t> langDist(0, 2);
             std::uniform_int_distribution<uint8_t> tagDist(0, 14);
             unsigned char channelLanguage = langDist(rng);
-            if(channelLanguage > userInput.userLanguages[userWithoutChannelIds[i]][3]) {
-                channelLanguage = userInput.userLanguages[userWithoutChannelIds[i]][3];
+            if(channelLanguage >= userInput.userLanguages[userWithoutChannelIds[i]][3]) {
+                channelLanguage = userInput.userLanguages[userWithoutChannelIds[i]][userInput.userLanguages[userWithoutChannelIds[i]][3] - 1];
             }
+            else channelLanguage = userInput.userLanguages[userWithoutChannelIds[i]][channelLanguage];
             channelInput.channelCategories[i] = tagDist(rng);
             channelInput.channelCreationDates[i] = creationDate;
             channelInput.channelIds[i] = channelId;
@@ -380,7 +382,9 @@ void RandomGenerator::addRandomSubs(Relations::UserSubChannelArray& subsInput, c
     subsInput.resizeUsers(userInput.size());
     subsInput.resizeChannels(channelInput.size());
 
-    size_t maxPossibleSubscriptions = userInput.size();
+    size_t maxPossibleSubscriptions;
+    if (userInput.size() < channelInput.size()) maxPossibleSubscriptions = userInput.size();
+    else maxPossibleSubscriptions = channelInput.size();
     size_t numberOfSubscriptions = static_cast<size_t>(maxPossibleSubscriptions * maxUserRatio);
 
     if(numberOfSubscriptions == 0) {
@@ -395,32 +399,10 @@ void RandomGenerator::addRandomSubs(Relations::UserSubChannelArray& subsInput, c
     std::vector<int64_t, AlignedAllocator<int64_t, 32>> randomchannelIds = FastCopy::copyAlignedVector(channelInput.channelIds);
     RandomUtils::shuffleLinspace(randomchannelIds, numberOfSubscriptions);
     if(debugMode) timer.stop("Auxiliar vectors creation and shuffle");
-
-    if(debugMode) timer.start("Thread Nodes");
-    int numThreads = omp_get_max_threads();
-    std::vector<UnorderedLinkedList::ThreadLocalNodePool> threadPools(numThreads);
-    // Estima quantos nodes cada thread vai usar
-    size_t nodesPerThread = numberOfSubscriptions * 2 / numThreads;
-    for (int t = 0; t < numThreads; t++) {
-        threadPools[t].init(nodesPerThread);
-    }
-    if(debugMode) timer.stop("Thread Nodes");
-
-    if(debugMode) timer.start("Thread Lists");
-    std::vector<UnorderedLinkedList::ThreadLocalListPool> threadListPools(numThreads);
-    // Estima quantas listas cada thread vai usar
-    size_t listsPerThread = numberOfSubscriptions * 2 / numThreads;
-    for (int t = 0; t < numThreads; t++) {
-        threadListPools[t].init(listsPerThread);
-    }
-    if(debugMode) timer.stop("Thread Lists");
     
     if(debugMode) timer.start("Main loop");
     #pragma omp parallel for schedule(static)
     for (size_t i = 0; i < numberOfSubscriptions; i++) {
-        int threadId = omp_get_thread_num();
-        auto& pool = threadPools[threadId];
-        auto& listPool = threadListPools[threadId];
 
         int64_t userId = randomUserIds[i];
         int64_t channelId = randomchannelIds[i];
@@ -428,8 +410,8 @@ void RandomGenerator::addRandomSubs(Relations::UserSubChannelArray& subsInput, c
         UnorderedLinkedList::UnorderedLinkedList* userList = subsInput.userIdSubscriptions[userId];
         UnorderedLinkedList::UnorderedLinkedList* channelList = subsInput.channelIdSubscribers[channelId];
 
-        if (!userList) userList = listPool.getList();
-        if (!channelList) channelList = listPool.getList();
+        if (!userList) {userList = new UnorderedLinkedList::UnorderedLinkedList(); subsInput.userIdSubscriptions[userId] = userList;} 
+        if (!channelList) {channelList = new UnorderedLinkedList::UnorderedLinkedList(); subsInput.channelIdSubscribers[channelId] = channelList;}
 
         bool alreadySubscribed = false;
         if (userList->getSize() <= channelList->getSize()) {
@@ -439,13 +421,12 @@ void RandomGenerator::addRandomSubs(Relations::UserSubChannelArray& subsInput, c
         }
 
         if (!alreadySubscribed) {
-            // Inserir na lista usando o pool
-            auto node1 = pool.getNode(channelId);
+            auto node1 = new UnorderedLinkedList::Node(channelId);
             node1->nextNode = userList->head;
             userList->head = node1;
             userList->size++;
 
-            auto node2 = pool.getNode(userId);
+            auto node2 = new UnorderedLinkedList::Node(userId);
             node2->nextNode = channelList->head;
             channelList->head = node2;
             channelList->size++;
@@ -568,12 +549,14 @@ void RandomGenerator::addRandomContent(Relations::ContentArray& contentInput, co
                 } else {
                     contentInput.contentDurations[cid] = static_cast<unsigned int>(RandomUtils::sampleBeta(2, 3, rng) * 18000);
                 }
-
+                
+                //std::cout << "#";
                 // Is live
                 contentInput.isLiveNows[cid] = (types[j] == Relations::ContentType::LIVE);
                 contentInput.fullvideoIds[cid] = -1;
                 contentInput.contentPubDateTimes[cid] = creationDate;
-            }
+                //std::cout << "#";
+            } 
         }
 
         // Parte restante sem SIMD

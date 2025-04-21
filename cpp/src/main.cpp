@@ -12,11 +12,11 @@ int main() {
     Relations::UserSubChannelArray subArray;
     Relations::ContentArray contentArray;
     RandomRelations::IdBatchManager idManager;
-    RandomRelations::RandomGenerator generator(idManager, true);
+    RandomRelations::RandomGenerator generator(idManager);
     constexpr int userCount = 10'000'000;
 
     auto start = std::chrono::high_resolution_clock::now();
-    std::cout << std::endl << "Initiated User Generation";
+    std::cout << "Initiated User Generation" << std::endl;
     generator.addRandomUser(userArray, userCount);
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> duration = end - start;
@@ -26,29 +26,29 @@ int main() {
     start = std::chrono::high_resolution_clock::now();
     constexpr int date = 0;
     constexpr float channelCreationRatio = 1;
-    std::cout << std::endl << "Initiated Channel Generation";
+    std::cout << "Initiated Channel Generation" << std::endl;
     generator.addRandomChannel(channelArray, userArray, channelCreationRatio, date);
     end = std::chrono::high_resolution_clock::now();
     duration = end - start;
-    std::cout << "Time to add " << channelCreationRatio*100 << "'%' channels: "
+    std::cout << "Time to add " << channelCreationRatio*userCount << " channels: "
               << duration.count() << " seconds." << std::endl;
 
     start = std::chrono::high_resolution_clock::now();
-    std::cout << std::endl << "Initiated Subs Generation";
+    std::cout << "Initiated Subs Generation" << std::endl;
     constexpr float maxUserRatio = 1;
     generator.addRandomSubs(subArray, channelArray, userArray, maxUserRatio);
     end = std::chrono::high_resolution_clock::now();
     duration = end - start;
-    std::cout << "Time to sub " << maxUserRatio*100 << "'%' users: "
+    std::cout << "Time to sub " << maxUserRatio*userCount << " users: "
             << duration.count() << " seconds." << std::endl;
 
     start = std::chrono::high_resolution_clock::now();
     constexpr float contentCreationRatio = 1;
-    std::cout << std::endl << "Initiated Content Generation";
+    std::cout << "Initiated Content Generation" << std::endl;
     generator.addRandomContent(contentArray, channelArray, contentCreationRatio, date);
     end = std::chrono::high_resolution_clock::now();
     duration = end - start;
-    std::cout << "Time to add " << contentCreationRatio*100 << "'%' Content: "
+    std::cout << "Time to add " << contentCreationRatio*userCount << " content: "
                 << duration.count() << " seconds." << std::endl;
     
     return 0;

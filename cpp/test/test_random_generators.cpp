@@ -1,7 +1,10 @@
 #include <gtest/gtest.h>
 #include "../include/random_generators.h"
 #include "../include/relation_properties.h"
+#include "../include/aligned_alocator.h"
+#include "../include/relation_properties.h"
 #include <vector>
+#include <unordered_set>
 
 using namespace RandomRelations;
 
@@ -246,6 +249,25 @@ TEST_F(RandomGeneratorTest, HandlesZeroIncrement){
     EXPECT_ANY_THROW(generator.addRandomUser(users, zeroUsers));
     EXPECT_EQ(users.size(), 0);
 }
+TEST_F(RandomGeneratorTest, AddRandomUserSingle) {
+    generator.addRandomUser(users, 1);
+    EXPECT_EQ(users.size(), 1);
+    EXPECT_EQ(users.userIds[0], 0);
+}
+TEST_F(RandomGeneratorTest, AddRandomUserSIMDEdgeCases) {
+    generator.addRandomUser(users, 31);
+    EXPECT_EQ(users.size(), 31);
+    users.resize(0);
+    idManager.reset();
+
+    generator.addRandomUser(users, 32);
+    EXPECT_EQ(users.size(), 32);
+    users.resize(0);
+    idManager.reset();
+
+    generator.addRandomUser(users, 33);
+    EXPECT_EQ(users.size(), 33);
+}
 
 class RandomChannelGeneratorTest : public ::testing::Test {
 protected:
@@ -308,9 +330,7 @@ TEST_F(RandomChannelGeneratorTest, ChannelsCreatedWithCorrectValues) {
         EXPECT_EQ(channels.channelCreationDates[i], creationDate);
 
         // Linguagem dentro do limite do user
-        unsigned char langIndicator = users.userLanguages[ownerId][3];
-        EXPECT_GE(channels.channelLanguages[i], 1);
-        EXPECT_LE(channels.channelLanguages[i], langIndicator);
+        EXPECT_TRUE(channels.channelLanguages[i] == users.userLanguages[ownerId][0] || channels.channelLanguages[i] == users.userLanguages[ownerId][1] || channels.channelLanguages[i] == users.userLanguages[ownerId][2]);
 
         // Categoria válida
         EXPECT_GE(channels.channelCategories[i], 0);
@@ -342,6 +362,305 @@ TEST_F(RandomChannelGeneratorTest, FullRatioCreatesAllAvailableChannels) {
     // All users should now have a non -1 channel id
     for (size_t i = 0; i < users.size(); ++i) {
         EXPECT_NE(users.userChannelIds[i], -1);
+    }
+}
+TEST_F(RandomChannelGeneratorTest, AddChannelWhenFull) {
+    generator.addRandomChannel(channels, users, 1.0, 0);
+    EXPECT_THROW(generator.addRandomChannel(channels, users, 0.5, 0), std::invalid_argument);
+}
+TEST_F(RandomChannelGeneratorTest, AddChannelAlmostFull) {
+    generator.addRandomChannel(channels, users, 0.999f, 0);
+    EXPECT_NE(channels.size(), 0);
+}
+
+class RandomSubsGeneratorTest : public ::testing::Test {
+    protected:
+    IdBatchManager idManager;
+    RandomGenerator generator;
+
+    RandomSubsGeneratorTest() : generator(idManager) {}
+
+    Relations::UserArray users;
+    Relations::ChannelArray channels;
+    Relations::UserSubChannelArray subs;
+
+    void SetUp() override {
+        // Prepare 200 users
+        generator.addRandomUser(users, 200);
+        // Prepare 100 channels
+        generator.addRandomChannel(channels, users, 0.5, 0);
+    }
+};
+TEST_F(RandomSubsGeneratorTest, InvalidArgumentsThrow){
+    EXPECT_ANY_THROW(generator.addRandomSubs(subs, channels, users, -1));
+    EXPECT_ANY_THROW(generator.addRandomSubs(subs, channels, users, 0));
+    EXPECT_ANY_THROW(generator.addRandomSubs(subs, channels, users, 2));
+    Relations::UserArray emptyUsers;
+    Relations::ChannelArray emptyChannels;
+    EXPECT_ANY_THROW(generator.addRandomSubs(subs, channels, emptyUsers, 0.5));
+    EXPECT_ANY_THROW(generator.addRandomSubs(subs, emptyChannels, users, 0.5));
+    EXPECT_ANY_THROW(generator.addRandomSubs(subs, emptyChannels, emptyUsers, 0.5));
+}
+TEST_F(RandomSubsGeneratorTest, SingleInput) {
+    IdBatchManager idManagerSingleInput;
+    Relations::UserSubChannelArray singleSub;
+    Relations::UserArray singleUser;
+    Relations::ChannelArray singleChannel;
+    RandomGenerator generatorSingleInput(idManagerSingleInput); 
+    generatorSingleInput.addRandomUser(singleUser, 1); 
+    generatorSingleInput.addRandomChannel(singleChannel, singleUser, 1, 0); 
+    generatorSingleInput.addRandomSubs(singleSub, singleChannel, singleUser, 1);
+    EXPECT_EQ(singleSub.sizeChannels(), 1);
+    EXPECT_EQ(singleSub.sizeUsers(), 1);
+    EXPECT_EQ(singleSub.userIdSubscriptions[0]->size, 1);
+    EXPECT_EQ(singleSub.channelIdSubscribers[0]->size, 1);
+    EXPECT_EQ(singleSub.userIdSubscriptions[0]->head->value, 0);
+    EXPECT_EQ(singleSub.channelIdSubscribers[0]->head->value, 0);
+}
+TEST_F(RandomSubsGeneratorTest, ValidSize){
+    generator.addRandomSubs(subs, channels, users, 0.5);
+    EXPECT_EQ(subs.sizeChannels(), channels.size());
+    EXPECT_EQ(subs.sizeUsers(), users.size());
+    int totalAlocatedUsers = 0;
+    for (int i = 0; i <subs.sizeUsers(); i++){
+        if (subs.userIdSubscriptions[i]) {
+            totalAlocatedUsers++;
+        }
+    }
+    EXPECT_LE(totalAlocatedUsers, channels.size());
+    int totalAlocatedChannels = 0;
+    for (int i = 0; i <subs.sizeChannels(); i++){
+        if (subs.channelIdSubscribers[i]) {
+            totalAlocatedChannels++;
+        }
+    }
+    EXPECT_LE(totalAlocatedChannels, users.size());
+}
+TEST_F(RandomSubsGeneratorTest, BidirectionalListConsistency) {
+    generator.addRandomSubs(subs, channels, users, 1.0);
+
+    // Para cada usuário
+    for (int64_t userId = 0; userId < users.size(); userId++) {
+        auto* userList = subs.userIdSubscriptions[userId];
+        if (!userList) continue;
+
+        // Para cada canal que o usuário está inscrito
+        auto* node = userList->head;
+        while (node) {
+            int64_t channelId = node->value;
+
+            // A lista do canal deve conter o userId
+            auto* channelList = subs.channelIdSubscribers[channelId];
+            ASSERT_NE(channelList, nullptr) << "Canal " << channelId << " não possui lista de inscritos.";
+            bool found = channelList->search(userId);
+            EXPECT_TRUE(found) << "Usuário " << userId << " está inscrito no canal " << channelId << ", mas não foi encontrado na lista de inscritos do canal.";
+            node = node->nextNode;
+        }
+    }
+
+    // Para cada canal
+    for (int64_t channelId = 0; channelId < channels.size(); channelId++) {
+        auto* channelList = subs.channelIdSubscribers[channelId];
+        if (!channelList) continue;
+
+        // Para cada usuário inscrito no canal
+        auto* node = channelList->head;
+        while (node) {
+            int64_t userId = node->value;
+
+            // A lista do usuário deve conter o channelId
+            auto* userList = subs.userIdSubscriptions[userId];
+            ASSERT_NE(userList, nullptr) << "Usuário " << userId << " não possui lista de inscrições.";
+            bool found = userList->search(channelId);
+            EXPECT_TRUE(found) << "Canal " << channelId << " possui usuário " << userId << " na lista de inscritos, mas o usuário não está inscrito no canal.";
+            node = node->nextNode;
+        }
+    }
+}
+TEST_F(RandomSubsGeneratorTest, NoDuplicateSubscriptions) {
+    generator.addRandomSubs(subs, channels, users, 1.0);
+
+    // Para cada usuário, checa se não há canais repetidos
+    for (int64_t userId = 0; userId < users.size(); userId++) {
+        auto* userList = subs.userIdSubscriptions[userId];
+        if (!userList) continue;
+
+        std::unordered_set<int64_t> seenChannels;
+        auto* node = userList->head;
+        while (node) {
+            int64_t channelId = node->value;
+            auto result = seenChannels.insert(channelId);
+            EXPECT_TRUE(result.second) << "Usuário " << userId << " está inscrito mais de uma vez no canal " << channelId;
+            node = node->nextNode;
+        }
+    }
+
+    // Para cada canal, checa se não há usuários repetidos
+    for (int64_t channelId = 0; channelId < channels.size(); channelId++) {
+        auto* channelList = subs.channelIdSubscribers[channelId];
+        if (!channelList) continue;
+
+        std::unordered_set<int64_t> seenUsers;
+        auto* node = channelList->head;
+        while (node) {
+            int64_t userId = node->value;
+            auto result = seenUsers.insert(userId);
+            EXPECT_TRUE(result.second) << "Canal " << channelId << " contém o usuário " << userId << " mais de uma vez";
+            node = node->nextNode;
+        }
+    }
+}
+TEST_F(RandomSubsGeneratorTest, MaxUserRatioOneUserOneChannel) {
+    Relations::UserArray singleUser;
+    Relations::ChannelArray singleChannel;
+    Relations::UserSubChannelArray singleSubs;
+    IdBatchManager localManager;
+    RandomGenerator localGen(localManager);
+
+    localGen.addRandomUser(singleUser, 1);
+    localGen.addRandomChannel(singleChannel, singleUser, 1.0, 0);
+    localGen.addRandomSubs(singleSubs, singleChannel, singleUser, 1.0);
+
+    EXPECT_EQ(singleSubs.sizeChannels(), 1);
+    EXPECT_EQ(singleSubs.sizeUsers(), 1);
+    EXPECT_EQ(singleSubs.userIdSubscriptions[0]->size, 1);
+    EXPECT_EQ(singleSubs.channelIdSubscribers[0]->size, 1);
+}
+TEST_F(RandomSubsGeneratorTest, AllUsersAlreadyHaveChannels) {
+    generator.addRandomChannel(channels, users, 1, 0);
+    Relations::UserSubChannelArray localSubs;
+    EXPECT_NO_THROW(generator.addRandomSubs(localSubs, channels, users, 1.0));
+}
+
+class RandomContentGeneratorTest : public ::testing::Test {
+    protected:
+        IdBatchManager idManager;
+        RandomGenerator generator;
+    
+        RandomContentGeneratorTest() : generator(idManager) {}
+    
+        Relations::ChannelArray channels;
+        Relations::ContentArray content;
+    
+        void SetUp() override {
+            // Gerar 100 canais (sem usuários, pois só os canais são necessários aqui)
+            Relations::UserArray dummyUsers;
+            generator.addRandomUser(dummyUsers, 100); // usuários só para gerar canais
+            generator.addRandomChannel(channels, dummyUsers, 1.0, 0);
+        }
+};
+TEST_F(RandomContentGeneratorTest, InvalidArgumentsThrow) {
+    Relations::ContentArray content;
+    Relations::ChannelArray emptyChannels;
+
+    EXPECT_ANY_THROW(generator.addRandomContent(content, emptyChannels, 0.5, 0));
+    EXPECT_ANY_THROW(generator.addRandomContent(content, channels, 0, 0));
+    EXPECT_ANY_THROW(generator.addRandomContent(content, channels, -0.1, 0));
+    EXPECT_ANY_THROW(generator.addRandomContent(content, channels, 1.1, 0));
+}
+TEST_F(RandomContentGeneratorTest, CorrectNumberGenerated) {
+    Relations::ContentArray content;
+    generator.addRandomContent(content, channels, 1.0, 12345);
+
+    EXPECT_EQ(content.size(), channels.size());
+    for (size_t i = 0; i < content.size(); i++) {
+        EXPECT_GE(content.contentIds[i], 0);
+        EXPECT_GE(content.contentChannelIds[i], 0);
+        EXPECT_LT(content.contentChannelIds[i], channels.size());
+    }
+}
+TEST_F(RandomContentGeneratorTest, CreationDateApplied) {
+    Relations::ContentArray content;
+    int creationDate = 54321;
+    generator.addRandomContent(content, channels, 1.0, creationDate);
+
+    for (size_t i = 0; i < content.size(); i++) {
+        EXPECT_EQ(content.contentPubDateTimes[i], creationDate);
+    }
+}
+TEST_F(RandomContentGeneratorTest, DefaultCountsAreZero) {
+    Relations::ContentArray content;
+    generator.addRandomContent(content, channels, 1.0, 0);
+
+    for (size_t i = 0; i < content.size(); i++) {
+        EXPECT_EQ(content.contentLikeCounts[i], 0);
+        EXPECT_EQ(content.contentDislikeCounts[i], 0);
+        EXPECT_EQ(content.contentViewCounts[i], 0);
+        EXPECT_EQ(content.contentCommentCounts[i], 0);
+    }
+}
+TEST_F(RandomContentGeneratorTest, FullVideoIdsDefault) {
+    Relations::ContentArray content;
+    generator.addRandomContent(content, channels, 1.0, 0);
+
+    for (size_t i = 0; i < content.size(); i++) {
+        EXPECT_EQ(content.fullvideoIds[i], -1);
+    }
+}
+TEST_F(RandomContentGeneratorTest, DistributesTypesAndStatuses) {
+    Relations::ContentArray content;
+    generator.addRandomContent(content, channels, 1.0, 0);
+
+    std::set<uint8_t> typesFound;
+    std::set<uint8_t> statusesFound;
+
+    for (size_t i = 0; i < content.size(); i++) {
+        typesFound.insert(content.contentTypes[i]);
+        statusesFound.insert(content.contentStatuses[i]);
+    }
+
+    EXPECT_GE(typesFound.size(), 2) << "Esperado pelo menos dois tipos diferentes de conteúdo.";
+    EXPECT_GE(statusesFound.size(), 2) << "Esperado pelo menos dois statuses diferentes.";
+}
+TEST_F(RandomContentGeneratorTest, ContentTagsHaveCorrectUniqueCount) {
+    generator.addRandomContent(content, channels, 1.0, 0);
+
+    for (size_t i = 0; i < content.size(); ++i) {
+        uint8_t tag1 = content.contentTags[i][0];
+        uint8_t tag2 = content.contentTags[i][1];
+        uint8_t tag3 = content.contentTags[i][2];
+
+        // Calcula a quantidade de tags únicas de acordo com a regra definida
+        uint8_t calculatedUniqueCount = 3; // Assume 3 únicas por padrão
+
+        if (tag1 == tag2) {
+            calculatedUniqueCount = 1; // Todas as tags são iguais
+        } else if (tag1 == tag3 || tag2 == tag3) {
+            calculatedUniqueCount = 2; // Duas tags são iguais, uma diferente
+        } else {
+            calculatedUniqueCount = 3; // Todas as tags são diferentes
+        }
+
+        uint8_t declaredUniqueCount = content.contentTags[i][3];
+
+        // Verifica se o número calculado de tags únicas corresponde ao declarado
+        EXPECT_EQ(calculatedUniqueCount, declaredUniqueCount)
+            << "Content ID " << content.contentIds[i]
+            << " declarou " << static_cast<int>(declaredUniqueCount)
+            << " tags únicas, mas foram encontradas " << static_cast<int>(calculatedUniqueCount);
+    }
+}
+TEST_F(RandomContentGeneratorTest, CreationRatioEdgeCases) {
+    EXPECT_NO_THROW(generator.addRandomContent(content, channels, 0.999f, 0));
+    EXPECT_EQ(content.size(), static_cast<size_t>(channels.size() * 0.999f));
+}
+TEST_F(RandomContentGeneratorTest, CreationRatioFull){
+    EXPECT_NO_THROW(generator.addRandomContent(content, channels, 1.0f, 0));
+    EXPECT_EQ(content.size(), channels.size());
+}
+TEST_F(RandomContentGeneratorTest, ContentDurationsWithinLimits) {
+    Relations::ContentArray content;
+    generator.addRandomContent(content, channels, 1.0f, 0);
+
+    for (size_t i = 0; i < content.size(); i++) {
+        auto type = content.contentTypes[i];
+        auto dur = content.contentDurations[i];
+        if (type == Relations::ContentType::VIDEO)
+            EXPECT_LE(dur, 3600);
+        else if (type == Relations::ContentType::SHORT)
+            EXPECT_LE(dur, 600); // porque beta(4,2)*60 pode variar
+        else if (type == Relations::ContentType::LIVE)
+            EXPECT_LE(dur, 18000);
     }
 }
 

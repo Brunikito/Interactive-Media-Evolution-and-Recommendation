@@ -29,6 +29,7 @@ namespace RandomUtils {
     void shuffleLinspace(std::vector<int64_t, AlignedAllocator<int64_t, 32>>& linspace, int64_t numberOfElements);
 
     float sampleBeta (float alpha, float beta, pcg64_fast& rng);
+
 }
 
 #endif
