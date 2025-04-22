@@ -54,13 +54,16 @@ int main() {
     duration = end - start;
     std::cout << "Time to add " << contentCreationRatio*userCount << " content: "
                 << duration.count() << " seconds." << std::endl;
+
     
-
-
-    start = std::chrono::high_resolution_clock::now();
     std::cout << "Initiated Content Recommendation" << std::endl;
-    std::vector<int64_t, AlignedAllocator<int64_t, 32>> designedIds = {1, 2, 3, 4, 5, 6, 7, 8};
-    int8_t recommendationCount = 8;
+    constexpr int numIds = 1000;
+    std::vector<int64_t, AlignedAllocator<int64_t, 32>> designedIds(numIds);
+    for (int i = 0; i < numIds; i++){
+        designedIds[i] = i;
+    }
+    constexpr int8_t recommendationCount = 8;
+    start = std::chrono::high_resolution_clock::now();
     Recommendations::recommendateSelectedUsers(userArray, contentArray, subArray, watchArray, commentArray, interactionArray, designedIds, recommendationCount);
     end = std::chrono::high_resolution_clock::now();
     duration = end - start;

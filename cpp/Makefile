@@ -1,7 +1,7 @@
 # Compilador e flags
 CXX = g++
 CXXFLAGS = -std=c++20 -I include -I utils -I C:/Dev/pcg-cpp-0.98/include
-OPTFLAGS = -O3 -fopenmp -mavx2
+OPTFLAGS = -O3 -fopenmp -mavx2 -march=native
 
 # GoogleTest paths
 GTEST_INCLUDE = C:/Dev/googletest/googletest/include
