@@ -4,20 +4,20 @@
 #include <relations.h>
 #include <relation_properties.h>
 #include <cstdint>
+#include <vector>
+#include <aligned_alocator.h>
 
 namespace Recommendations{
 
-    Relations::id* recommendate(
+    std::vector<Relations::id*, AlignedAllocator<Relations::id*, 32>> recommendateSelectedUsers(
         const Relations::UserArray& userInput, 
-        const Relations::ContentArray& contentInput, 
-        const Relations::UserSubChannelArray& subsInput, 
-        const Relations::UserWatchContArray& watchInput,
-        const Relations::CommentArray& commentInput,
-        const Relations::UserContInteractionArray& interactionInput,
-        int64_t watchMaxIndex,
-        Relations::id userId, 
-        uint8_t numOfRecommendtions);
+        const Relations::ContentArray& contentInput, //*%ofTags
+        const Relations::UserSubChannelArray& subsInput, // *2
+        const Relations::UserWatchContArray& watchInput, // 1
+        const Relations::CommentArray& commentInput, // 10
+        const Relations::UserContInteractionArray& interactionInput, // 20 15 -20
+        std::vector<Relations::id, AlignedAllocator<Relations::id, 32>> userIds, 
+        uint8_t numOfRecommendations);
 
-    Relations::id* getNMostPopular(const Relations::UserWatchContArray& watchInput, int64_t watchMaxIndex, int8_t nMost);
 }
 #endif

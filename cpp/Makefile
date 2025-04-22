@@ -14,9 +14,9 @@ BUILD_DIR = build
 UTILS_DIR = utils
 
 # Arquivos objeto principais
-MAIN_OBJS = $(BUILD_DIR)/main.o $(BUILD_DIR)/random_generators.o $(BUILD_DIR)/fast_copy.o $(BUILD_DIR)/random_utils.o $(BUILD_DIR)/timer.o
+MAIN_OBJS = $(BUILD_DIR)/main.o $(BUILD_DIR)/random_generators.o $(BUILD_DIR)/fast_copy.o $(BUILD_DIR)/random_utils.o $(BUILD_DIR)/timer.o $(BUILD_DIR)/recommendator.o
 # Arquivos objeto para os testes
-TEST_OBJS = $(BUILD_DIR)/test_random_generators.o $(BUILD_DIR)/random_generators.o $(BUILD_DIR)/fast_copy.o $(BUILD_DIR)/random_utils.o $(BUILD_DIR)/timer.o
+TEST_OBJS = $(BUILD_DIR)/test_random_generators.o $(BUILD_DIR)/random_generators.o $(BUILD_DIR)/fast_copy.o $(BUILD_DIR)/random_utils.o $(BUILD_DIR)/timer.o $(BUILD_DIR)/recommendator.o
 
 # Executáveis
 MAIN_EXE = $(BUILD_DIR)/main.exe
@@ -54,6 +54,11 @@ $(BUILD_DIR)/random_utils.o: $(UTILS_DIR)/random_utils.cpp include/random_utils.
 # Compilar timer.cpp
 $(BUILD_DIR)/timer.o: $(UTILS_DIR)/timer.cpp
 	$(CXX) $(OPTFLAGS) $(CXXFLAGS) -c $< -o $@
+
+# Compilar recommendator.cpp
+$(BUILD_DIR)/recommendator.o: $(SRC_DIR)/recommendator.cpp include/recommendator.h
+	$(CXX) $(OPTFLAGS) $(CXXFLAGS) -c $< -o $@
+
 
 # Limpar
 clean:
