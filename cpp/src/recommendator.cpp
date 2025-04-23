@@ -9,8 +9,16 @@
 #include <omp.h>
 #include <immintrin.h>
 #include <atomic>
+#include <numeric>
 
 namespace Recommendations{
+
+    bool isIn(int64_t number, std::vector<int64_t, AlignedAllocator<int64_t, 32>> vector){
+        for (size_t i = 0; i < vector.size(); i++){
+            if (number = vector[i]) return true;
+        }
+        return false;
+    }
 
     constexpr int8_t WATCH_VALUE = 1;
     constexpr int8_t COMMENT_VALUE = 25;
@@ -78,35 +86,68 @@ namespace Recommendations{
             }
         }
         
+
+        /*
+        std::vector<std::atomic<int8_t>> contentBaseScoreTopNumOfRecommendationsAllTags(contentBaseScore.size());
+        for (auto& v : contentBaseScoreTopNumOfRecommendationsAllTags) v.store(0, std::memory_order_relaxed);
+
+        std::vector<std::atomic<int8_t>> contentBaseScoreTag(contentBaseScore.size());
+
+        #pragma omp parallel for schedule(static)
+        for (int8_t i = 0; i < RelationProperties::NUMTAGS; i++){
+
+            for (size_t j = 0; j < contentBaseScore.size(); j++){
+                contentBaseScoreTag[j].store(0, std::memory_order_relaxed);
+                if(contentInput.contentTags[j][0] == i) contentBaseScoreTag[j].store(contentBaseScore[j].load(std::memory_order_relaxed), std::memory_order_relaxed);
+                else if(contentInput.contentTags[j][3] > 1 && contentInput.contentTags[j][1] == i) contentBaseScoreTag[j].store(contentBaseScore[j].load(std::memory_order_relaxed), std::memory_order_relaxed);
+                else if(contentInput.contentTags[j][3] > 2 && contentInput.contentTags[j][2] == i) contentBaseScoreTag[j].store(contentBaseScore[j].load(std::memory_order_relaxed), std::memory_order_relaxed);
+            }
+
+            std::ranges::partial_sort(contentBaseScoreTag.begin(), contentBaseScoreTag.begin() + numOfRecommendations, contentBaseScoreTag.end(), std::greater{});
+            for (int8_t j = 0; j < numOfRecommendations; j++){
+                contentBaseScoreTopNumOfRecommendationsAllTags[j].store(contentBaseScoreTag[j].load(std::memory_order_relaxed));
+            }
+        }
+        */
+
+
         int nThreads = omp_get_max_threads();
         std::vector<std::vector<Relations::id, AlignedAllocator<Relations::id, 32>>> threadAdjustedScores(
-        nThreads, std::vector<Relations::id, AlignedAllocator<Relations::id, 32>>(contentInput.size()));
+        nThreads, std::vector<Relations::id, AlignedAllocator<Relations::id, 32>>(contentBaseScore.size()));
         
         #pragma omp parallel for schedule(static)
         for (size_t i = 0; i < userIds.size(); i++){
             Relations::id userId = userIds[i];
             auto& localAdjustedScore = threadAdjustedScores[omp_get_thread_num()];
-            int8_t multiplier;
-            auto& userTagWatch = tagWatchCount[userId];
+            int multiplier;
+            const auto& userTagWatch = tagWatchCount[userId];
             auto& userSubs = *subsInput.userIdSubscriptions[userId];
+            const auto& indexes = contentInput.contentIds;
             
             for (size_t j = 0; j < localAdjustedScore.size(); j++){
                 multiplier = 0;
-                auto& tags = contentInput.contentTags[j];
-                uint8_t tagCount = tags[3];
-                if (tagCount > 0) multiplier += userTagWatch[tags[0]];
+                const auto& tags = contentInput.contentTags[j];
+                const uint8_t tagCount = tags[3];
+                multiplier += userTagWatch[tags[0]];
                 if (tagCount > 1) multiplier += userTagWatch[tags[1]];
                 if (tagCount > 2) multiplier += userTagWatch[tags[2]];
                 localAdjustedScore[j] = contentBaseScore[j] * multiplier;
                 if (userSubs.search(contentInput.contentChannelIds[j])) localAdjustedScore[j] *= SUB_MULTIPLIER;
             }
 
-            std::ranges::partial_sort(localAdjustedScore.begin(), localAdjustedScore.begin() + numOfRecommendations, localAdjustedScore.end(), std::greater{});
+            std::vector<Relations::id> sortedTopIndexes(numOfRecommendations);
+
+            std::partial_sort_copy(
+                indexes.begin(), indexes.end(),
+                sortedTopIndexes.begin(), sortedTopIndexes.end(),
+                [&](int a, int b) {
+                    return localAdjustedScore[a] > localAdjustedScore[b]; // ordem decrescente
+                }
+            );
             
             Relations::id* userRecommendations = new Relations::id[numOfRecommendations];
-            
             for (int8_t j = 0; j < numOfRecommendations; j++){
-                userRecommendations[j] = localAdjustedScore[j];
+                userRecommendations[j] = sortedTopIndexes[j];
             }
             recommendations[userId] = userRecommendations;
         }
