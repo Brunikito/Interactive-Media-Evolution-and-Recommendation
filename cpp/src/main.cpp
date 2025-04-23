@@ -17,7 +17,7 @@ int main() {
     Relations::UserContInteractionArray interactionArray;
     RandomRelations::IdBatchManager idManager;
     RandomRelations::RandomGenerator generator(idManager);
-    constexpr int userCount = 1'000'000;
+    constexpr int userCount = 10'000'000;
 
     auto start = std::chrono::high_resolution_clock::now();
     std::cout << "Initiated User Generation" << std::endl;
@@ -57,7 +57,7 @@ int main() {
 
     
     std::cout << "Initiated Content Recommendation" << std::endl;
-    constexpr int numIds = 1'000;
+    constexpr int numIds = 100'000;
     std::vector<int64_t, AlignedAllocator<int64_t, 32>> designedIds(numIds);
     for (int i = 0; i < numIds; i++){
         designedIds[i] = i;

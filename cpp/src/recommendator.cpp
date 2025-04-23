@@ -143,13 +143,11 @@ namespace Recommendations{
                 localAdjustedScore[contentId] = contentBaseScore[contentId] * multiplier;
                 if (userSubs.search(contentInput.contentChannelIds[contentId])) localAdjustedScore[contentId] *= SUB_MULTIPLIER;
             }
-
             
-            //GARGALO PARA CONSERTAR
             std::vector<Relations::id> sortedTopIndexes(numOfRecommendations);
 
             std::partial_sort_copy(
-                indexes.begin(), indexes.end(),
+                bestContent.begin(), bestContent.end(),
                 sortedTopIndexes.begin(), sortedTopIndexes.end(),
                 [&](int a, int b) {
                     return localAdjustedScore[a] > localAdjustedScore[b]; // ordem decrescente
@@ -161,7 +159,6 @@ namespace Recommendations{
                 userRecommendations[j] = sortedTopIndexes[j];
             }
             recommendations[userId] = userRecommendations;
-            // FIM DO GARGALO
             
             for (size_t j = 0; j < bestContent.size(); j++){
                 if (bestContent[j] == -1) continue;
