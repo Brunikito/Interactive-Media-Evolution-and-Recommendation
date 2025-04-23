@@ -150,14 +150,18 @@ struct ChannelArray {
 
 struct UserSubChannelArray {
     AlignedULLVec userIdSubscriptions;
+    AlignedULLVec userIdNotifications;
     AlignedULLVec channelIdSubscribers;
+    AlignedULLVec channelIdNotifieds;
 
     void resizeUsers(size_t new_size) {
-        userIdSubscriptions.resize(new_size);
+        userIdSubscriptions.resize(new_size, nullptr);
+        userIdNotifications.resize(new_size, nullptr);
     }
 
     void resizeChannels(size_t new_size) {
-        channelIdSubscribers.resize(new_size);
+        channelIdSubscribers.resize(new_size, nullptr);
+        channelIdNotifieds.resize(new_size, nullptr);
     }
 
     size_t sizeUsers() const { return userIdSubscriptions.size(); }

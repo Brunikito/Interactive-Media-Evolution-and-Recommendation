@@ -170,7 +170,7 @@ namespace Recommendations{
                 userRecommendations[j] = sortedTopPairs[j].first;
             }
             recommendations[userId] = userRecommendations;
-            
+
             for (size_t j = 0; j < bestContent.size(); j++){
                 if (bestContent[j] == -1) continue;
                 localAdjustedScore[j].first = -1;

@@ -420,16 +420,22 @@ void RandomGenerator::addRandomSubs(Relations::UserSubChannelArray& subsInput, c
             alreadySubscribed = channelList->search(userId);
         }
 
-        if (!alreadySubscribed) {
-            auto node1 = new UnorderedLinkedList::Node(channelId);
-            node1->nextNode = userList->head;
-            userList->head = node1;
-            userList->size++;
+        bool notify = ((userId + channelId) % 2);
 
-            auto node2 = new UnorderedLinkedList::Node(userId);
-            node2->nextNode = channelList->head;
-            channelList->head = node2;
-            channelList->size++;
+        if (!alreadySubscribed) {
+            userList->insert(channelId);
+            channelList->insert(userId);
+
+            if (notify){
+                UnorderedLinkedList::UnorderedLinkedList* userNotifyList = subsInput.userIdNotifications[userId];
+                UnorderedLinkedList::UnorderedLinkedList* channelNotifiedList = subsInput.channelIdNotifieds[channelId];
+
+                if (!userNotifyList) {userNotifyList = new UnorderedLinkedList::UnorderedLinkedList(); subsInput.userIdNotifications[userId] = userNotifyList;} 
+                if (!channelNotifiedList) {channelNotifiedList = new UnorderedLinkedList::UnorderedLinkedList(); subsInput.channelIdNotifieds[channelId] = channelNotifiedList;}
+                
+                userNotifyList->insert(channelId);
+                channelNotifiedList->insert(userId);
+            }
         }
     }
     if(debugMode) timer.stop("Main loop");

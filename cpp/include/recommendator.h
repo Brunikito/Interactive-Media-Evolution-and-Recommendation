@@ -9,6 +9,8 @@
 
 namespace Recommendations{
 
+    bool isIn(int64_t number, std::vector<int64_t, AlignedAllocator<int64_t, 32>> vector);
+
     std::vector<Relations::id*, AlignedAllocator<Relations::id*, 32>> recommendateSelectedUsers(
         const Relations::UserArray& userInput, 
         const Relations::ContentArray& contentInput,

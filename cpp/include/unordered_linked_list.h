@@ -4,6 +4,7 @@
 #include <memory>
 #include <iostream>
 #include <vector>
+#include <stdexcept>
 
 namespace UnorderedLinkedList{
 
