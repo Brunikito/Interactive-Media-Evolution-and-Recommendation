@@ -71,11 +71,11 @@ namespace Recommendations{
             int8_t valueToAdd;
 
             switch (interactionInput.interactionTypes[i]) {
-                case Relations::LIKE:    valueToAdd = LIKE_VALUE; break;
-                case Relations::DISLIKE: valueToAdd = DISLIKE_VALUE; break;
-                case Relations::REPORT:  valueToAdd = REPORT_VALUE; break;
-                case Relations::SHARE:   valueToAdd = SHARE_VALUE; break;
-                case Relations::SAVE:    valueToAdd = SAVE_VALUE; break;
+                case Relations::LIKE:       valueToAdd = LIKE_VALUE;       break;
+                case Relations::DISLIKE:    valueToAdd = DISLIKE_VALUE;    break;
+                case Relations::REPORT:     valueToAdd = REPORT_VALUE;     break;
+                case Relations::SHARE:      valueToAdd = SHARE_VALUE;      break;
+                case Relations::SAVE:       valueToAdd = SAVE_VALUE;       break;
             }
 
             contentBaseScore[contentId].fetch_add(valueToAdd, std::memory_order_relaxed);
@@ -111,16 +111,18 @@ namespace Recommendations{
                 }
             );
             for (int8_t j = 0; j < 50; j++){
-                if (!isIn(sortedTopIndexes[j], bestContent)) {
-                    bestContent[sizeBestContent++] = sortedTopIndexes[j];
+                if (sortedTopIndexes[j] != -1){
+                    if (!isIn(sortedTopIndexes[j], bestContent)) {
+                        bestContent[sizeBestContent++] = sortedTopIndexes[j];
+                    }
                 }
             }
         }
 
 
         int nThreads = omp_get_max_threads();
-        std::vector<std::vector<Relations::id, AlignedAllocator<Relations::id, 32>>> threadAdjustedScores(
-        nThreads, std::vector<Relations::id, AlignedAllocator<Relations::id, 32>>(contentBaseScore.size(), -1));
+        std::vector<std::vector<std::pair<Relations::id, Relations::id>>> threadAdjustedScores(
+            nThreads, std::vector<std::pair<Relations::id, Relations::id>>(bestContent.size(), {-1, -1}));
         
         #pragma omp parallel for schedule(static)
         for (size_t i = 0; i < userIds.size(); i++){
@@ -130,39 +132,49 @@ namespace Recommendations{
             const auto& userTagWatch = tagWatchCount[userId];
             auto& userSubs = *subsInput.userIdSubscriptions[userId];
             const auto& indexes = contentInput.contentIds;
+            int64_t score;
+            size_t contentId;
             
             for (size_t j = 0; j < bestContent.size(); j++){
                 if (bestContent[j] == -1) continue;
-                size_t contentId = bestContent[j];
-                multiplier = 0;
+                contentId = bestContent[j];
                 const auto& tags = contentInput.contentTags[contentId];
-                const uint8_t tagCount = tags[3];
-                multiplier += userTagWatch[tags[0]];
+                const uint8_t& tagCount = tags[3];
+                multiplier = userTagWatch[tags[0]];
                 if (tagCount > 1) multiplier += userTagWatch[tags[1]];
                 if (tagCount > 2) multiplier += userTagWatch[tags[2]];
-                localAdjustedScore[contentId] = contentBaseScore[contentId] * multiplier;
-                if (userSubs.search(contentInput.contentChannelIds[contentId])) localAdjustedScore[contentId] *= SUB_MULTIPLIER;
+                score = contentBaseScore[contentId] * multiplier;
+                if (userSubs.search(contentInput.contentChannelIds[contentId])) score *= SUB_MULTIPLIER;
+                localAdjustedScore[j].first = contentId;
+                localAdjustedScore[j].second = score;
             }
+
             
-            std::vector<Relations::id> sortedTopIndexes(numOfRecommendations);
+            std::vector<std::pair<Relations::id, Relations::id>> sortedTopPairs(numOfRecommendations);
+
+            std::vector<std::pair<Relations::id, Relations::id>> filteredScores;
+            for (const auto& p : localAdjustedScore) {
+                if (p.first != -1) filteredScores.push_back(p);
+            }
 
             std::partial_sort_copy(
-                bestContent.begin(), bestContent.end(),
-                sortedTopIndexes.begin(), sortedTopIndexes.end(),
-                [&](int a, int b) {
-                    return localAdjustedScore[a] > localAdjustedScore[b]; // ordem decrescente
+                filteredScores.begin(), filteredScores.end(),
+                sortedTopPairs.begin(), sortedTopPairs.end(),
+                [](const auto& a, const auto& b) {
+                    return a.second > b.second;
                 }
             );
 
             Relations::id* userRecommendations = new Relations::id[numOfRecommendations];
             for (int8_t j = 0; j < numOfRecommendations; j++){
-                userRecommendations[j] = sortedTopIndexes[j];
+                userRecommendations[j] = sortedTopPairs[j].first;
             }
             recommendations[userId] = userRecommendations;
             
             for (size_t j = 0; j < bestContent.size(); j++){
                 if (bestContent[j] == -1) continue;
-                localAdjustedScore[bestContent[j]] = -1;
+                localAdjustedScore[j].first = -1;
+                localAdjustedScore[j].second = -1;
             }
 
         }

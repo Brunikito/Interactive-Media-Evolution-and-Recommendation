@@ -11,11 +11,11 @@ namespace Recommendations{
 
     std::vector<Relations::id*, AlignedAllocator<Relations::id*, 32>> recommendateSelectedUsers(
         const Relations::UserArray& userInput, 
-        const Relations::ContentArray& contentInput, //*%ofTags
-        const Relations::UserSubChannelArray& subsInput, // *2
-        const Relations::UserWatchContArray& watchInput, // 1
-        const Relations::CommentArray& commentInput, // 10
-        const Relations::UserContInteractionArray& interactionInput, // 20 15 -20
+        const Relations::ContentArray& contentInput,
+        const Relations::UserSubChannelArray& subsInput,
+        const Relations::UserWatchContArray& watchInput,
+        const Relations::CommentArray& commentInput,
+        const Relations::UserContInteractionArray& interactionInput,
         std::vector<Relations::id, AlignedAllocator<Relations::id, 32>> userIds, 
         uint8_t numOfRecommendations);
 

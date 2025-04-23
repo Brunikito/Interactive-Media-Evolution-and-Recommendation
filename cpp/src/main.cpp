@@ -57,7 +57,7 @@ int main() {
 
     
     std::cout << "Initiated Content Recommendation" << std::endl;
-    constexpr int numIds = 100'000;
+    constexpr int numIds = 1'000'000;
     std::vector<int64_t, AlignedAllocator<int64_t, 32>> designedIds(numIds);
     for (int i = 0; i < numIds; i++){
         designedIds[i] = i;
