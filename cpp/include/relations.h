@@ -208,6 +208,17 @@ struct ContentArray {
     size_t size() const { return contentIds.size(); }
 };
 
+struct NotificationsArray{
+    ALIGN_VEC(id) notificationIds;
+    ALIGN_VEC(id) channelIds;
+};
+
+struct UserNotifiedArray{
+    ALIGN_VEC(id) userIds;
+    ALIGN_VEC(id) notificationIds;
+    ALIGN_VEC(datetime) notificationDateTimes;
+};
+
 struct UserWatchContArray {
     ALIGN_VEC(id) userWatcherIds;
     ALIGN_VEC(id) contentWatchedIds;

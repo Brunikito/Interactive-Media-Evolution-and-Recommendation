@@ -116,10 +116,7 @@ void RandomGenerator::addRandomUser(Relations::UserArray &userInput, int numberO
                     languages[k][2] = (languages[k][0] + languageDist(rng)) % 156;
                     languages[k][3] = 1;
                     if(languages[k][0] != languages[k][1]) {
-                        languages[k][3]++;
-                        if((languages[k][2] != languages[k][1]) && (languages[k][2] != languages[k][0])) {
-                            languages[k][3]++;
-                        }
+                        languages[k][3]+= 1 + (languages[k][2] != languages[k][1]) && (languages[k][2] != languages[k][0]);
                     } 
                 }
                 _mm256_store_si256((__m256i *)&userInput.userLanguages[langBase], _mm256_load_si256((__m256i *)languages));
@@ -540,11 +537,7 @@ void RandomGenerator::addRandomContent(Relations::ContentArray& contentInput, co
                 contentInput.contentTags[cid][2] = (categories[j] + languageDist(rng)) % 156;
                 contentInput.contentTags[cid][3] = 1;
                 if(contentInput.contentTags[cid][0] != contentInput.contentTags[cid][1]){
-                    contentInput.contentTags[cid][3]++;
-                    if((contentInput.contentTags[cid][2] != contentInput.contentTags[cid][1]) &&
-                       (contentInput.contentTags[cid][2] != contentInput.contentTags[cid][0])){
-                        contentInput.contentTags[cid][3]++;
-                    }
+                    contentInput.contentTags[cid][3] += 1 + (contentInput.contentTags[cid][2] != contentInput.contentTags[cid][1] && contentInput.contentTags[cid][2] != contentInput.contentTags[cid][0]);
                 }
 
                 // Duração
@@ -601,11 +594,7 @@ void RandomGenerator::addRandomContent(Relations::ContentArray& contentInput, co
             contentInput.contentTags[cid][2] = (category + languageDist(rng)) % 156;
             contentInput.contentTags[cid][3] = 1;
             if(contentInput.contentTags[cid][0] != contentInput.contentTags[cid][1]){
-                contentInput.contentTags[cid][3]++;
-                if((contentInput.contentTags[cid][2] != contentInput.contentTags[cid][1]) &&
-                   (contentInput.contentTags[cid][2] != contentInput.contentTags[cid][0])){
-                    contentInput.contentTags[cid][3]++;
-                }
+                contentInput.contentTags[cid][3] += 1 + (contentInput.contentTags[cid][2] != contentInput.contentTags[cid][1] && contentInput.contentTags[cid][2] != contentInput.contentTags[cid][0]);
             }
 
             if(contentInput.contentTypes[cid] == Relations::ContentType::VIDEO){
